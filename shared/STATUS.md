@@ -19,7 +19,7 @@
 - repo local: `/Users/mariano/Documents/multiauditoria`
 - repo GitHub: `garantias3-afk/multiauditoria`
 - rama actual: `main`
-- commit de evidencia publicado: `fb1c7e5`
+- commit de evidencia publicado: `0f0d65d`
 - estado remoto: publicado en `origin/main`
 - archivo de referencia para correr la siguiente sesion: `shared/RUNBOOK.md`
 
@@ -34,11 +34,11 @@
 ## Pendientes inmediatos
 
 - mantener commits pequenos por cambio importante
-- publicar Camino B requiere exponer el Gateway por HTTPS y actualizar la Action en GPT Builder; la parte de navegador la realiza el usuario
 - no queda codigo funcional pendiente para el backend local de Camino B
 - GPT Builder fue actualizado en Chrome y devolvio `GPT actualizado` para `auditor externo`
 - el host configurado `https://camino-b-ultimo.marianogrammatico.com.ar` respondio en el smoke del Builder con `getGatewayHealth` y `status: ok`
 - el smoke del Builder reporto `gateway_version: 1.2.20`, `context packs: supported`, `file search: supported` y `file manifests: supported`
+- la publicacion HTTPS y la Action del Builder quedaron verificadas con smoke real desde Chrome
 
 ## Evidencia operativa del cierre
 
