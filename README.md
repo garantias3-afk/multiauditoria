@@ -6,6 +6,7 @@ Repo base para coordinar Camino A, Camino B y el material compartido entre GPT, 
 
 - `camino-a/`: orquestacion y control del flujo.
 - `camino-b/`: ejecucion, puente y materiales operativos.
+- `docs/`: blueprint tecnico para fork arquitectonico y reconstruccion.
 - `shared/`: estado comun, hilos de IA y pendientes de recuperacion.
 
 ## Estado actual recuperado
@@ -15,6 +16,7 @@ Repo base para coordinar Camino A, Camino B y el material compartido entre GPT, 
 - El fallback de slot 14 cierra `stdin`, usa Codex por suscripcion y conserva el binding de evidencia previa por SHA.
 - La corrida real `RUN_20260713_022749_eb68e_slot14_subscription_smoke` cerro limpia.
 - La suite autoritativa termino con `106 passed` y `RUN_TESTS_OK`.
+- El documento de diseno tecnico para replicar Camino A/B esta en `docs/TDD_SYSTEM_BLUEPRINT.md`.
 
 ## Regla de trabajo
 

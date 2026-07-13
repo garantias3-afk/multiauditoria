@@ -3,6 +3,8 @@
 ## Estado cerrado actual
 
 - Runtime recuperado en `camino-a/runtime/` con 124 archivos de release.
+- Contratos, scripts, schemas, Actions GPT, prompts generados, tests y evidencia seleccionada estan versionados en el repo.
+- Blueprint tecnico para fork arquitectonico agregado en `docs/TDD_SYSTEM_BLUEPRINT.md`.
 - El worker de fallback usa `stdin=subprocess.DEVNULL` y Codex por suscripcion.
 - El handoff conserva `candidate_sha256` en la evidencia compacta de slots previos.
 - El flujo canonico promueve bundles validados a `ACCEPTED/` antes de consultar la autoridad terminal.
@@ -30,6 +32,7 @@
 ## Pendientes inmediatos
 
 - mantener commits pequenos por cambio importante
+- terminar Camino B requiere desplegar o reemplazar el puente Slot 14 con handlers reales y smoke operativo
 - si se despliegan las Actions de Camino B en GPT Builder, la parte de navegador la realiza el usuario
 
 ## Evidencia operativa del cierre
