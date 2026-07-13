@@ -15,7 +15,8 @@
 - repo local: `/Users/mariano/Documents/multiauditoria`
 - repo GitHub: `garantias3-afk/multiauditoria`
 - rama actual: `main`
-- ultimo commit remoto antes de este cierre: `b030f0b`
+- commit de evidencia publicado: `fb1c7e5`
+- estado remoto: publicado en `origin/main`
 - archivo de referencia para correr la siguiente sesion: `shared/RUNBOOK.md`
 
 ## Secuencia recomendada para trabajos pendientes
@@ -28,7 +29,6 @@
 
 ## Pendientes inmediatos
 
-- publicar los commits de este cierre en GitHub
 - mantener commits pequenos por cambio importante
 - si se despliegan las Actions de Camino B en GPT Builder, la parte de navegador la realiza el usuario
 
