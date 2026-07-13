@@ -1,17 +1,21 @@
 # Estado recuperado
 
-## Ultimo estado util
+## Estado cerrado actual
 
-- `scripts/worker_codex_fallback.py`: el worker de fallback de Codex quedo ajustado para no leer desde stdin heredado y seguir el camino de suscripcion.
-- `tests/test_codex_fallback.py`: se agrego una regresion que verifica que el worker use `stdin=subprocess.DEVNULL`.
-- `scripts/run_slot14_subscription_smoke.py`: quedo como intento real pendiente en la ultima sesion recuperada; la ejecucion no se cerro con veredicto final en lo visto localmente.
+- Runtime recuperado en `camino-a/runtime/` con 124 archivos de release.
+- El worker de fallback usa `stdin=subprocess.DEVNULL` y Codex por suscripcion.
+- El handoff conserva `candidate_sha256` en la evidencia compacta de slots previos.
+- El flujo canonico promueve bundles validados a `ACCEPTED/` antes de consultar la autoridad terminal.
+- Suite autoritativa: `106 passed` y `RUN_TESTS_OK`.
+- Smoke real final: `terminal_clean_codex_fallback=true`.
+- Camino B: bridge, actions, schema y pruebas incluidos en el runtime recuperado.
 
 ## Estado de preparacion para ejecucion
 
 - repo local: `/Users/mariano/Documents/multiauditoria`
 - repo GitHub: `garantias3-afk/multiauditoria`
 - rama actual: `main`
-- ultimo commit local conocido: `8b4baa3`
+- ultimo commit remoto antes de este cierre: `b030f0b`
 - archivo de referencia para correr la siguiente sesion: `shared/RUNBOOK.md`
 
 ## Secuencia recomendada para trabajos pendientes
@@ -24,10 +28,19 @@
 
 ## Pendientes inmediatos
 
-- cerrar la corrida real de `slot14_subscription_smoke`
-- subir este repo base a GitHub
-- seguir con commits pequenos por cambio importante
-- dejar listo el flujo de trabajo para que GPT, GLM, Claude y Codex actualicen este estado en cada cambio relevante
+- publicar los commits de este cierre en GitHub
+- mantener commits pequenos por cambio importante
+- si se despliegan las Actions de Camino B en GPT Builder, la parte de navegador la realiza el usuario
+
+## Evidencia operativa del cierre
+
+- comando: `python3 scripts/run_slot14_subscription_smoke.py --max-attempts 1`
+- run: `RUN_20260713_022749_eb68e_slot14_subscription_smoke`
+- ruta: `camino-a/runtime/outputs/operational_runs/RUN_20260713_022749_eb68e_slot14_subscription_smoke`
+- resultado: bundle aceptado, cero rechazados, cero findings
+- autoridad terminal: `terminal_clean_codex_fallback=true`
+- accion de operador: `false`
+- evidencia versionada: `shared/evidence/2026-07-12-slot14-subscription-smoke.json`
 
 ## Ultimos 5 pedidos del usuario
 

@@ -18,10 +18,12 @@ Este archivo prepara las corridas pendientes y el orden de trabajo para Camino A
 
 ## Pendientes que siguen vigentes
 
-- cerrar o dejar cerrada con evidencia la corrida real de `slot14_subscription_smoke`
 - seguir distinguiendo Camino A como orquestador
 - seguir distinguiendo Camino B como ejecucion y puente
 - no mezclar recuperacion historica con una reforma grande en el mismo commit
+
+La corrida `slot14_subscription_smoke` quedo cerrada con evidencia el 12 de
+julio de 2026 (hora local). Ver `shared/evidence/2026-07-12-slot14-subscription-smoke.json`.
 
 ## Para la siguiente sesion con modelo alto
 

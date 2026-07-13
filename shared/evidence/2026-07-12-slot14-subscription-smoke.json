@@ -1,0 +1,33 @@
+{
+  "schema_version": "multiauditoria_operational_evidence.v1",
+  "local_date": "2026-07-12",
+  "run_id": "RUN_20260713_022749_eb68e_slot14_subscription_smoke",
+  "command": "python3 scripts/run_slot14_subscription_smoke.py --max-attempts 1",
+  "candidate_sha256": "dcc35eec57b55cba494672ea534ea7f7fb3cfe8fab9ac0283ec675a2fb7b3e1b",
+  "audit_request_sha256": "537b735f6827084f25546dcc6f38fce18266f2359bccdc3b1183f64443bfba9b",
+  "route_id": "codex_gpt_5_6_sol_ultra_subscription_cli",
+  "model_id": "gpt-5.6-sol",
+  "reasoning_effort": "ultra",
+  "authentication": "chatgpt_subscription",
+  "api_credentials_removed_from_environment": true,
+  "worker_exit_code": 0,
+  "harvest": {
+    "accepted": 1,
+    "rejected": 0,
+    "pending": 0
+  },
+  "findings_count": 0,
+  "residual_debt_count": 0,
+  "terminal_clean_codex_fallback": true,
+  "operator_action_required": false,
+  "full_suite": {
+    "passed": 106,
+    "marker": "RUN_TESTS_OK"
+  },
+  "release": {
+    "version": "v1.3.21-slot14-handoff",
+    "file_count": 124,
+    "zip_sha256": "3f0c648529c4cfeaa030ea94ec6a0fa1898ac8f0ab057a48bb28cacff617adf3"
+  },
+  "raw_result_path": "camino-a/runtime/outputs/operational_runs/RUN_20260713_022749_eb68e_slot14_subscription_smoke/SLOT14_SUBSCRIPTION_SMOKE_RESULT.json"
+}
