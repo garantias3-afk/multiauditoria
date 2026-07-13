@@ -1,0 +1,67 @@
+{
+  "schema_version": "multiauditoria_real_transport_test.v1",
+  "local_date": "2026-07-13",
+  "manual_steps_skipped": true,
+  "authoritative_suite": {
+    "command": "./bin/run_tests.sh",
+    "passed": 110,
+    "failed": 0,
+    "marker": "RUN_TESTS_OK"
+  },
+  "camino_a_live_routes": {
+    "probe_command": "python3 scripts/probe_live_routes.py --execute --active-probe --allow-paid --timeout 20",
+    "pending_routes": 22,
+    "active_probe_ok": 9,
+    "listed_available": 5,
+    "missing_credentials_or_config": 7,
+    "not_found_in_listing": 1,
+    "errors": 0,
+    "lmstudio": "9 models responded with HTTP 200",
+    "openrouter": "model listing HTTP 200; active generation skipped because OPENROUTER_API_KEY was absent",
+    "blackbox_gemini_vertex": "not executed because credentials/project configuration was absent"
+  },
+  "file_transport": {
+    "transport": "real local HTTP socket using Camino A worker_gateway protocol",
+    "small_multiformat": {
+      "result": "audited",
+      "uploads": "single_input_v1",
+      "formats": ["md", "json", "yaml", "csv", "png", "pdf", "zip"],
+      "findings": 0
+    },
+    "large_multiformat": {
+      "result": "audited",
+      "large_file_bytes": 11534346,
+      "uploads": "chunked_input_v1",
+      "chunks": 4,
+      "max_raw_chunk_bytes": 3145728,
+      "findings": 0
+    }
+  },
+  "camino_b_local_http": {
+    "passed": true,
+    "request_status": 202,
+    "status_status": 200,
+    "result_status": 200,
+    "bridge_status": "completed",
+    "transport_completed": true,
+    "primary_failure_armed_fallback": true,
+    "worker": "codex_fallback",
+    "model": "gpt-5.6-sol",
+    "reasoning_effort": "ultra",
+    "auth_method": "chatgpt_subscription",
+    "terminal_approval": false,
+    "requires_terminal_gate_validation": true
+  },
+  "public_https": {
+    "health_path": "/health",
+    "health_status": 200,
+    "gateway_version": "1.2.20",
+    "supports_context_pack": true,
+    "supports_file_search": true,
+    "supports_file_manifest": true,
+    "public_camino_b_slot14_route_status": 404,
+    "public_camino_b_slot14_route": "/v1/camino-b/slot14/reviews",
+    "interpretation": "Camino A public Gateway is reachable; Camino B slot14 handlers are not exposed on this public host."
+  },
+  "conclusion": "Automated local Camino A/B transport and file handling passed. External provider routes without configured credentials remain unverified. Public deployment of Camino B slot14 handlers remains pending."
+}

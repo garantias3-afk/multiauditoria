@@ -59,6 +59,28 @@
 - autoridad: `terminal_approval=false` y `requires_terminal_gate_validation=true`
 - evidencia versionada: `shared/evidence/2026-07-12-camino-b-bridge-smoke.json`
 
+## Prueba real automatizada 2026-07-13
+
+- se saltearon los pasos manuales y se ejecutó `./bin/run_tests.sh` fuera del
+  sandbox: `110 passed`, `RUN_TESTS_OK`
+- Camino A probó `22` rutas pendientes: `9` respondieron con generación real en
+  LM Studio, `5` quedaron listadas en OpenRouter sin credencial para generar,
+  `7` quedaron sin credenciales/configuración y `1` no apareció en el listado;
+  no hubo errores de red ni rutas prohibidas ejecutadas
+- transporte de archivos por HTTP local real: lote chico multiformato (`md`,
+  `json`, `yaml`, `csv`, `png`, `pdf`, `zip`) aprobado por uploads individuales;
+  lote grande de `11534346` bytes aprobado por `chunked_input_v1` en `4` chunks
+- Camino B local probó POST `202`, status `200`, result `200`, fallback
+  Claude→Codex, `gpt-5.6-sol/ultra` por suscripción y recibo validado; quedó
+  correctamente `terminal_approval=false`
+- HTTPS público responde por `/health` con Gateway `1.2.20`, context packs,
+  file search y file manifests soportados
+- pendiente externo confirmado: el host público devuelve `404` para
+  `/v1/camino-b/slot14/reviews`; los handlers slot 14 sólo están verificados en
+  el Gateway local y aún deben publicarse en el reverse proxy y en la spec
+  completa de Actions
+- evidencia: `shared/evidence/2026-07-13-camino-a-b-real-test.json`
+
 ## Ultimos 5 pedidos del usuario
 
 1. Recuperar los cambios y archivos modificados hoy en MacBook e iMac.
