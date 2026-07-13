@@ -8,9 +8,11 @@
 - El worker de fallback usa `stdin=subprocess.DEVNULL` y Codex por suscripcion.
 - El handoff conserva `candidate_sha256` en la evidencia compacta de slots previos.
 - El flujo canonico promueve bundles validados a `ACCEPTED/` antes de consultar la autoridad terminal.
-- Suite autoritativa: `106 passed` y `RUN_TESTS_OK`.
+- Suite autoritativa: `110 passed` y `RUN_TESTS_OK`.
+- Release verificable regenerada con 132 archivos y los entrypoints de Camino B.
 - Smoke real final: `terminal_clean_codex_fallback=true`.
 - Camino B: bridge, actions, schema y pruebas incluidos en el runtime recuperado.
+- Camino B local terminado: Gateway HTTP, agente saliente, cola, fallback secuencial y smoke operativo incluidos.
 
 ## Estado de preparacion para ejecucion
 
@@ -32,8 +34,8 @@
 ## Pendientes inmediatos
 
 - mantener commits pequenos por cambio importante
-- terminar Camino B requiere desplegar o reemplazar el puente Slot 14 con handlers reales y smoke operativo
-- si se despliegan las Actions de Camino B en GPT Builder, la parte de navegador la realiza el usuario
+- publicar Camino B requiere exponer el Gateway por HTTPS y actualizar la Action en GPT Builder; la parte de navegador la realiza el usuario
+- no queda codigo funcional pendiente para el backend local de Camino B
 
 ## Evidencia operativa del cierre
 
@@ -44,6 +46,15 @@
 - autoridad terminal: `terminal_clean_codex_fallback=true`
 - accion de operador: `false`
 - evidencia versionada: `shared/evidence/2026-07-12-slot14-subscription-smoke.json`
+
+## Evidencia operativa Camino B
+
+- comando: `python3 scripts/run_camino_b_bridge_smoke.py --run ... --codex-bundle ...`
+- handoff: `B14_c60ef8dfc78daff75f929da2b48f4c2d`
+- HTTP: request `202`, status `200`, result `200`
+- resultado: fallback armado, transporte completado, recibo Sol/Ultra por suscripcion validado
+- autoridad: `terminal_approval=false` y `requires_terminal_gate_validation=true`
+- evidencia versionada: `shared/evidence/2026-07-12-camino-b-bridge-smoke.json`
 
 ## Ultimos 5 pedidos del usuario
 

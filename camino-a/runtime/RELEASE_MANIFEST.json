@@ -1,9 +1,9 @@
 {
   "release_name": "Camino Nocturno Canon Mutable",
   "version": "v1.3.21-slot14-handoff",
-  "built_at_utc": "2026-07-13T02:28:36.900036+00:00",
-  "file_count": 124,
-  "total_size_bytes": 1933753,
+  "built_at_utc": "2026-07-13T03:05:31.198871+00:00",
+  "file_count": 132,
+  "total_size_bytes": 1971690,
   "run_tests_exit_code": 0,
   "files": [
     {
@@ -43,7 +43,7 @@
     },
     {
       "path": "VALIDATION_RESULTS.json",
-      "sha256": "efe3fcbf81daa23ed67afb21026c0416f9f500a1a8231156259c87c1665b2864",
+      "sha256": "2a1659534d0fc52b63e505c896a606235939a54c280c3161b92d8391adf9b4c7",
       "size_bytes": 8218
     },
     {
@@ -63,13 +63,13 @@
     },
     {
       "path": "actions/CAMINO_B_SLOT14_BRIDGE_ACTIONS.v1.yaml",
-      "sha256": "0c100009120f2260a5260e8ce3783cdc7f7364ee2794a6a8020d21e7c070381d",
-      "size_bytes": 9346
+      "sha256": "6ffb440e4753239fec1e7844b05f304b5120d5e3567795fd596a04b8d11aafb2",
+      "size_bytes": 9365
     },
     {
       "path": "actions/CAMINO_B_SLOT14_BRIDGE_DEPLOYMENT.md",
-      "sha256": "5957814f8a5c5a12167f88b6c63d1614544ceec223829114917a9d8589911549",
-      "size_bytes": 3953
+      "sha256": "7160f378ddd57d251861cd50a9d31326d2074fec3b93a34914a1b2bbd02cc3fb",
+      "size_bytes": 4309
     },
     {
       "path": "actions/SOL56_ACTIONS_EVAL_PROTOCOL.md",
@@ -87,9 +87,19 @@
       "size_bytes": 128
     },
     {
+      "path": "bin/run_camino_b_agent.sh",
+      "sha256": "0e5237c3c7de19fbffc528f5053d9e7d2475bc3bd996ebaf5931544d108c477d",
+      "size_bytes": 357
+    },
+    {
       "path": "bin/run_tests.sh",
       "sha256": "3c6be04b13599c0d1899d1306b290693a738cdb652cf0e774411bac7f32a40d0",
       "size_bytes": 1295
+    },
+    {
+      "path": "bin/start_camino_b_gateway.sh",
+      "sha256": "8b35fc55a5b7c7895a6bf07e4d32a7de340a1c45fb1ce45ba56b3d44c214d2bd",
+      "size_bytes": 580
     },
     {
       "path": "bin/start_overnight.sh",
@@ -140,6 +150,11 @@
       "path": "config/budget.policy.json",
       "sha256": "d6f68c2c705d9ef817ed202ee6efef8d65f73b44ebaa5ffb691c673b3dd61c2e",
       "size_bytes": 1482
+    },
+    {
+      "path": "config/camino_b.env.example",
+      "sha256": "16d1a4fd4be8cda912d3bf5191034a238269621cc146da2f9708d97323207a55",
+      "size_bytes": 368
     },
     {
       "path": "config/drive.policy.json",
@@ -248,8 +263,8 @@
     },
     {
       "path": "schemas/camino_b_slot14_bridge.schema.json",
-      "sha256": "34792a3fef45b7e32d79248d51c37b59e8f2db0796d22307c7841a094ae8f898",
-      "size_bytes": 6681
+      "sha256": "73bef8f0a047e08d75cad4f23c37814e9966ef2c68e0275f283ec7b85e128a17",
+      "size_bytes": 6735
     },
     {
       "path": "schemas/schemas.json",
@@ -292,9 +307,19 @@
       "size_bytes": 19381
     },
     {
+      "path": "scripts/camino_b_gateway.py",
+      "sha256": "debd4450edf272c0704594a304f8555cc4915af691fde45a059dba3c5380db72",
+      "size_bytes": 7204
+    },
+    {
+      "path": "scripts/camino_b_outbound_agent.py",
+      "sha256": "9971d326a07702f8e5b51eb2f39d442d65fde65849b5e8ab6c45439edc798630",
+      "size_bytes": 8893
+    },
+    {
       "path": "scripts/camino_b_slot14_bridge.py",
-      "sha256": "56445a79153cfa9aefb237bcf6abc502d3ddb94ac63ceefa0821c6c8df9ed133",
-      "size_bytes": 36881
+      "sha256": "dc6e30c34205db8121fa9f17bf63a8c86fd66431c3d44c926df477636cafd288",
+      "size_bytes": 41036
     },
     {
       "path": "scripts/candidate_updates.py",
@@ -368,8 +393,8 @@
     },
     {
       "path": "scripts/package_release.py",
-      "sha256": "1148f5489686eac5e79bb8f54f5059cfefc91f8df65bd8ac8d1d63a5173f05b7",
-      "size_bytes": 15672
+      "sha256": "efd94c8db7e3ecd53a5f02361859ae4eedbdf36f59ec3a931617e086cc55fe50",
+      "size_bytes": 15742
     },
     {
       "path": "scripts/peer_executor.py",
@@ -415,6 +440,11 @@
       "path": "scripts/retry_policy.py",
       "sha256": "db569b4a4ad198e243160a0895dc12d12c05358cb15ed6e7fdc93b48ba67a352",
       "size_bytes": 1193
+    },
+    {
+      "path": "scripts/run_camino_b_bridge_smoke.py",
+      "sha256": "0ad5d153062b09aa5f2e9cb749ffe480585099e5d8652f36bc2945e525f5d1d8",
+      "size_bytes": 8616
     },
     {
       "path": "scripts/run_multiaudit_cycle.py",
@@ -508,8 +538,8 @@
     },
     {
       "path": "scripts/worker_codex_fallback.py",
-      "sha256": "82472c5187aedc1b3f56c4b9b5d0d95d230ccd79bfbd5e2f4260f51395da7bbe",
-      "size_bytes": 32773
+      "sha256": "8e72a844d1fcec550ebc6ad053586de29c4bc910a2f80b4dbc6d011712f87ec7",
+      "size_bytes": 32819
     },
     {
       "path": "scripts/worker_gateway.py",
@@ -542,9 +572,19 @@
       "size_bytes": 5487
     },
     {
+      "path": "tests/test_camino_b_gateway.py",
+      "sha256": "c5671399f36dbe4f6de156c8cf25368ae30c830af70410c6129210e0cc300aaa",
+      "size_bytes": 3266
+    },
+    {
+      "path": "tests/test_camino_b_outbound_agent.py",
+      "sha256": "77d6a02866d98a40347161399667bb3464beeb5e70cf8e5552c2d1e5ca0dd1d8",
+      "size_bytes": 2743
+    },
+    {
       "path": "tests/test_camino_b_slot14_bridge.py",
-      "sha256": "c73b8e043fc2126cfc670c9160f9d95be49a077ca2894769ab936ffb27c16dbd",
-      "size_bytes": 11861
+      "sha256": "52834af02317462f3c26c347d2e3ae4c1a5f9f64789021c8460e6d697241dca4",
+      "size_bytes": 12826
     },
     {
       "path": "tests/test_candidate_lifecycle.py",
@@ -588,8 +628,8 @@
     },
     {
       "path": "tests/test_release_hygiene.py",
-      "sha256": "192ac842c776678c1ffc0b4f8924a4e3c3ba378429f12de11b4b78b7f116f7cf",
-      "size_bytes": 3115
+      "sha256": "f09897138b187ee11bf464348b9e197d83a29469dc964387e5f7c3f0fd64116f",
+      "size_bytes": 3360
     },
     {
       "path": "tests/test_resource_scheduler.py",

@@ -739,4 +739,4 @@ lessons:
 
 El repo incluye contratos, scripts, schemas, Actions GPT, prompts generados, tests y evidencia seleccionada. Los outputs voluminosos de corridas se mantienen ignorados y se resumen en `shared/evidence/`.
 
-La siguiente fase para terminar Camino B es desplegar o reemplazar el puente Slot 14 con handlers reales en el Gateway/Robot OS, ejecutar smoke real del puente y actualizar `shared/STATUS.md` con el resultado.
+El backend local de Camino B ya incluye handlers reales, agente saliente y smoke operativo. Para usarlo desde ChatGPT Actions resta exponer el Gateway mediante HTTPS, fusionar el fragmento OpenAPI con la spec completa y actualizar GPT Builder.

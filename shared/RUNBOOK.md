@@ -25,6 +25,10 @@ Este archivo prepara las corridas pendientes y el orden de trabajo para Camino A
 La corrida `slot14_subscription_smoke` quedo cerrada con evidencia el 12 de
 julio de 2026 (hora local). Ver `shared/evidence/2026-07-12-slot14-subscription-smoke.json`.
 
+El backend local de Camino B quedo cerrado con Gateway, agente y smoke HTTP.
+Ver `shared/evidence/2026-07-12-camino-b-bridge-smoke.json`. Solo resta la
+publicacion HTTPS y la actualizacion manual de GPT Builder.
+
 ## Para la siguiente sesion con modelo alto
 
 Cuando el usuario cambie al modelo mas alto:

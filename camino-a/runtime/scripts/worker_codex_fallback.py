@@ -60,7 +60,7 @@ ALLOWED_FALLBACK_TRIGGERS = {
     "claude_unavailable",
 }
 TRIGGER_ERROR_CLASSES = {
-    "claude_auth_missing": {"auth_missing"},
+    "claude_auth_missing": {"auth_missing", "forbidden_auth_method", "forbidden_api_key"},
     "claude_worker_missing": {"worker_missing", "skipped_cli_missing"},
     "claude_auth_check_failed": {"auth_check_failed", "auth_check_invalid_json"},
     "claude_auth_check_timeout": {"auth_check_timeout"},

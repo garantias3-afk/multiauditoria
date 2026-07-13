@@ -29,6 +29,11 @@ def test_release_keeps_only_current_versioned_knowledge() -> None:
     assert not is_excluded(Path("CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.md"))
 
 
+def test_camino_b_entrypoints_keep_executable_bits_in_release() -> None:
+    assert "bin/start_camino_b_gateway.sh" in package_release.EXECUTABLE_RELEASE_PATHS
+    assert "bin/run_camino_b_agent.sh" in package_release.EXECUTABLE_RELEASE_PATHS
+
+
 def test_actions_deployment_guide_matches_current_knowledge_manifest() -> None:
     manifest = json.loads(
         (ROOT / "CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.manifest.json").read_text(encoding="utf-8")

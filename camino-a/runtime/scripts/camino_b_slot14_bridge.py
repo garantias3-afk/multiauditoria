@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Local, fail-closed queue contract for Camino B slot 14.
 
-The public Camino B Gateway is not implemented in this repository.  This
-module therefore does not pretend to deploy an HTTPS Action backend.  It
-implements the local half of the bridge that such a backend must drive:
+The queue is shared by the versioned HTTP Gateway and the outbound subscription
+agent in this repository.  It implements the durable half of the bridge:
 
 * idempotent, candidate-bound review requests;
 * an explicit ``awaiting_slot14_local_worker`` state;
@@ -58,6 +57,8 @@ ROUTE_WORKERS = {
 }
 ALLOWED_CLAUDE_FAILURES = frozenset({
     "auth_missing",
+    "forbidden_auth_method",
+    "forbidden_api_key",
     "worker_missing",
     "auth_check_failed",
     "auth_check_invalid_json",
@@ -368,6 +369,71 @@ class LocalSlot14Queue:
             self._check_candidate(record, candidate_sha256)
             return self._public_status(record)
 
+    def list_jobs(self, *, statuses: Optional[set[str]] = None) -> list[dict[str, Any]]:
+        """Return public queue states without exposing tokens or idempotency keys."""
+        allowed = {AWAITING, CLAIMED, COMPLETED, BLOCKED}
+        selected = set(statuses or allowed)
+        if not selected <= allowed:
+            raise BridgeError("job_status_filter_invalid")
+        with self._locked():
+            jobs: list[dict[str, Any]] = []
+            for entry in sorted((self.root / "jobs").iterdir()):
+                if not entry.is_dir() or entry.is_symlink() or not HANDOFF_RE.fullmatch(entry.name):
+                    continue
+                _, record = self._load_record(entry.name)
+                if record.get("status") in selected:
+                    jobs.append(self._public_status(record))
+            return jobs
+
+    def get_agent_context(self, handoff_id: str, candidate_sha256: str) -> dict[str, Any]:
+        """Expose hash-bound local execution context to the trusted Mac agent."""
+        with self._locked():
+            _, record = self._load_record(handoff_id)
+            self._check_candidate(record, candidate_sha256)
+            return {
+                "request": dict(record["request"]),
+                "primary_failure": (
+                    dict(record["primary_failure"])
+                    if isinstance(record.get("primary_failure"), dict) else None
+                ),
+            }
+
+    @staticmethod
+    def _claim_expired(claim: Mapping[str, Any], now: Optional[dt.datetime] = None) -> bool:
+        try:
+            expires = dt.datetime.fromisoformat(str(claim.get("lease_expires_at_utc") or ""))
+        except ValueError as exc:
+            raise BridgeError("claim_lease_timestamp_invalid") from exc
+        if expires.tzinfo is None:
+            raise BridgeError("claim_lease_timestamp_invalid")
+        return expires <= (now or dt.datetime.now(dt.timezone.utc))
+
+    def requeue_expired_claims(self, now: Optional[dt.datetime] = None) -> int:
+        """Release crashed workers after their signed lease deadline."""
+        released = 0
+        with self._locked():
+            for entry in sorted((self.root / "jobs").iterdir()):
+                if not entry.is_dir() or entry.is_symlink() or not HANDOFF_RE.fullmatch(entry.name):
+                    continue
+                job_dir, record = self._load_record(entry.name)
+                claim = record.get("claim")
+                if record.get("status") != CLAIMED or not isinstance(claim, dict):
+                    continue
+                if not self._claim_expired(claim, now):
+                    continue
+                public_claim = {key: value for key, value in claim.items() if key != "claim_token_sha256"}
+                self._write_json(job_dir / ("expired_claim_%04d.json" % int(record["revision"])), public_claim)
+                (job_dir / ".claim_token").unlink(missing_ok=True)
+                record.update({
+                    "status": AWAITING,
+                    "revision": int(record["revision"]) + 1,
+                    "updated_at_utc": utc_now(),
+                    "claim": None,
+                })
+                self._save_record(job_dir, record)
+                released += 1
+        return released
+
     def claim(
         self,
         handoff_id: str,
@@ -393,19 +459,38 @@ class LocalSlot14Queue:
             candidate = self._check_candidate(record, candidate_sha256)
             current = record.get("claim")
             if record.get("status") == CLAIMED and isinstance(current, dict):
-                same = (
-                    current.get("claim_id") == claim_id
-                    and current.get("worker_id") == worker_id
-                    and current.get("route_id") == route_id
-                    and current.get("host_id") == host_id
-                )
-                if not same:
-                    raise BridgeError("job_already_claimed")
-                secret_path = job_dir / ".claim_token"
-                if not secret_path.is_file() or secret_path.is_symlink():
-                    raise BridgeError("claim_token_missing")
-                token = secret_path.read_text(encoding="utf-8").strip()
-                return self._claim_response(record, token, idempotent=True)
+                if self._claim_expired(current):
+                    public_claim = {
+                        key: value for key, value in current.items()
+                        if key != "claim_token_sha256"
+                    }
+                    self._write_json(
+                        job_dir / ("expired_claim_%04d.json" % int(record["revision"])),
+                        public_claim,
+                    )
+                    (job_dir / ".claim_token").unlink(missing_ok=True)
+                    record.update({
+                        "status": AWAITING,
+                        "revision": int(record["revision"]) + 1,
+                        "updated_at_utc": utc_now(),
+                        "claim": None,
+                    })
+                    self._save_record(job_dir, record)
+                    current = None
+                else:
+                    same = (
+                        current.get("claim_id") == claim_id
+                        and current.get("worker_id") == worker_id
+                        and current.get("route_id") == route_id
+                        and current.get("host_id") == host_id
+                    )
+                    if not same:
+                        raise BridgeError("job_already_claimed")
+                    secret_path = job_dir / ".claim_token"
+                    if not secret_path.is_file() or secret_path.is_symlink():
+                        raise BridgeError("claim_token_missing")
+                    token = secret_path.read_text(encoding="utf-8").strip()
+                    return self._claim_response(record, token, idempotent=True)
             if record.get("status") != AWAITING:
                 raise BridgeError("job_not_claimable", status=record.get("status"))
             primary_failure = record.get("primary_failure")

@@ -2,8 +2,8 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://camino-b-ultimo.marianogrammatico.com.ar/schemas/camino_b_slot14_bridge.schema.json",
   "title": "Camino B slot 14 local bridge contracts",
-  "description": "Contract-only schema. It does not assert that the public Gateway handlers or outbound Mac agent are deployed.",
-  "x-camino-deployment-status": "contract_only_not_deployed",
+  "description": "Contracts implemented by the local Gateway, durable queue and outbound Mac subscription agent. Public HTTPS publication is environment-specific.",
+  "x-camino-deployment-status": "local_backend_ready_https_publication_pending",
   "$defs": {
     "sha256": {
       "type": "string",

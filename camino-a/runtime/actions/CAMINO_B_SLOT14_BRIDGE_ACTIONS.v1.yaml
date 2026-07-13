@@ -9,7 +9,7 @@ info:
     paste this file as a replacement for the existing 25-operation Camino B
     specification and do not publish these operations until the HTTPS Gateway
     handlers and outbound Mac agent have been deployed and smoke-tested.
-x-camino-deployment-status: contract_only_not_deployed
+x-camino-deployment-status: local_backend_ready_https_publication_pending
 x-camino-replaces-existing-spec: false
 x-camino-public-actions-exclude-local-control-plane: true
 servers:

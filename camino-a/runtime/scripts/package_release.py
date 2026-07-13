@@ -317,6 +317,8 @@ EXECUTABLE_RELEASE_PATHS = {
     "bin/install_launchd.sh",
     "bin/uninstall_launchd.sh",
     "bin/manual_submit.sh",
+    "bin/start_camino_b_gateway.sh",
+    "bin/run_camino_b_agent.sh",
 }
 
 def ensure_executable_bits(root: Path) -> None:

@@ -1,0 +1,22 @@
+{
+  "auth_method": "chatgpt_subscription",
+  "bridge_status": "completed",
+  "candidate_sha256": "dcc35eec57b55cba494672ea534ea7f7fb3cfe8fab9ac0283ec675a2fb7b3e1b",
+  "completed_at_utc": "2026-07-13T03:03:14.884936+00:00",
+  "gateway_http_request_status": 202,
+  "gateway_http_result_status": 200,
+  "gateway_http_status_status": 200,
+  "handoff_id": "B14_c60ef8dfc78daff75f929da2b48f4c2d",
+  "model_id": "gpt-5.6-sol",
+  "model_reasoning_effort": "ultra",
+  "passed": true,
+  "primary_failure_armed_fallback": true,
+  "requires_terminal_gate_validation": true,
+  "route_id": "codex_gpt_5_6_sol_ultra_subscription_cli",
+  "run_id": "RUN_20260713_022749_eb68e_slot14_subscription_smoke",
+  "schema_version": "camino_b_bridge_operational_smoke.v1",
+  "source_bundle_sha256": "f451d43db347d6a572a8cbb854c19aefad1ef4109ebf1dd6e60550206c8257f7",
+  "terminal_approval": false,
+  "transport_completed": true,
+  "worker_id": "codex_fallback"
+}

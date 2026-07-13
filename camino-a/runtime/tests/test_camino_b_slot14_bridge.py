@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import pytest
@@ -186,6 +187,25 @@ def test_claim_is_exclusive_and_same_claim_replay_is_idempotent(tmp_path: Path) 
     )
 
 
+def test_expired_claim_is_requeued_without_exposing_token(tmp_path: Path) -> None:
+    queue = LocalSlot14Queue(tmp_path / "queue")
+    handoff = queue.request_review(_request(idempotency_key="slot14-expiry-key-0001"))["handoff_id"]
+    claimed = queue.claim(
+        handoff, CANDIDATE, worker_id="claude_code", route_id=PRIMARY_ROUTE,
+        claim_id="CLAIM_expiry_001", host_id="macbook", lease_seconds=60,
+    )
+    assert claimed["claim_token"]
+    released = queue.requeue_expired_claims(
+        datetime.now(timezone.utc) + timedelta(minutes=2)
+    )
+    assert released == 1
+    status = queue.get_status(handoff, CANDIDATE)
+    assert status["status"] == AWAITING
+    assert status["claim"] is None
+    receipt = next((tmp_path / "queue" / "jobs" / handoff).glob("expired_claim_*.json"))
+    assert "claim_token" not in receipt.read_text(encoding="utf-8")
+
+
 def test_codex_fallback_cannot_claim_without_claude_failure(tmp_path: Path) -> None:
     queue = LocalSlot14Queue(tmp_path / "queue")
     handoff = queue.request_review(_request())["handoff_id"]
@@ -338,16 +358,16 @@ def test_fallback_bundle_must_prove_sol_ultra_subscription_identity(tmp_path: Pa
     )
 
 
-def test_contract_files_are_versioned_and_explicitly_not_deployed() -> None:
+def test_contract_files_are_versioned_and_mark_https_publication_pending() -> None:
     root = Path(__file__).resolve().parents[1]
     schema = json.loads(
         (root / "schemas/camino_b_slot14_bridge.schema.json").read_text(encoding="utf-8")
     )
-    assert schema["x-camino-deployment-status"] == "contract_only_not_deployed"
+    assert schema["x-camino-deployment-status"] == "local_backend_ready_https_publication_pending"
     openapi = (root / "actions/CAMINO_B_SLOT14_BRIDGE_ACTIONS.v1.yaml").read_text(
         encoding="utf-8"
     )
-    assert "x-camino-deployment-status: contract_only_not_deployed" in openapi
+    assert "x-camino-deployment-status: local_backend_ready_https_publication_pending" in openapi
     assert "requestCaminoBSlot14SubscriptionReview" in openapi
     assert "getCaminoBSlot14SubscriptionReviewStatus" in openapi
     assert "getCaminoBSlot14SubscriptionReviewResult" in openapi
