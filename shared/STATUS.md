@@ -37,7 +37,8 @@
 - publicar Camino B requiere exponer el Gateway por HTTPS y actualizar la Action en GPT Builder; la parte de navegador la realiza el usuario
 - no queda codigo funcional pendiente para el backend local de Camino B
 - GPT Builder fue actualizado en Chrome y devolvio `GPT actualizado` para `auditor externo`
-- el host configurado `https://camino-b-ultimo.marianogrammatico.com.ar` no resolvio desde esta maquina, asi que la publicacion HTTPS real sigue dependiendo de infraestructura externa accesible
+- el host configurado `https://camino-b-ultimo.marianogrammatico.com.ar` respondio en el smoke del Builder con `getGatewayHealth` y `status: ok`
+- el smoke del Builder reporto `gateway_version: 1.2.20`, `context packs: supported`, `file search: supported` y `file manifests: supported`
 
 ## Evidencia operativa del cierre
 
