@@ -1,0 +1,94 @@
+{
+  "schema_version": "camino_host_runtime_policy.v1",
+  "host_detection": {
+    "role_env": "CAMINO_HOST_ROLE",
+    "allowed_roles": [
+      "auto",
+      "imac",
+      "macbook",
+      "generic"
+    ]
+  },
+  "lmstudio": {
+    "base_url_env": "LMSTUDIO_BASE_URL",
+    "loopback_urls_env": "LMSTUDIO_LOOPBACK_URLS",
+    "bridge_urls_env": "LMSTUDIO_BRIDGE_URLS",
+    "loopback_urls": [
+      "http://127.0.0.1:1234/v1",
+      "http://localhost:1234/v1"
+    ],
+    "bridge_urls": [
+      "http://10.0.0.1:1234/v1"
+    ],
+    "models_path": "/models",
+    "api_key_env": "LMSTUDIO_API_KEY",
+    "api_key_fallback_literal": "lm-studio",
+    "probe_timeout_seconds": 2.0,
+    "request_timeout_seconds": 180,
+    "request_ttl_seconds": 1800,
+    "max_parallel_requests": 2,
+    "require_authoritative_memory_guard": true
+  },
+  "drive": {
+    "root_env": "CAMINO_DRIVE_BUS_ROOT",
+    "root_default": "",
+    "auto_discover": true,
+    "drive_policy_path": "config/drive.policy.json",
+    "require_existing": false,
+    "require_writable": false
+  },
+  "peer": {
+    "enabled_env": "CAMINO_PEER_ENABLED",
+    "url_env": "CAMINO_PEER_URL",
+    "ssh_host_env": "CAMINO_PEER_SSH_HOST",
+    "ssh_identity_file_env": "CAMINO_PEER_SSH_IDENTITY",
+    "remote_root_env": "CAMINO_PEER_REMOTE_ROOT",
+    "remote_root_default": ".camino/peer-runtime",
+    "python_env": "CAMINO_PEER_PYTHON",
+    "python_default": "python3",
+    "role_env": "CAMINO_PEER_ROLE",
+    "default_enabled": true,
+    "transport": "ssh",
+    "connect_timeout_seconds": 5,
+    "command_timeout_seconds": 900,
+    "bootstrap_max_file_bytes": 10485760,
+    "snapshot_max_file_bytes": 52428800,
+    "snapshot_max_files": 20000,
+    "ssh_hosts_by_local_role": {
+      "macbook": "mariano@10.0.0.2",
+      "imac": "mariano@10.0.0.1"
+    },
+    "peer_roles_by_local_role": {
+      "macbook": "imac",
+      "imac": "macbook"
+    },
+    "ssh_identity_files_by_local_role": {
+      "macbook": "~/.ssh/id_ed25519_camino",
+      "imac": "~/.ssh/id_ed25519_camino"
+    }
+  },
+  "resource_scheduler": {
+    "state_dir_env": "CAMINO_RESOURCE_STATE_DIR",
+    "state_dir_default": "~/.camino/runtime",
+    "database_name": "lmstudio_resource_reservations.sqlite",
+    "minimum_headroom_bytes": 8589934592,
+    "minimum_headroom_fraction": 0.15,
+    "critical_available_fraction": 0.08,
+    "warning_available_fraction": 0.15,
+    "deny_pressure_levels": [
+      "critical"
+    ],
+    "max_concurrent_medium": 2,
+    "max_concurrent_heavy": 1,
+    "heavy_is_exclusive": true,
+    "reservation_ttl_seconds": 1800,
+    "heartbeat_interval_seconds": 30,
+    "poll_interval_seconds": 1.0,
+    "default_wait_seconds": 0,
+    "estimated_peak_bytes_by_tier": {
+      "medium": 21474836480,
+      "heavy": 60129542144,
+      "heavy_exclusive": 60129542144
+    }
+  }
+}

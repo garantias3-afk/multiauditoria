@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "max_total_cost_usd": 0,
+  "allowed_cost_classes": [
+    "free",
+    "manual",
+    "included_in_plan",
+    "free_quota",
+    "free_or_credit",
+    "free_or_flat",
+    "plan",
+    "plan_or_free",
+    "flat_subscription"
+  ],
+  "paid_cost_classes_allowed_only_with_credentials": [
+    "vertex_credit",
+    "vertex_credit_or_intermediate",
+    "cheap_direct",
+    "paid",
+    "paid_credit",
+    "paid_intermediate",
+    "paid_manual",
+    "paid_payg",
+    "prepaid_token_plan"
+  ],
+  "per_worker_limits": {
+    "codex": {"max_cost_usd": 0, "cost_class": "included_in_plan"},
+    "claude_code": {"max_cost_usd": 0, "cost_class": "included_in_plan"},
+    "gateway": {"max_cost_usd": 0, "cost_class": "free"},
+    "manual_gpt": {"max_cost_usd": 0, "cost_class": "manual"},
+    "manual_claude": {"max_cost_usd": 0, "cost_class": "manual"}
+  },
+  "enforcement_note": "Las clases free/manual/plan/flat_subscription y variantes free_* se permiten por defecto. Las clases paid_*/vertex_credit/cheap_direct/prepaid_token_plan solo son ejecutables si el operador configura las credenciales/CLI correspondientes (BLACKBOX_API_KEY, DeepInfra, Vertex ADC, Xiaomi, etc.). El gate real de gasto se compone de: (1) api_policy.forbidden_api_providers en CANON_RUNTIME_POLICY, (2) forbidden_env_vars_for_workers, y (3) la ausencia de CLIs/credenciales. budget.check_worker_budget/check_total_budget no estan cableados al runtime; mantenerlos como helpers declarativos."
+}

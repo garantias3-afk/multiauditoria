@@ -1,0 +1,49 @@
+{
+  "schema_version": "camino_path_roles.v1",
+  "brain": "gpt_manual_or_configured",
+  "paths": {
+    "camino_a": {
+      "logical_orchestrator": "codex",
+      "orchestrator_model_policy": {
+        "selection_mode": "operator_selected",
+        "model_tier_preference": "low",
+        "reasoning_preference": "low",
+        "cost_preference": "low",
+        "fixed_model_id": null,
+        "self_model_switch_for_slot_14": false
+      },
+      "slot_14_reviewer_process": "independent_codex_cli",
+      "mechanical_state_engine": "overnight_master",
+      "brain_decides_content": true,
+      "codex_coordinates_execution": true,
+      "gateway_is_transport_only": true
+    },
+    "camino_b": {
+      "logical_orchestrator": "gpt_manual_or_configured",
+      "orchestrator_model_policy": {
+        "selection_mode": "gpt_desktop",
+        "reasoning_level": "high",
+        "fixed_model_id": null,
+        "self_model_switch_for_slot_14": false
+      },
+      "slot_14_reviewer_process": "independent_codex_cli",
+      "mechanical_state_engine": "camino_b_gateway",
+      "brain_decides_content": true,
+      "gpt_coordinates_execution": true,
+      "gateway_is_transport_only": true
+    }
+  },
+  "invariants": {
+    "state_engine_is_not_brain": true,
+    "provider_is_not_brain": true,
+    "no_synthetic_gpt_evidence": true,
+    "only_slot_14_clean_subscription_reviewer_may_approve": true,
+    "slot_14_primary": "claude_code_subscription_cli",
+    "slot_14_fallback": "codex_gpt_5_6_sol_ultra_subscription_cli",
+    "slot_14_fallback_requires_primary_unavailable": true,
+    "slot_14_fallback_process_isolation": "separate_codex_exec",
+    "slot_14_fallback_inherits_orchestrator_model": false,
+    "slot_14_self_model_switch": false,
+    "slot_14_unavailable_policy": "fail_closed_operator_action_required"
+  }
+}

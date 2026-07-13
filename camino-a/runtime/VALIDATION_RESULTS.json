@@ -1,0 +1,183 @@
+{
+  "release_name": "Camino Nocturno Canon Mutable",
+  "version": "v1.3.21-slot14-handoff",
+  "built_at_utc": "2026-07-13T02:28:24.853777+00:00",
+  "render_contracts_check": {
+    "command": "/Library/Developer/CommandLineTools/usr/bin/python3 scripts/render_contracts.py --root . --check",
+    "exit_code": 0,
+    "stdout_summary": [],
+    "stdout_tail": "RENDER_CHECK_OK: 9 files",
+    "stderr_tail": ""
+  },
+  "knowledge_current_check": {
+    "command": "/Library/Developer/CommandLineTools/usr/bin/python3 scripts/build_gpt_knowledge_bundle.py --root . --version v1.3.21-slot14-handoff --check",
+    "exit_code": 0,
+    "stdout_summary": [],
+    "stdout_tail": "{\n  \"status\": \"ok\",\n  \"bundle_version\": \"v1.3.21-slot14-handoff\",\n  \"source_count\": 19,\n  \"errors\": []\n}",
+    "stderr_tail": ""
+  },
+  "compileall": {
+    "command": "/Library/Developer/CommandLineTools/usr/bin/python3 -m compileall -q scripts tests",
+    "exit_code": 0,
+    "stdout_summary": [],
+    "stdout_tail": "",
+    "stderr_tail": ""
+  },
+  "run_tests_sh": {
+    "command": "bash /Users/mariano/Documents/multiauditoria/camino-a/runtime/bin/run_tests.sh",
+    "exit_code": 0,
+    "stdout_summary": [
+      "RESULTADO: 21 passed, 0 failed",
+      "RESULTADO: 18 passed, 0 failed",
+      "CEREBRO_ACTIONS_CONTRACT_OK",
+      "operation_ids=15 paths=15",
+      "RESULTADO: 16 passed, 0 failed",
+      "RESULTADO: 14 passed, 0 failed",
+      "106 passed in 5.59s",
+      "RUN_TESTS_OK"
+    ],
+    "stdout_tail": "  PASS: multiple roots fail closed\n  PASS: staging on Drive rejected\n=== DRIVE 4: localized My Drive discovery and safe creation ===\n  PASS: localized missing root is not ready\n  PASS: localized root created only under Mi unidad\n  PASS: localized root rediscovered\n\nRESULTADO: 14 passed, 0 failed\n........................................................................ [ 67%]\n..................................                                       [100%]\n106 passed in 5.59s\nRUN_TESTS_OK",
+    "stderr_tail": "ERROR: secret_detected:manual_file:secret.txt\nERROR: symlink_rejected:/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/tmpg03gz74q/linked.md\nERROR: zip_path_traversal:unsafe.zip:../escape.txt\nERROR: file_too_large:audit.md:69>16"
+  },
+  "residual_risk_tests": {
+    "command": "pytest tests/test_v132_residual_risks.py tests/test_v133_quality_log.py",
+    "exit_code": 0,
+    "not_applicable": "legacy_named_tests_replaced_by_full_mandatory_tests_directory"
+  },
+  "canon_validate_without_claude": {
+    "command": "/Library/Developer/CommandLineTools/usr/bin/python3 scripts/canon_loader.py --root . --profile without_claude --validate",
+    "exit_code": 0,
+    "stdout_summary": [],
+    "stdout_tail": "    \"FINAL\": [\n      11,\n      12,\n      13,\n      14\n    ]\n  },\n  \"forbidden_api_env_vars\": [\n    \"ANTHROPIC_API_KEY\",\n    \"OPENAI_API_KEY\"\n  ]\n}",
+    "stderr_tail": ""
+  },
+  "canon_validate_with_claude": {
+    "command": "/Library/Developer/CommandLineTools/usr/bin/python3 scripts/canon_loader.py --root . --profile with_claude --validate",
+    "exit_code": 0,
+    "stdout_summary": [],
+    "stdout_tail": "    \"FINAL\": [\n      11,\n      12,\n      13,\n      14\n    ]\n  },\n  \"forbidden_api_env_vars\": [\n    \"ANTHROPIC_API_KEY\",\n    \"OPENAI_API_KEY\"\n  ]\n}",
+    "stderr_tail": ""
+  },
+  "launch_sandbox": {
+    "command": "python3 scripts/launch_sandbox.py --json",
+    "exit_code": 0,
+    "result": {
+      "status": "ok",
+      "profile": "sandbox_reference",
+      "phase": "closed",
+      "terminal_reason": "reference_smoke_complete",
+      "final_zip_exists": true,
+      "accepted": [
+        "local_static_local_static_2026-07-13T02-28-35.084907+00-00"
+      ],
+      "rejected": []
+    }
+  },
+  "canonical_entrypoint": {
+    "command": "python3 scripts/run_multiaudit_cycle.py --input <target> --drive-bus-root <runs> --canon-profile sandbox_reference --execute-workers --watch-interval-seconds 1 --watch-timeout-minutes 2 --max-iterations 1",
+    "exit_code": 0,
+    "summary": {
+      "status": "ok",
+      "phase": "closed",
+      "terminal_reason": "reference_smoke_complete",
+      "accepted_evidence": [
+        "local_static_local_static_2026-07-13T02-28-36.854285+00-00"
+      ],
+      "final_zip_exists": true,
+      "quality_delta_count": 10,
+      "quality_sqlite_rows": 10,
+      "quality_log_connected": true,
+      "internal_loop": {
+        "schema_version": "camino_internal_loops_aggregate.v1",
+        "ran": true,
+        "status": "clean",
+        "selected_slot": "1",
+        "selected_slots": [
+          "1",
+          "4",
+          "7",
+          "8"
+        ],
+        "slot_count": 4,
+        "iteration_count": 0,
+        "max_internal_loops": 10,
+        "worker_kind": "reference_local_agentic",
+        "slots": {
+          "1": {
+            "schema_version": "camino_internal_loop_result.v1",
+            "slot_id": "1",
+            "worker_id": "agentic_local",
+            "max_internal_loops": 10,
+            "evidence_scope": "mechanical_reference_only",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_kab0wevp/RUN_20260713_022835_29fbc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "status": "clean_no_corrections",
+            "advanced": true,
+            "iteration_count": 0,
+            "versions": [],
+            "residual_debt": [],
+            "iterations": [],
+            "ran": true,
+            "selected_slot": "1",
+            "worker_kind": "reference_local_agentic"
+          },
+          "4": {
+            "schema_version": "camino_internal_loop_result.v1",
+            "slot_id": "4",
+            "worker_id": "agentic_local",
+            "max_internal_loops": 10,
+            "evidence_scope": "mechanical_reference_only",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_kab0wevp/RUN_20260713_022835_29fbc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "status": "clean_no_corrections",
+            "advanced": true,
+            "iteration_count": 0,
+            "versions": [],
+            "residual_debt": [],
+            "iterations": [],
+            "ran": true,
+            "selected_slot": "4",
+            "worker_kind": "reference_local_agentic"
+          },
+          "7": {
+            "schema_version": "camino_internal_loop_result.v1",
+            "slot_id": "7",
+            "worker_id": "agentic_local",
+            "max_internal_loops": 10,
+            "evidence_scope": "mechanical_reference_only",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_kab0wevp/RUN_20260713_022835_29fbc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "status": "clean_no_corrections",
+            "advanced": true,
+            "iteration_count": 0,
+            "versions": [],
+            "residual_debt": [],
+            "iterations": [],
+            "ran": true,
+            "selected_slot": "7",
+            "worker_kind": "reference_local_agentic"
+          },
+          "8": {
+            "schema_version": "camino_internal_loop_result.v1",
+            "slot_id": "8",
+            "worker_id": "agentic_local",
+            "max_internal_loops": 10,
+            "evidence_scope": "mechanical_reference_only",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_kab0wevp/RUN_20260713_022835_29fbc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "status": "clean_no_corrections",
+            "advanced": true,
+            "iteration_count": 0,
+            "versions": [],
+            "residual_debt": [],
+            "iterations": [],
+            "ran": true,
+            "selected_slot": "8",
+            "worker_kind": "reference_local_agentic"
+          }
+        },
+        "residual_debt": []
+      },
+      "residual_debt": []
+    },
+    "stdout_tail": "    },\n    \"residual_debt\": []\n  },\n  \"residual_debt\": [],\n  \"canon_slot_plan\": \"CANON_SLOT_PLAN.json\"\n}",
+    "stderr_tail": ""
+  },
+  "release_zip_sha256": null
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": "camino_a_drive_policy.v1",
+  "purpose": "Locate a shared artifact bus without embedding either Mac's home path in canon.",
+  "override_precedence": [
+    "CAMINO_DRIVE_BUS_ROOT",
+    "CAMINO_SHARED_ROOT",
+    "macos_google_drive_discovery"
+  ],
+  "shared_root_directory_name": "CAMINO_A_SHARED",
+  "bus_relative_path": "AUDIT_BUS",
+  "workspace_marker": ".camino_shared_root.json",
+  "macos_cloud_storage_directory": "Library/CloudStorage",
+  "macos_provider_prefixes": [
+    "GoogleDrive"
+  ],
+  "macos_my_drive_directory_names": [
+    "My Drive",
+    "Mi unidad"
+  ],
+  "local_staging_app_name": "CaminoA",
+  "sqlite_on_shared_drive_allowed": false,
+  "mutable_state_on_shared_drive_allowed": false,
+  "shared_drive_payload_policy": "immutable_bundle_manifest_done_only"
+}

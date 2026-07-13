@@ -1,0 +1,58 @@
+{
+  "schema_version": "primary_brain_policy.v4.gateway_actions_external_evidence",
+  "brain_current": "gpt_manual_or_configured",
+  "brain_is_unique": true,
+  "automatic_mode": false,
+  "dispatch_mode": "gpt_active_conversation_via_gateway_actions",
+  "evidence_mode": "external_validated_only",
+  "synthetic_adapter_forbidden": true,
+  "drive_access_mode": "gateway_data_plane",
+  "gpt_surface_mode": "actions_not_apps",
+  "model_policy": {
+    "preferred_route_id": "chatgpt_gpt_5_6_sol_actions_plan",
+    "preferred_model_id": "gpt-5.6-sol",
+    "surface": "custom_gpt_actions",
+    "preferred_reasoning_level": "high",
+    "required_mode": "non_pro",
+    "actions_required": true,
+    "api_key_allowed": false,
+    "availability_gate": "builder_model_picker_and_live_action_smoke",
+    "fallback_route_id": "chatgpt_gpt_5_5_plan",
+    "responses_api_active": false,
+    "openai_api_forbidden": true
+  },
+  "max_short_iterations": 7,
+  "max_total_iterations": 50,
+  "timeout_per_stage_seconds": 300,
+  "forbidden_brains": [
+    "mimo_gateway",
+    "vertex_gemini_3_1_pro_preview",
+    "gemini_aistudio_highest",
+    "codex",
+    "claude"
+  ],
+  "require_manifest_for_response": true,
+  "max_response_size_bytes": 1048576,
+  "stages": {
+    "primary_consolidation": {
+      "output_dir": "31_GPT_PRIMARY_OUTPUT",
+      "done_name": "PRIMARY_BRAIN_RESPONSE.DONE",
+      "max_input_chars": 50000
+    },
+    "code_generation": {
+      "output_dir": "40_GPT_CODE_OUTPUT",
+      "done_name": "GPT_CODE_OUTPUT.DONE",
+      "max_input_chars": 30000
+    },
+    "post_code_review": {
+      "output_dir": "61_GPT_ITERATION_OUTPUT",
+      "done_name": "GPT_ITERATION_OUTPUT.DONE",
+      "max_input_chars": 50000
+    },
+    "closure": {
+      "output_dir": "70_FINAL_GPT_CLOSURE",
+      "done_name": "FINAL_GPT_CLOSURE.DONE",
+      "max_input_chars": 20000
+    }
+  }
+}

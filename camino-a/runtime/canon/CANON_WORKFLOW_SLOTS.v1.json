@@ -1,0 +1,557 @@
+{
+  "schema_version": "canon_workflow_slots.v1",
+  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
+  "updated_utc": "2026-07-11T00:00:00Z",
+  "big_loop": {
+    "name": "bucle_grande",
+    "slots": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "cycles": {
+    "A": [
+      1,
+      2,
+      3
+    ],
+    "B": [
+      4,
+      5,
+      6
+    ],
+    "C": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "FINAL": [
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "general_rules": {
+    "without_corrections": "advance_to_next_slot",
+    "with_corrections": "apply_slot_correction_policy",
+    "loop_limit_reached": "advance_with_explicit_residual_debt",
+    "approval": "slot_14_claude_or_codex_subscription_fallback_only_without_corrections_or_findings",
+    "agentic_internal_loop": "audit_patch_reaudit_repeat",
+    "internal_loop_contract": "COMUN_CAMINO_A_Y_B: todo auditor IA con bucle interno obligatorio (slots 1, 4, 7, 8) debe iterar versiones .001 a .010: genera versión, la reaudita, genera la siguiente; secuencia obligatoria por iteración: auditar -> detectar bug/mejora/deuda -> corregir o reescribir -> testear/validar -> reauditar la corrección -> decidir si queda limpio dentro del alcance del slot. Termina al no encontrar nuevos hallazgos en su alcance o al llegar a .010. Entrega: última versión, diff acumulado, historial de iteraciones, tests, deuda residual, veredicto de ronda. El veredicto de ronda nunca es aprobación global.",
+    "external_slot_loops": "COMUN_CAMINO_A_Y_B: slots 3, 6, 10, 11, 12, 13, 14 iteran por bucle de slot con conteo definido en el campo 'loops' de cada slot; no usan el bucle interno .001-.010.",
+    "lmstudio_bridge_rules": {
+      "provider_id": "lmstudio_macbook_bridge",
+      "base_url_source": "config/host_runtime.policy.json",
+      "interface": "openai_compatible",
+      "api_key": "literal_lm-studio_or_LMSTUDIO_API_KEY",
+      "model_ram_guard_must_run_on_lmstudio_host": true,
+      "tier1_slot": "1",
+      "tier2_slot": "4",
+      "medium_concurrency_limit": 2,
+      "heavy_exclusive_route": "lmstudio_nemotron_70b_high_criticality",
+      "heavy_exclusive_policy": "not_in_general_slots; run one at a time only when explicitly selected for high criticality",
+      "vision_route": "lmstudio_gemma_3_27b_vision_ocr",
+      "vision_policy": "not_general_code_review; use only for images/OCR evidence",
+      "availability_check": "GET /v1/models before dispatch; no invented model IDs"
+    },
+    "local_paid_duplicate_policy": {
+      "rule": "local_free LM Studio routes have priority only over exact or substantially equivalent paid routes",
+      "same_family_is_not_duplicate": true,
+      "material_capacity_difference_keeps_both": true,
+      "qwen_480b_rule": "deepinfra_qwen3_coder_480b remains active because Qwen 480B is materially different from local Qwen 30B/32B",
+      "functional_paid_duplicates_excluded": {
+        "blackbox_devstral_2": "lmstudio_devstral_small_2507"
+      },
+      "scope": "automatic slots only; route records remain in canon for traceability/manual future authorization"
+    }
+  },
+  "legacy_runtime_aliases": {
+    "1": "1",
+    "3": "4",
+    "4": "6",
+    "5": "7.consolidator",
+    "6": "7.writer",
+    "7": "8",
+    "8": "10_11.support",
+    "9": "10_11.mimo",
+    "10": "12",
+    "11": "16.minimax",
+    "12": "16.kimi",
+    "13": "13_14",
+    "14": "reserved_claude"
+  },
+  "slots": {
+    "1": {
+      "cycle": "A",
+      "role": "parallel_initial_auditors",
+      "loops": null,
+      "correction_policy": "NO_BLOQUEA",
+      "routes": [
+        "gemini_aistudio_3_5_flash",
+        "vertex_gemini_2_5_pro",
+        "deepseek_v4_flash",
+        "blackbox_grok_code_fast_free",
+        "blackbox_minimax_m2_5_free",
+        "openrouter_qwen_coder_free",
+        "openrouter_nemotron_free",
+        "openrouter_gpt_oss_120b_free",
+        "openrouter_llama_33_70b_free",
+        "openrouter_gemma_4_31b_free",
+        "openrouter_gemma_4_26b_free",
+        "openrouter_nemotron_nano_omni_30b_free",
+        "openrouter_nex_n2_pro_free",
+        "openrouter_laguna_m1_free",
+        "nvidia_nemotron_ultra_direct",
+        "groq_gpt_oss_120b",
+        "groq_llama_33_70b",
+        "groq_qwen3_32b",
+        "lmstudio_qwen3_coder_30b_a3b",
+        "lmstudio_qwen25_coder_32b",
+        "lmstudio_qwen25_coder_32b_abliterated",
+        "lmstudio_deepseek_r1_distill_qwen_32b",
+        "lmstudio_qwq_32b",
+        "lmstudio_qwen36_27b"
+      ],
+      "special": {
+        "openrouter": "run_all_allowlisted_suffix_free_no_paid_fallback",
+        "nemotron_race": [
+          "nvidia_nemotron_ultra_direct",
+          "openrouter_nemotron_free"
+        ],
+        "nemotron_first_valid_wins": true,
+        "lmstudio_free_local_batch": {
+          "routes": [
+            "lmstudio_qwen3_coder_30b_a3b",
+            "lmstudio_qwen25_coder_32b",
+            "lmstudio_qwen25_coder_32b_abliterated",
+            "lmstudio_deepseek_r1_distill_qwen_32b",
+            "lmstudio_qwq_32b",
+            "lmstudio_qwen36_27b"
+          ],
+          "endpoint_source": "config/host_runtime.policy.json",
+          "requires_lmstudio_listen_on_all_interfaces": true,
+          "medium_model_concurrency_limit": 2,
+          "never_parallelize_with_heavy_exclusive": true,
+          "on_connection_refused": "skip_explicit_no_consta_do_not_fail_silently"
+        }
+      },
+      "internal_loop": {
+        "required": true,
+        "loop_type": "internal_agentic",
+        "max_iterations": 10,
+        "version_suffixes": "candidate.001 hasta candidate.010",
+        "mandatory_sequence": [
+          "auditar",
+          "detectar bug/mejora/deuda",
+          "corregir o reescribir",
+          "testear / validar",
+          "reauditar la corrección",
+          "decidir si queda limpio dentro del alcance del slot"
+        ],
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "stop_conditions": [
+          "sin nuevos hallazgos dentro del alcance del slot",
+          "alcanzada la iteración .010"
+        ],
+        "delivery_requirements": [
+          "última versión corregida",
+          "diff acumulado",
+          "historial de iteraciones (.001 a .NNN)",
+          "tests sugeridos o ejecutados",
+          "deuda residual explícita",
+          "veredicto de ronda (sin aprobación global)"
+        ]
+      }
+    },
+    "2": {
+      "cycle": "A",
+      "role": "manual_harvest",
+      "loops": null,
+      "correction_policy": "NO_BLOQUEA",
+      "routes": [],
+      "internal_loop": {
+        "required": false,
+        "loop_type": "none"
+      }
+    },
+    "3": {
+      "cycle": "A",
+      "role": "consolidator_and_writer",
+      "loops": 5,
+      "correction_policy": "BLOCKING_WITHIN_LIMIT",
+      "routes": [
+        "chatgpt_gpt_5_6_sol_actions_plan"
+      ],
+      "fallback_chain": [
+        "chatgpt_gpt_5_5_plan"
+      ],
+      "special": {
+        "brain_stage": "primary_consolidation"
+      },
+      "internal_loop": {
+        "required": false,
+        "loop_type": "external_slot_loop",
+        "note": "este slot itera por bucle de slot (campo 'loops'), no por bucle interno .001-.010"
+      }
+    },
+    "4": {
+      "cycle": "B",
+      "role": "intermediate_parallel_auditors",
+      "loops": null,
+      "correction_policy": "NO_BLOQUEA",
+      "routes": [
+        "deepseek_v4_pro",
+        "vertex_gemini_3_1_pro",
+        "blackbox_minimax_m2_5_free",
+        "blackbox_trinity_large_thinking",
+        "deepinfra_qwen3_coder_480b",
+        "lmstudio_devstral_small_2507",
+        "lmstudio_codestral_22b",
+        "lmstudio_mistral_small_3_2_24b"
+      ],
+      "special": {
+        "blackbox_nemotron_enters_only_without_free_winner": "blackbox_nemotron_ultra_paid",
+        "lmstudio_local_intermediate_batch": {
+          "routes": [
+            "lmstudio_devstral_small_2507",
+            "lmstudio_codestral_22b",
+            "lmstudio_mistral_small_3_2_24b"
+          ],
+          "medium_model_concurrency_limit": 2,
+          "on_connection_refused": "skip_explicit_no_consta_do_not_fail_silently"
+        },
+        "paid_duplicate_local_priority": {
+          "excluded_paid_routes": {
+            "blackbox_devstral_2": "lmstudio_devstral_small_2507"
+          },
+          "not_excluded_distinct_capacity": {
+            "deepinfra_qwen3_coder_480b": "Qwen3 Coder 480B remains active; local Qwen 30B/32B are different-capacity models"
+          },
+          "rule": "local route only excludes a paid route when model/capability is substantially equivalent; same family alone is insufficient",
+          "manual_override": "requires explicit user authorization and canon change"
+        }
+      },
+      "internal_loop": {
+        "required": true,
+        "loop_type": "internal_agentic",
+        "max_iterations": 10,
+        "version_suffixes": "candidate.001 hasta candidate.010",
+        "mandatory_sequence": [
+          "auditar",
+          "detectar bug/mejora/deuda",
+          "corregir o reescribir",
+          "testear / validar",
+          "reauditar la corrección",
+          "decidir si queda limpio dentro del alcance del slot"
+        ],
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "stop_conditions": [
+          "sin nuevos hallazgos dentro del alcance del slot",
+          "alcanzada la iteración .010"
+        ],
+        "delivery_requirements": [
+          "última versión corregida",
+          "diff acumulado",
+          "historial de iteraciones (.001 a .NNN)",
+          "tests sugeridos o ejecutados",
+          "deuda residual explícita",
+          "veredicto de ronda (sin aprobación global)"
+        ]
+      }
+    },
+    "5": {
+      "cycle": "B",
+      "role": "consolidator",
+      "loops": null,
+      "correction_policy": "NO_BLOQUEA",
+      "routes": [
+        "deepseek_v4_pro"
+      ],
+      "internal_loop": {
+        "required": false,
+        "loop_type": "none"
+      }
+    },
+    "6": {
+      "cycle": "B",
+      "role": "writer",
+      "loops": 3,
+      "correction_policy": "BLOCKING_WITHIN_LIMIT",
+      "routes": [
+        "chatgpt_gpt_5_6_sol_actions_plan"
+      ],
+      "fallback_chain": [
+        "chatgpt_gpt_5_5_plan"
+      ],
+      "special": {
+        "brain_stage": "code_generation"
+      },
+      "internal_loop": {
+        "required": false,
+        "loop_type": "external_slot_loop",
+        "note": "este slot itera por bucle de slot (campo 'loops'), no por bucle interno .001-.010"
+      }
+    },
+    "7": {
+      "cycle": "C",
+      "role": "glm_gate",
+      "loops": null,
+      "correction_policy": "NO_BLOQUEA",
+      "routes": [
+        "zai_glm_5_1"
+      ],
+      "fallback_chain": [
+        "lmstudio_qwen3_coder_30b_a3b",
+        "chatgpt_gpt_5_6_sol_actions_plan",
+        "chatgpt_gpt_5_5_plan"
+      ],
+      "special": {
+        "brain_stage": "post_code_review",
+        "provider_circuit_breaker": {
+          "provider_id": "zai_glm",
+          "trip_on": [
+            "subscription_credit_exhausted",
+            "quota_limited",
+            "payment_required",
+            "http_402",
+            "http_429"
+          ],
+          "scope": "run",
+          "skip_remaining_provider_routes": true
+        },
+        "fallback_policy": "first_enabled_independent_free_or_plan_route"
+      },
+      "internal_loop": {
+        "required": true,
+        "loop_type": "internal_agentic",
+        "max_iterations": 10,
+        "version_suffixes": "candidate.001 hasta candidate.010",
+        "mandatory_sequence": [
+          "auditar",
+          "detectar bug/mejora/deuda",
+          "corregir o reescribir",
+          "testear / validar",
+          "reauditar la corrección",
+          "decidir si queda limpio dentro del alcance del slot"
+        ],
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "stop_conditions": [
+          "sin nuevos hallazgos dentro del alcance del slot",
+          "alcanzada la iteración .010"
+        ],
+        "delivery_requirements": [
+          "última versión corregida",
+          "diff acumulado",
+          "historial de iteraciones (.001 a .NNN)",
+          "tests sugeridos o ejecutados",
+          "deuda residual explícita",
+          "veredicto de ronda (sin aprobación global)"
+        ]
+      }
+    },
+    "8": {
+      "cycle": "C",
+      "role": "agentic_support_auditors",
+      "loops": null,
+      "correction_policy": "NO_BLOQUEA",
+      "routes": [
+        "deepinfra_minimax_m2_7",
+        "deepinfra_qwen3_coder_480b",
+        "lmstudio_qwen3_coder_30b_a3b",
+        "lmstudio_qwen25_coder_32b",
+        "lmstudio_devstral_small_2507"
+      ],
+      "internal_loop": {
+        "required": true,
+        "loop_type": "internal_agentic",
+        "max_iterations": 10,
+        "version_suffixes": "candidate.001 hasta candidate.010",
+        "mandatory_sequence": [
+          "auditar",
+          "detectar bug/mejora/deuda",
+          "corregir o reescribir",
+          "testear / validar",
+          "reauditar la corrección",
+          "decidir si queda limpio dentro del alcance del slot"
+        ],
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "stop_conditions": [
+          "sin nuevos hallazgos dentro del alcance del slot",
+          "alcanzada la iteración .010"
+        ],
+        "delivery_requirements": [
+          "última versión corregida",
+          "diff acumulado",
+          "historial de iteraciones (.001 a .NNN)",
+          "tests sugeridos o ejecutados",
+          "deuda residual explícita",
+          "veredicto de ronda (sin aprobación global)"
+        ]
+      },
+      "special": {
+        "paid_duplicate_local_priority": {
+          "excluded_paid_routes": {
+            "blackbox_devstral_2": "lmstudio_devstral_small_2507"
+          },
+          "not_excluded_distinct_capacity": {
+            "deepinfra_qwen3_coder_480b": "Qwen3 Coder 480B remains active; local Qwen 30B/32B are different-capacity models"
+          },
+          "rule": "local route only excludes a paid route when model/capability is substantially equivalent; same family alone is insufficient",
+          "manual_override": "requires explicit user authorization and canon change"
+        }
+      }
+    },
+    "9": {
+      "cycle": "C",
+      "role": "agentic_consolidator",
+      "loops": null,
+      "correction_policy": "NO_BLOQUEA",
+      "routes": [
+        "xiaomi_mimo_token_plan_agentic"
+      ],
+      "fallback_chain": [
+        "xiaomi_mimo_payg_agentic",
+        "deepinfra_mimo_manual"
+      ],
+      "internal_loop": {
+        "required": false,
+        "loop_type": "none"
+      }
+    },
+    "10": {
+      "cycle": "C",
+      "role": "gpt_writer",
+      "loops": 3,
+      "correction_policy": "BLOCKING_WITHIN_LIMIT",
+      "routes": [
+        "chatgpt_gpt_5_6_sol_actions_plan"
+      ],
+      "fallback_chain": [
+        "chatgpt_gpt_5_5_plan"
+      ],
+      "special": {
+        "brain_stage": "code_generation"
+      },
+      "internal_loop": {
+        "required": false,
+        "loop_type": "external_slot_loop",
+        "note": "este slot itera por bucle de slot (campo 'loops'), no por bucle interno .001-.010"
+      }
+    },
+    "11": {
+      "cycle": "FINAL",
+      "role": "minimax_corrector_writer",
+      "loops": 4,
+      "correction_policy": "BLOCKING_WITHIN_LIMIT",
+      "routes": [
+        "deepinfra_minimax_m2_7"
+      ],
+      "fallback_chain": [
+        "deepinfra_minimax_m2_5"
+      ],
+      "internal_loop": {
+        "required": false,
+        "loop_type": "external_slot_loop",
+        "note": "este slot itera por bucle de slot (campo 'loops'), no por bucle interno .001-.010"
+      }
+    },
+    "12": {
+      "cycle": "FINAL",
+      "role": "kimi_corrector_writer",
+      "loops": 4,
+      "correction_policy": "BLOCKING_WITHIN_LIMIT",
+      "routes": [
+        "deepinfra_kimi_k2_7_code"
+      ],
+      "internal_loop": {
+        "required": false,
+        "loop_type": "external_slot_loop",
+        "note": "este slot itera por bucle de slot (campo 'loops'), no por bucle interno .001-.010"
+      }
+    },
+    "13": {
+      "cycle": "FINAL",
+      "role": "glm_corrector_writer",
+      "loops": 4,
+      "correction_policy": "BLOCKING_WITHIN_LIMIT",
+      "routes": [
+        "zai_glm_5_2"
+      ],
+      "request_rule": "one_request_per_slot_with_internal_fallbacks",
+      "fallback_chain": [
+        "lmstudio_qwen3_coder_30b_a3b",
+        "chatgpt_gpt_5_6_sol_actions_plan",
+        "chatgpt_gpt_5_5_plan"
+      ],
+      "special": {
+        "brain_stage": "closure",
+        "provider_circuit_breaker": {
+          "provider_id": "zai_glm",
+          "trip_on": [
+            "subscription_credit_exhausted",
+            "quota_limited",
+            "payment_required",
+            "http_402",
+            "http_429"
+          ],
+          "scope": "run",
+          "skip_remaining_provider_routes": true
+        },
+        "fallback_policy": "first_enabled_independent_free_or_plan_route",
+        "paid_fallbacks_authorized": false
+      },
+      "internal_loop": {
+        "required": false,
+        "loop_type": "external_slot_loop",
+        "note": "este slot itera por bucle de slot (campo 'loops'), no por bucle interno .001-.010"
+      }
+    },
+    "14": {
+      "cycle": "FINAL",
+      "role": "final_corrector_writer_and_only_approver",
+      "loops": 3,
+      "correction_policy": "RESTART_BIG_LOOP_IF_CORRECTED_WITHIN_LIMIT",
+      "routes": [
+        "claude_code_subscription_cli"
+      ],
+      "fallback_chain": [
+        "codex_gpt_5_6_sol_ultra_subscription_cli"
+      ],
+      "executor_worker": "claude_code",
+      "execution_mode": "automatic_cli",
+      "approval_contract": {
+        "verdict": "APPROVED_BY_CLAUDE_OR_CODEX_SUBSCRIPTION_FALLBACK",
+        "primary_verdict": "APPROVED_BY_CLAUDE",
+        "fallback_verdict": "APPROVED_BY_CODEX_FALLBACK",
+        "fallback_route_id": "codex_gpt_5_6_sol_ultra_subscription_cli",
+        "fallback_requires_primary_unavailable": true,
+        "requires_slot_id": "14",
+        "requires_no_corrections": true,
+        "requires_no_findings": true,
+        "requires_current_candidate_sha256": true,
+        "requires_prior_slots_complete": true,
+        "corrections_action": "restart_big_loop"
+      },
+      "terminal_if_no_corrections": "APPROVED_BY_CLAUDE_OR_CODEX_SUBSCRIPTION_FALLBACK",
+      "internal_loop": {
+        "required": false,
+        "loop_type": "external_slot_loop",
+        "note": "este slot itera por bucle de slot (campo 'loops'), no por bucle interno .001-.010"
+      }
+    }
+  }
+}

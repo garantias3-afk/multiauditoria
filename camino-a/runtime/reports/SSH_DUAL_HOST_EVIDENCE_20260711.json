@@ -1,0 +1,26 @@
+{
+  "schema_version": "camino_ssh_dual_host_evidence.v1",
+  "date": "2026-07-11",
+  "imac_to_macbook": {
+    "status": "verified_by_operator_batchmode_output",
+    "command": "ssh -o BatchMode=yes macbook-camino 'echo SSH_OK; hostname; whoami'",
+    "stdout_lines": [
+      "SSH_OK",
+      "MacBook-Pro-de-Mariano.local",
+      "mariano"
+    ],
+    "password_prompt": false,
+    "automation_transport_ready": true
+  },
+  "macbook_to_imac": {
+    "status": "previously_verified_with_peer_bootstrap",
+    "previous_evidence": "strict SSH probe plus six-file peer runtime bootstrap",
+    "current_recheck": "blocked locally by Operation not permitted before SSH connection",
+    "current_recheck_changes_status": false
+  },
+  "not_proven": [
+    "same complete run launched from both hosts",
+    "RAM-pressure offload during a live LM Studio inference",
+    "dual-host end-to-end slots 1 through 14"
+  ]
+}

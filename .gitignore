@@ -11,4 +11,6 @@ build/
 *.sqlite-shm
 *.sqlite-wal
 *.log
-
+camino-a/runtime/dist/
+camino-a/runtime/outputs/
+camino-a/runtime/work/

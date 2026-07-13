@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canon_workflow_slots.v1.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "canon_version",
+    "big_loop",
+    "cycles",
+    "general_rules",
+    "slots"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "canon_workflow_slots.v1"
+    },
+    "slots": {
+      "type": "object",
+      "minProperties": 14,
+      "maxProperties": 14,
+      "properties": {
+        "14": {
+          "required": ["executor_worker", "execution_mode", "approval_contract", "terminal_if_no_corrections"],
+          "properties": {
+            "executor_worker": {"const": "claude_code"},
+            "execution_mode": {"const": "automatic_cli"},
+            "approval_contract": {
+              "type": "object",
+              "required": ["verdict", "requires_slot_id", "requires_no_corrections", "requires_no_findings", "requires_prior_slots_complete"],
+              "properties": {
+                "requires_slot_id": {"const": "14"},
+                "requires_no_corrections": {"const": true},
+                "requires_no_findings": {"const": true},
+                "requires_prior_slots_complete": {"const": true}
+              }
+            }
+          }
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "cycle",
+          "role",
+          "loops",
+          "correction_policy",
+          "routes"
+        ],
+        "properties": {
+          "routes": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "fallback_chain": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "special": {"type": "object"},
+          "internal_loop": {"type": "object"}
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

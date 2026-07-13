@@ -1,0 +1,86 @@
+{
+  "allowed_providers": [],
+  "disable_on_401": true,
+  "disable_on_403": true,
+  "disable_on_404_model": true,
+  "forbidden_providers": [
+    "openai_api",
+    "anthropic_api",
+    "claude_api"
+  ],
+  "live_probe": {
+    "active_probe_requires_cli_flag": "--active-probe",
+    "allowed_provider_families": [
+      "openrouter",
+      "blackbox",
+      "gemini",
+      "vertex",
+      "lmstudio"
+    ],
+    "credential_envs_by_family": {
+      "blackbox": [
+        "BLACKBOX_API_KEY",
+        "BLACKBOX_TOKEN"
+      ],
+      "gemini": [
+        "GEMINI_API_KEY",
+        "GOOGLE_API_KEY",
+        "GOOGLE_AI_STUDIO_API_KEY"
+      ],
+      "openrouter": [
+        "OPENROUTER_API_KEY"
+      ],
+      "vertex": [
+        "VERTEX_ACCESS_TOKEN",
+        "GOOGLE_OAUTH_ACCESS_TOKEN",
+        "GCLOUD_ACCESS_TOKEN",
+        "gcloud auth print-access-token"
+      ],
+      "lmstudio": [
+        "LMSTUDIO_API_KEY",
+        "literal:lm-studio"
+      ]
+    },
+    "default_execute_external_calls": false,
+    "execute_requires_cli_flag": "--execute",
+    "forbidden_api_providers": [
+      "openai_api",
+      "anthropic_api",
+      "claude_api"
+    ],
+    "forbidden_env_vars": [
+      "OPENAI_API_KEY",
+      "ANTHROPIC_API_KEY"
+    ],
+    "listing_endpoints": {
+      "blackbox": "https://api.blackbox.ai/v1/models",
+      "gemini": "https://generativelanguage.googleapis.com/v1beta/models",
+      "openrouter": "https://openrouter.ai/api/v1/models",
+      "vertex": "https://{location}-aiplatform.googleapis.com/v1/projects/{project}/locations/{location}/publishers/google/models",
+      "lmstudio": "resolved_by_host_runtime"
+    },
+    "paid_active_probe_requires_cli_flag": "--allow-paid",
+    "result_contract": "missing credentials/network/auth/model_absent are explicit statuses; never convert them to availability",
+    "schema_version": "camino_a_live_probe_policy.v1",
+    "lmstudio_connection_refused_policy": "explicit_skip_no_consta_check_lmstudio_listen_on_0_0_0_0"
+  },
+  "max_429_retries": 1,
+  "probe_timeout_seconds": 10,
+  "require_probe_before_gate": true,
+  "retry_on_429": true,
+  "gateway_security": {
+    "api_key_env": "CAMINO_B_GATEWAY_API_KEY",
+    "api_key_header": "X-API-Key",
+    "https_required_for_remote": true,
+    "insecure_http_override_env": "CAMINO_B_ALLOW_INSECURE_HTTP",
+    "allowed_hosts_override_env": "CAMINO_B_GATEWAY_ALLOWED_HOSTS",
+    "audit_response_requires": [
+      "status",
+      "model_id",
+      "provider_id",
+      "candidate_sha256",
+      "findings"
+    ]
+  },
+  "schema_version": "1.1"
+}

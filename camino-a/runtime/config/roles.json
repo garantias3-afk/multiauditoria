@@ -1,0 +1,109 @@
+{
+  "schema_version": "2.0",
+  "brain_current": "gpt_manual_or_configured",
+  "authority": {
+    "state_engine": "overnight_master",
+    "state_engine_is_brain": false,
+    "master": "overnight_master",
+    "master_is_brain": false,
+    "workers_are_judges": false,
+    "global_approval_allowed": false
+  },
+  "paths": {
+    "camino_a": {
+      "brain": "gpt_manual_or_configured",
+      "logical_orchestrator": "codex",
+      "orchestrator_model_policy": {
+        "selection_mode": "operator_selected",
+        "model_tier_preference": "low",
+        "reasoning_preference": "low",
+        "cost_preference": "low",
+        "fixed_model_id": null,
+        "self_model_switch_for_slot_14": false
+      },
+      "slot_14_reviewer_process": "independent_codex_cli",
+      "state_authority": "overnight_master",
+      "transport": "gateway_and_drive_bus",
+      "gpt_must_supply_decision_evidence": true
+    },
+    "camino_b": {
+      "brain": "gpt_manual_or_configured",
+      "logical_orchestrator": "gpt_manual_or_configured",
+      "orchestrator_model_policy": {
+        "selection_mode": "gpt_desktop",
+        "reasoning_level": "high",
+        "fixed_model_id": null,
+        "self_model_switch_for_slot_14": false
+      },
+      "slot_14_reviewer_process": "independent_codex_cli",
+      "state_authority": "camino_b_gateway",
+      "transport": "gateway",
+      "gpt_must_supply_decision_evidence": true
+    }
+  },
+  "workers": {
+    "codex": {
+      "enabled": true,
+      "max_cycles": 3,
+      "workspace_isolated": true,
+      "may_edit_workspace": true,
+      "may_edit_main": false
+    },
+    "claude_code": {
+      "enabled": true,
+      "max_passes_per_run": 1,
+      "timeout_minutes": 45,
+      "max_input_chars": 25000,
+      "allow_anthropic_api_key": false,
+      "allow_api_credits": false,
+      "workspace_isolated": true,
+      "may_edit_main": false
+    },
+    "codex_fallback": {
+      "enabled": true,
+      "slot_id": "14",
+      "fallback_only": true,
+      "model_id": "gpt-5.6-sol",
+      "model_reasoning_effort": "ultra",
+      "process_isolation": "separate_codex_exec",
+      "inherits_orchestrator_model": false,
+      "self_model_switch": false,
+      "unavailable_policy": "fail_closed_operator_action_required",
+      "manual_or_desktop_result_may_approve": false,
+      "auth_method": "chatgpt_subscription",
+      "allow_openai_api_key": false,
+      "workspace_isolated": true,
+      "may_edit_main": false
+    },
+    "gateway": {
+      "enabled": true,
+      "forbidden_providers": [
+        "openai_api",
+        "anthropic_api",
+        "claude_api"
+      ],
+      "require_probe_before_gate": true
+    },
+    "manual_gpt": {
+      "enabled": true,
+      "manual_only": true
+    },
+    "manual_claude": {
+      "enabled": true,
+      "manual_only": true
+    }
+  },
+  "retry_policy": {
+    "transient_max_retries": 2,
+    "quota_max_retries": 0,
+    "auth_max_retries": 0,
+    "contract_error_max_retries": 0,
+    "worker_timeout_max_retries": 1
+  },
+  "terminal_policy": {
+    "require_no_canonical_pending_jobs": true,
+    "require_no_incomplete_out_bundles": true,
+    "require_no_live_child_processes": true,
+    "require_final_zip_manifest": true
+  }
+}

@@ -1,0 +1,172 @@
+{
+  "schema_version": "canon_runtime_policy.v1",
+  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
+  "updated_utc": "2026-07-11T00:00:00Z",
+  "default_profile": "with_claude",
+  "profiles": {
+    "with_claude": {
+      "description": "Claude participa como worker/slot manual o Claude Code si está disponible; nunca por API prohibida.",
+      "claude_enabled": true,
+      "final_without_claude": false,
+      "terminal_without_claude_reason": null,
+      "enabled_workers": [
+        "local_static",
+        "codex",
+        "gateway",
+        "claude_code",
+        "codex_fallback",
+        "manual_gpt",
+        "manual_claude",
+        "lmstudio_bridge"
+      ],
+      "required_final_review": "claude_or_manual_final_slot_when_available",
+      "terminal_if_claude_missing": "waiting_manual_claude_final_review",
+      "auto_execute_workers": false,
+      "require_gpt_brain_evidence": true
+    },
+    "without_claude": {
+      "description": "Perfil sin Claude: Codex gpt-5.6-sol ultra por suscripción ocupa el fallback del slot 14; nunca usa OpenAI API.",
+      "claude_enabled": false,
+      "final_without_claude": true,
+      "terminal_without_claude_reason": "ready_for_human_final_review",
+      "enabled_workers": [
+        "local_static",
+        "codex",
+        "gateway",
+        "manual_gpt",
+        "codex_fallback",
+        "lmstudio_bridge"
+      ],
+      "disabled_workers": [
+        "claude_code",
+        "manual_claude"
+      ],
+      "required_final_review": "codex_subscription_fallback_or_human_final_review",
+      "auto_execute_workers": false,
+      "require_gpt_brain_evidence": true
+    },
+    "sandbox_reference": {
+      "description": "Smoke mecánico explícito: sólo auditor estático local, sin Claude y sin pretender evidencia del GPT cerebro.",
+      "claude_enabled": false,
+      "final_without_claude": true,
+      "terminal_without_claude_reason": "reference_smoke_complete",
+      "enabled_workers": [
+        "local_static"
+      ],
+      "disabled_workers": [
+        "codex",
+        "gateway",
+        "claude_code",
+        "codex_fallback",
+        "manual_gpt",
+        "manual_claude",
+        "lmstudio_bridge"
+      ],
+      "required_final_review": "mechanical_smoke_only",
+      "auto_execute_workers": true,
+      "require_gpt_brain_evidence": false
+    }
+  },
+  "api_policy": {
+    "forbidden_api_providers": [
+      "anthropic_api",
+      "claude_api",
+      "openai_api"
+    ],
+    "forbidden_env_vars_for_workers": [
+      "ANTHROPIC_API_KEY",
+      "OPENAI_API_KEY"
+    ],
+    "allow_paid_credit": false,
+    "default_deny": true,
+    "lmstudio_bridge": {
+      "allowed": true,
+      "provider_id": "lmstudio_macbook_bridge",
+      "api_key_is_not_secret_when_literal_lm_studio": true,
+      "forbidden_to_use_openai_api": true,
+      "forbidden_to_use_claude_api": true
+    }
+  },
+  "heartbeat_policy": {
+    "heartbeat_interval_seconds": 600,
+    "heartbeat_grace_seconds": 1800,
+    "long_run_probe_every_minutes": 30,
+    "fallout_if_no_progress_minutes": 180,
+    "fallout_if_no_heartbeat_minutes": 60,
+    "manual_harvest_window_minutes": 720,
+    "late_manual_audit_policy": "reject_if_candidate_sha_mismatch"
+  },
+  "slot_defaults": {
+    "slot_budget_hours": 8,
+    "max_internal_loops": 3,
+    "strict_loop_limit": true,
+    "advance_with_explicit_residual_debt": true
+  },
+  "worker_limits": {
+    "codex": {
+      "max_cycles": 3,
+      "timeout_minutes": 120,
+      "gate_required": false
+    },
+    "gateway": {
+      "max_cycles": 1,
+      "timeout_minutes": 180,
+      "gate_required": false
+    },
+    "claude_code": {
+      "max_cycles": 1,
+      "timeout_minutes": 45,
+      "gate_required": false,
+      "allow_api_credits": false,
+      "allow_anthropic_api_key": false
+    },
+    "codex_fallback": {
+      "max_cycles": 1,
+      "timeout_minutes": 60,
+      "gate_required": false,
+      "allow_openai_api_key": false,
+      "subscription_auth_only": true,
+      "fallback_only_after_claude_unavailable": true
+    },
+    "manual_gpt": {
+      "max_cycles": 1,
+      "timeout_minutes": 720,
+      "gate_required": false
+    },
+    "manual_claude": {
+      "max_cycles": 1,
+      "timeout_minutes": 720,
+      "gate_required": false
+    },
+    "lmstudio_bridge": {
+      "max_concurrent_medium_models": 2,
+      "max_concurrent_heavy_models": 1,
+      "heavy_is_exclusive": true,
+      "timeout_minutes": 180,
+      "heartbeat_minutes": 10,
+      "base_url_source": "config/host_runtime.policy.json",
+      "connection_refused_status": "lmstudio_unavailable_connection_refused",
+      "do_not_treat_unavailable_as_model_failure": true
+    }
+  },
+  "terminal_policy": {
+    "require_accepted_evidence": true,
+    "reject_stale_candidate": true,
+    "allow_without_claude_terminal_state": "ready_for_human_final_review",
+    "allow_with_claude_missing_terminal_state": "waiting_manual_claude_final_review",
+    "only_slot_14_can_approve_when_claude_enabled": true,
+    "slot_14_subscription_approval_order": [
+      "claude_code",
+      "codex_fallback"
+    ],
+    "minimum_valid_evidence_workers": [
+      "local_static",
+      "codex",
+      "gateway",
+      "manual_gpt",
+      "manual_claude",
+      "claude_code",
+      "codex_fallback"
+    ]
+  }
+}

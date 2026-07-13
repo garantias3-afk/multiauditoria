@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canon_provider_model_routes.v1.schema.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "canon_version",
+    "identity_fields",
+    "routes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "canon_provider_model_routes.v1"
+    },
+    "canon_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity_fields": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "routes": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "route_id",
+          "provider_id",
+          "provider_name",
+          "model_id",
+          "route",
+          "interface",
+          "cost_class",
+          "status",
+          "reserved",
+          "agentic"
+        ],
+        "properties": {
+          "route_id": {"type": "string", "minLength": 1},
+          "provider_id": {"type": "string", "minLength": 1},
+          "model_id": {"type": "string", "minLength": 1},
+          "status": {"type": "string", "minLength": 1},
+          "ram_tier": {"enum": ["medium", "heavy", "heavy_exclusive"]},
+          "estimated_peak_ram_bytes": {"type": "integer", "minimum": 1},
+          "executor_worker": {"type": "string", "minLength": 1},
+          "execution_mode": {"type": "string", "minLength": 1},
+          "api_key_allowed": {"type": "boolean"}
+        },
+        "allOf": [
+          {
+            "if": {"properties": {"provider_id": {"const": "lmstudio_macbook_bridge"}}},
+            "then": {"required": ["ram_tier"]}
+          },
+          {
+            "if": {"properties": {"interface": {"const": "claude_cli"}}},
+            "then": {
+              "required": ["executor_worker", "execution_mode", "auth_probe", "api_key_allowed"],
+              "properties": {"api_key_allowed": {"const": false}}
+            }
+          }
+        ],
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

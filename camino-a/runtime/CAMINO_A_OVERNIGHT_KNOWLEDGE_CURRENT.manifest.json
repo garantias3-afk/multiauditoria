@@ -1,0 +1,106 @@
+{
+  "schema_version": "camino_a_knowledge_current.v1",
+  "bundle_version": "v1.3.21-slot14-handoff",
+  "file": "CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.md",
+  "size_bytes": 187521,
+  "sha256": "d9cba15bfc6bbe5d44ac974db9e774871b3050063e187ed078db593a4a8623ca",
+  "generated_utc": "2026-07-12T12:53:23.972627+00:00",
+  "brain_current": "gpt_manual_or_configured",
+  "source_manifest": [
+    {
+      "path": "generated/GPT_SHARED_INSTRUCTIONS.md",
+      "bytes": 16142,
+      "sha256": "a8ed3e5a5c2a8cd9c383b01a45e0f703f49da8f0fe115b8e5a3584ba261d0a0a"
+    },
+    {
+      "path": "contracts/CAMINO_SHARED_CONTRACT.md",
+      "bytes": 16049,
+      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8"
+    },
+    {
+      "path": "contracts/CANON_ACTION_TRANSFER_POLICY_v1.md",
+      "bytes": 4534,
+      "sha256": "2622731f174830a393ffa40fa7c607e70bc2b225931db19e77aa5910d5880ca8"
+    },
+    {
+      "path": "actions/CAMINO_A_CEREBRO_ACTIONS.v1.yaml",
+      "bytes": 29570,
+      "sha256": "8b9b04c39e6f3f2b8d137926c2cfad7ad0ce9763294d0e60d54a9a0ec46ef24b"
+    },
+    {
+      "path": "actions/SOL56_ACTIONS_EVAL_PROTOCOL.md",
+      "bytes": 3603,
+      "sha256": "578a51a1f43f4e558ddac1ee13ba0dae3248d83a73c192d6a026e6854acb25fd"
+    },
+    {
+      "path": "canon/CANON_SHARED_CONTRACT_v1.md",
+      "bytes": 16049,
+      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8"
+    },
+    {
+      "path": "canon/CANON_CHANGE_PROTOCOL_v1.md",
+      "bytes": 2693,
+      "sha256": "d1455540a67ad548986c98162ae2191860db1b0639f798e3b206ce8aa4774155"
+    },
+    {
+      "path": "canon/CANON_PROVIDER_MODEL_ROUTES.v1.json",
+      "bytes": 39729,
+      "sha256": "541a10f2facd3be97761fb6028576d6dc22a1814eb6dd98bba74f999e3e6b2f8"
+    },
+    {
+      "path": "canon/CANON_WORKFLOW_SLOTS.v1.json",
+      "bytes": 19085,
+      "sha256": "3569eb3b0f88a8f271a0e951cc88e6d6b8761d4e2a4a9396b1596cda5326db23"
+    },
+    {
+      "path": "canon/CANON_RUNTIME_POLICY.v1.json",
+      "bytes": 5258,
+      "sha256": "7ee7020d085d1b6d44118c613c59e24a804add8d7813c59e6f439b4d34e92bd4"
+    },
+    {
+      "path": "canon/CANON_PREAUDIT_DELIVERY.v1.json",
+      "bytes": 4788,
+      "sha256": "f00aa2fa6667805b74c1386a01723463bc26066b9a01982c5271c9df003a1aea"
+    },
+    {
+      "path": "config/roles.json",
+      "bytes": 3202,
+      "sha256": "13495cddb5af3557ae7a93321350b3934ae3d599d640b7621f18cd6c6bb4375c"
+    },
+    {
+      "path": "config/path_roles.json",
+      "bytes": 1819,
+      "sha256": "a74deb00de28da41a6d833f461a4df593a30b9fa981292c1e27c56eef9ac4f6a"
+    },
+    {
+      "path": "config/host_runtime.policy.json",
+      "bytes": 2801,
+      "sha256": "4bafa419ea77c975028fed02c0dc4317af16a9bfc569a2b0994fa9859eb5a110"
+    },
+    {
+      "path": "config/drive.policy.json",
+      "bytes": 798,
+      "sha256": "c9db6d49fcdc22e890be2c2ff0479d030941464b34ce4bc0ec71b965b824021e"
+    },
+    {
+      "path": "config/primary_brain_policy.json",
+      "bytes": 1859,
+      "sha256": "8eabc628ede359ef4c432779d656786d75762c08e2b0129e887f94ec55b9ef5c"
+    },
+    {
+      "path": "config/provider.policy.json",
+      "bytes": 2546,
+      "sha256": "bf70b9b0e572cae8565c9fdd79ca84963b58111e4780e086ec6571568d9d1eb8"
+    },
+    {
+      "path": "QUICKSTART.md",
+      "bytes": 5434,
+      "sha256": "bdc7e5a2f15686fec3996727c3381956cf8072c80dc53acc038b4f73d2ac0cd9"
+    },
+    {
+      "path": "RUNBOOK_CODEX.md",
+      "bytes": 6101,
+      "sha256": "cc206c5e8f4e0c1e00e9b5da045cb8c117e940105e335e099d20531fbea5e3b2"
+    }
+  ]
+}

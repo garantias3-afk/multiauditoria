@@ -1,0 +1,782 @@
+openapi: 3.1.0
+info:
+  title: Camino A Cerebro Actions
+  version: 1.3.21
+  description: >-
+    Minimal Action surface for GPT Cerebro Camino A. This spec is control-plane
+    and context-plane only. Codex/Gateway remain the data-plane for zips,
+    filesystem, provider dispatch, builds, tests, manifests and .DONE.
+servers:
+  - url: https://auditor.marianogrammatico.com.ar
+security:
+  - GatewayApiKey: []
+tags:
+  - name: Health
+  - name: Knowledge
+  - name: Brain
+paths:
+  /health:
+    get:
+      operationId: getGatewayHealth
+      tags: [Health]
+      summary: Public gateway health, version and declared bridge limits.
+      security: []
+      responses:
+        '200':
+          description: Gateway is alive.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/HealthResponse'}
+  /camino-a/knowledge/current:
+    get:
+      operationId: getCurrentCaminoAKnowledge
+      tags: [Knowledge]
+      summary: Read canonical shared Knowledge metadata and SHA-256.
+      responses:
+        '200':
+          description: Current Knowledge metadata.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoAKnowledgeMetadata'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '503': {$ref: '#/components/responses/AuthNotConfigured'}
+  /camino-a/knowledge/current/chunk:
+    get:
+      operationId: getCaminoAKnowledgeChunk
+      tags: [Knowledge]
+      summary: Read one bounded canonical Knowledge text fragment.
+      parameters:
+        - in: query
+          name: offset
+          required: false
+          schema: {type: integer, minimum: 0, default: 0}
+        - in: query
+          name: max_chars
+          required: false
+          schema: {type: integer, minimum: 1000, maximum: 24000, default: 12000}
+      responses:
+        '200':
+          description: Knowledge fragment.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/TextChunk'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '416': {$ref: '#/components/responses/RangeNotSatisfiable'}
+  /camino-a/runs/{run_id}/status:
+    get:
+      operationId: getCaminoARunStatus
+      tags: [Brain]
+      summary: Read unified watcher and GPT brain task status.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+      responses:
+        '200':
+          description: Unified Camino A status.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoARunStatus'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+  /camino-a/runs/{run_id}/brain/tasks/next:
+    get:
+      operationId: getNextCaminoABrainTask
+      tags: [Brain]
+      summary: Read compact metadata for the next canonical Camino A brain task.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+      responses:
+        '200':
+          description: Current task or completed stage.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainTaskEnvelope'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /camino-a/runs/{run_id}/context-pack:
+    get:
+      operationId: getCaminoABrainContextPack
+      tags: [Brain]
+      summary: >-
+        Read a bounded, SHA-identified context pack: file map, hashes, summaries,
+        critical files, omitted files and recommended reads. This is the normal
+        first input for large tasks.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: query
+          name: mode
+          required: false
+          schema: {type: string, enum: [minimal, standard, deep, diff_focus, manual_audits_focus, code_focus], default: standard}
+        - in: query
+          name: max_chars
+          required: false
+          schema: {type: integer, minimum: 4000, maximum: 64000, default: 24000}
+      responses:
+        '200':
+          description: Auditable context pack.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainContextPack'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /camino-a/runs/{run_id}/brain/tasks/{task_id}/files:
+    get:
+      operationId: listCaminoABrainTaskFiles
+      tags: [Brain]
+      summary: List a bounded page of task input-file metadata.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: task_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+        - in: query
+          name: cursor
+          required: false
+          schema: {type: integer, minimum: 0, default: 0}
+        - in: query
+          name: limit
+          required: false
+          schema: {type: integer, minimum: 1, maximum: 50, default: 20}
+      responses:
+        '200':
+          description: File metadata page.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainTaskFilePage'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /camino-a/runs/{run_id}/files/{file_id}/manifest:
+    get:
+      operationId: getCaminoABrainTaskFileManifest
+      tags: [Brain]
+      summary: "Read file metadata only: path, sha256, size, line count, language, role and criticality."
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: file_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+      responses:
+        '200':
+          description: Single file manifest.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainTaskFileManifest'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /camino-a/runs/{run_id}/brain/tasks/{task_id}/files/{file_id}:
+    get:
+      operationId: readCaminoABrainTaskFileChunk
+      tags: [Brain]
+      summary: Read one bounded text chunk from a task input file.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: task_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+        - in: path
+          name: file_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+        - in: query
+          name: offset
+          required: false
+          schema: {type: integer, minimum: 0, default: 0}
+        - in: query
+          name: max_chars
+          required: false
+          schema: {type: integer, minimum: 1000, maximum: 24000, default: 12000}
+      responses:
+        '200':
+          description: Bounded file chunk.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainTaskFileChunk'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '416': {$ref: '#/components/responses/RangeNotSatisfiable'}
+  /camino-a/runs/{run_id}/files/{file_id}/search:
+    get:
+      operationId: searchCaminoABrainTaskFile
+      tags: [Brain]
+      summary: Search inside one task input file and return bounded matches with offsets/line numbers.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: file_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+        - in: query
+          name: q
+          required: true
+          schema: {type: string, minLength: 1, maxLength: 200}
+        - in: query
+          name: regex
+          required: false
+          schema: {type: boolean, default: false}
+        - in: query
+          name: max_matches
+          required: false
+          schema: {type: integer, minimum: 1, maximum: 100, default: 20}
+      responses:
+        '200':
+          description: Bounded search result.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainFileSearchResult'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/ValidationError'}
+  /camino-a/runs/{run_id}/brain/tasks/{task_id}/artifacts/start:
+    post:
+      operationId: startCaminoABrainArtifactUpload
+      x-openai-isConsequential: true
+      tags: [Brain]
+      summary: Start an idempotent chunked upload for one GPT-origin text output artifact.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: task_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/CaminoABrainArtifactUploadStart'}
+      responses:
+        '200':
+          description: Upload initialized or resumed.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainArtifactUploadState'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/ValidationError'}
+  /camino-a/runs/{run_id}/brain/tasks/{task_id}/artifacts/{upload_id}:
+    get:
+      operationId: getCaminoABrainArtifactUploadState
+      tags: [Brain]
+      summary: Read upload state for idempotent resume after retries or crash.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: task_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+        - in: path
+          name: upload_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+      responses:
+        '200':
+          description: Upload state.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainArtifactUploadState'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '404': {$ref: '#/components/responses/NotFound'}
+        '409': {$ref: '#/components/responses/Conflict'}
+  /camino-a/runs/{run_id}/brain/tasks/{task_id}/artifacts/{upload_id}/chunks:
+    post:
+      operationId: uploadCaminoABrainArtifactChunk
+      x-openai-isConsequential: true
+      tags: [Brain]
+      summary: Upload one idempotent bounded text chunk.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: task_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+        - in: path
+          name: upload_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/CaminoABrainArtifactChunk'}
+      responses:
+        '200':
+          description: Chunk accepted or duplicate accepted if same hash/content.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainArtifactChunkAccepted'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '413': {$ref: '#/components/responses/PayloadTooLarge'}
+        '422': {$ref: '#/components/responses/ValidationError'}
+  /camino-a/runs/{run_id}/brain/tasks/{task_id}/artifacts/{upload_id}/finalize:
+    post:
+      operationId: finalizeCaminoABrainArtifactUpload
+      x-openai-isConsequential: true
+      tags: [Brain]
+      summary: Verify chunks, compute/compare SHA-256 and finalize one uploaded artifact.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: task_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+        - in: path
+          name: upload_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+      responses:
+        '200':
+          description: Artifact finalized.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainArtifactUploadState'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '422': {$ref: '#/components/responses/ValidationError'}
+  /camino-a/runs/{run_id}/brain/tasks/{task_id}/result:
+    post:
+      operationId: submitCaminoABrainTaskResult
+      x-openai-isConsequential: true
+      tags: [Brain]
+      summary: Submit GPT brain result; Gateway validates evidence and writes manifest/DONE.
+      parameters:
+        - in: path
+          name: run_id
+          required: true
+          schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+        - in: path
+          name: task_id
+          required: true
+          schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/CaminoABrainTaskResult'}
+      responses:
+        '200':
+          description: Result accepted and materialized.
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/CaminoABrainResultAccepted'}
+        '400': {$ref: '#/components/responses/BadRequest'}
+        '401': {$ref: '#/components/responses/Unauthorized'}
+        '409': {$ref: '#/components/responses/Conflict'}
+        '413': {$ref: '#/components/responses/PayloadTooLarge'}
+        '422': {$ref: '#/components/responses/ValidationError'}
+components:
+  securitySchemes:
+    GatewayApiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  parameters:
+    RunId:
+      in: path
+      name: run_id
+      required: true
+      schema: {type: string, pattern: '^RUN_[0-9]{8}_[0-9]{6}_[a-f0-9]{5}(?:_[A-Za-z0-9-][A-Za-z0-9_-]{0,199})?$'}
+    TaskId:
+      in: path
+      name: task_id
+      required: true
+      schema: {type: string, pattern: '^[a-f0-9]{32}$'}
+    FileId:
+      in: path
+      name: file_id
+      required: true
+      schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+    UploadId:
+      in: path
+      name: upload_id
+      required: true
+      schema: {type: string, pattern: '^[a-f0-9]{24}$'}
+  responses:
+    BadRequest:
+      description: Bad request.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    Unauthorized:
+      description: Missing or invalid X-API-Key.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    NotFound:
+      description: Resource not found.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    Conflict:
+      description: Invalid run state, stale task, hash mismatch or resource conflict.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    PayloadTooLarge:
+      description: Request or file too large.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    RangeNotSatisfiable:
+      description: Offset outside document.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    ValidationError:
+      description: Validation error.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+    AuthNotConfigured:
+      description: Gateway API key not configured; fail-closed.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+  schemas:
+    Error:
+      type: object
+      properties:
+        detail: {type: string}
+        code: {type: string}
+    HealthResponse:
+      type: object
+      required: [status, gateway_version]
+      properties:
+        status: {type: string}
+        gateway_version: {type: string}
+        bridge_version: {type: string}
+        limits:
+          type: object
+          additionalProperties: true
+    CaminoAKnowledgeMetadata:
+      type: object
+      required: [schema_version, bundle_version, file, sha256, size_bytes, total_chars, brain_current, source_count, max_chunk_chars, delivery]
+      properties:
+        schema_version: {type: string}
+        bundle_version: {type: string}
+        file: {type: string}
+        sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        size_bytes: {type: integer}
+        total_chars: {type: integer}
+        brain_current: {type: string}
+        source_count: {type: integer}
+        max_chunk_chars: {type: integer}
+        delivery: {type: string}
+    TextChunk:
+      type: object
+      required: [bundle_version, sha256, offset, next_offset, complete, content, chunk_sha256]
+      properties:
+        bundle_version: {type: string}
+        sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        offset: {type: integer}
+        next_offset: {type: integer}
+        complete: {type: boolean}
+        content: {type: string, maxLength: 24000}
+        chunk_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+    CaminoABrainContextPack:
+      type: object
+      required: [schema_version, run_id, task_id, input_sha256, context_pack_sha256, file_map, critical_files, omitted_files, coverage]
+      properties:
+        schema_version: {type: string}
+        run_id: {type: string}
+        task_id: {type: string}
+        input_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        context_pack_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        file_map:
+          type: array
+          items: {$ref: '#/components/schemas/CaminoABrainTaskFileManifest'}
+        critical_files:
+          type: array
+          items: {type: string}
+        omitted_files:
+          type: array
+          items:
+            type: object
+            required: [path, reason]
+            properties:
+              path: {type: string}
+              reason: {type: string}
+              sha256: {type: string}
+              size_bytes: {type: integer}
+        recommended_reads:
+          type: array
+          items: {type: string}
+        risk_indicators:
+          type: array
+          items: {type: string}
+        coverage:
+          type: object
+          required: [total_files, represented_files, omitted_files, critical_files_covered]
+          properties:
+            total_files: {type: integer}
+            represented_files: {type: integer}
+            omitted_files: {type: integer}
+            critical_files_covered: {type: boolean}
+    CaminoABrainTaskFileManifest:
+      type: object
+      required: [file_id, path, sha256, size_bytes, total_chars]
+      properties:
+        file_id: {type: string}
+        path: {type: string}
+        sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        size_bytes: {type: integer}
+        total_chars: {type: integer}
+        line_count: {type: integer}
+        language: {type: string}
+        role: {type: string}
+        critical: {type: boolean}
+        summary: {type: string}
+        symbol_index:
+          type: array
+          items: {type: string}
+    CaminoABrainTaskFilePage:
+      type: object
+      required: [run_id, task_id, input_sha256, files, complete, total_files]
+      properties:
+        run_id: {type: string}
+        task_id: {type: string}
+        input_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        files:
+          type: array
+          items: {$ref: '#/components/schemas/CaminoABrainTaskFileManifest'}
+        next_cursor: {type: [integer, 'null']}
+        complete: {type: boolean}
+        total_files: {type: integer}
+    CaminoABrainTaskFileChunk:
+      allOf:
+        - {$ref: '#/components/schemas/CaminoABrainTaskFileManifest'}
+        - type: object
+          required: [offset, next_offset, complete, content, chunk_sha256]
+          properties:
+            offset: {type: integer}
+            next_offset: {type: integer}
+            complete: {type: boolean}
+            content: {type: string, maxLength: 24000}
+            chunk_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+    CaminoABrainFileSearchResult:
+      type: object
+      required: [file_id, q, matches, total_matches, truncated]
+      properties:
+        file_id: {type: string}
+        q: {type: string}
+        matches:
+          type: array
+          items:
+            type: object
+            required: [line_number, char_offset, preview]
+            properties:
+              line_number: {type: integer}
+              char_offset: {type: integer}
+              preview: {type: string}
+              context_before: {type: string}
+              context_after: {type: string}
+        total_matches: {type: integer}
+        truncated: {type: boolean}
+    CaminoABrainTask:
+      type: object
+      required: [task_id, run_id, slot_id, stage, input_sha256, required_artifacts, done_marker, file_count, total_size_bytes, file_delivery]
+      properties:
+        task_id: {type: string}
+        run_id: {type: string}
+        slot_id: {type: string, pattern: '^(?:[1-9]|1[0-4])$'}
+        stage: {type: string}
+        phase: {type: string}
+        input_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        context_pack_required: {type: boolean, default: true}
+        candidate_version: {type: [string, 'null']}
+        candidate_sha256: {type: [string, 'null']}
+        required_output_dir: {type: string}
+        required_artifacts:
+          type: array
+          items: {type: string}
+        done_marker: {type: string}
+        instructions: {type: string}
+        file_count: {type: integer}
+        total_size_bytes: {type: integer}
+        file_delivery: {type: string}
+    CaminoABrainTaskEnvelope:
+      type: object
+      required: [run_id, state, phase]
+      properties:
+        run_id: {type: string}
+        state: {type: string}
+        phase: {type: string}
+        task:
+          oneOf:
+            - {$ref: '#/components/schemas/CaminoABrainTask'}
+            - {type: 'null'}
+    CaminoABrainArtifact:
+      type: object
+      required: [name, content]
+      properties:
+        name: {type: string, maxLength: 200}
+        content: {type: string, maxLength: 32768}
+        sha256: {type: string, pattern: '^(sha256:)?[a-f0-9]{64}$'}
+        base_sha256: {type: string, pattern: '^(sha256:)?[a-f0-9]{64}$'}
+        base_path: {type: string}
+    CaminoABrainArtifactUploadStart:
+      type: object
+      required: [name]
+      properties:
+        name: {type: string, maxLength: 200}
+        artifact_kind: {type: string, enum: [patch_plan, unified_diff, new_file, full_rewrite, report], default: report}
+        size_bytes: {type: [integer, 'null'], minimum: 1, maximum: 67108864}
+        assert_sha256: {type: [string, 'null'], pattern: '^(sha256:)?[a-f0-9]{64}$'}
+        total_chunks: {type: [integer, 'null'], minimum: 1, maximum: 99999}
+        content_type: {type: string, default: text/plain}
+        idempotency_key: {type: string, maxLength: 200}
+        base_sha256: {type: [string, 'null'], pattern: '^(sha256:)?[a-f0-9]{64}$'}
+        base_path: {type: [string, 'null']}
+    CaminoABrainArtifactChunk:
+      type: object
+      required: [index, content]
+      properties:
+        index: {type: integer, minimum: 0, maximum: 99999}
+        content: {type: string, maxLength: 24000}
+        chunk_sha256: {type: [string, 'null'], pattern: '^[a-f0-9]{64}$'}
+    CaminoABrainArtifactUploadState:
+      type: object
+      required: [upload_id, task_id, name, finalized]
+      properties:
+        upload_id: {type: string}
+        task_id: {type: string}
+        name: {type: string}
+        size_bytes: {type: [integer, 'null']}
+        assert_sha256: {type: [string, 'null']}
+        computed_sha256: {type: [string, 'null']}
+        finalized: {type: boolean}
+        finalized_utc: {type: string}
+        max_chunk_chars: {type: integer}
+        chunks_received:
+          type: array
+          items: {type: integer}
+        chunks_missing:
+          type: array
+          items: {type: integer}
+        next_chunk_index: {type: [integer, 'null']}
+        received_bytes: {type: integer}
+    CaminoABrainArtifactChunkAccepted:
+      type: object
+      required: [upload_id, index, chunk_sha256, received_bytes]
+      properties:
+        upload_id: {type: string}
+        index: {type: integer}
+        duplicate: {type: boolean}
+        chunk_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        received_bytes: {type: integer}
+    CaminoABrainTaskResult:
+      type: object
+      required: [slot_id, status, context_pack_sha256, input_sha256, evidence_read]
+      properties:
+        slot_id: {type: string, pattern: '^(?:[1-9]|1[0-4])$'}
+        status:
+          type: string
+          enum: [completed, code_required, no_new_findings, insufficient_evidence]
+        context_pack_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        input_sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+        evidence_read:
+          type: array
+          items:
+            type: object
+            required: [file_id, sha256]
+            properties:
+              file_id: {type: string, pattern: '^[a-f0-9]{24}$'}
+              sha256: {type: string, pattern: '^[a-f0-9]{64}$'}
+              ranges_read:
+                type: array
+                items:
+                  type: array
+                  items: {type: integer}
+        findings:
+          type: array
+          items:
+            type: object
+            required: [id, severity, summary]
+            properties:
+              id: {type: string}
+              severity: {type: string, enum: [BLOCKER, HIGH, MEDIUM, LOW, INFO]}
+              file_id: {type: string}
+              file_path: {type: string}
+              summary: {type: string}
+        artifacts:
+          type: array
+          maxItems: 20
+          items: {$ref: '#/components/schemas/CaminoABrainArtifact'}
+        artifact_upload_ids:
+          type: array
+          maxItems: 20
+          items: {type: string, pattern: '^[a-f0-9]{24}$'}
+        patch_plan_ref:
+          type: object
+          additionalProperties: true
+        summary: {type: string, maxLength: 20000}
+        candidate_version: {type: string, maxLength: 100}
+        candidate_sha256: {type: string, pattern: '^(sha256:)?[a-f0-9]{64}$'}
+    CaminoABrainResultAccepted:
+      type: object
+      required: [run_id, task_id, state, manifest, done_marker]
+      properties:
+        run_id: {type: string}
+        task_id: {type: string}
+        state: {type: string}
+        manifest: {type: string}
+        done_marker: {type: string}
+    CaminoARunStatus:
+      type: object
+      required: [run_id, current_phase, task_state, quality_hash_chain_ok]
+      properties:
+        run_id: {type: string}
+        current_phase: {type: string}
+        watcher_status: {type: string}
+        primary_brain_status: {type: string}
+        next_action: {type: string}
+        task_state: {type: string}
+        task_id: {type: [string, 'null']}
+        current_slot: {type: [string, 'null'], pattern: '^(?:[1-9]|1[0-4])$'}
+        completed_slots:
+          type: array
+          items: {type: string, pattern: '^(?:[1-9]|1[0-4])$'}
+        manual_audits_received: {type: integer}
+        quality_hash_chain_ok: {type: boolean}

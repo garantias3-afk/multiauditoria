@@ -1,0 +1,74 @@
+{
+ "schema_version": "canon_preaudit_delivery.v1",
+ "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
+ "updated_utc": "2026-07-11T00:00:00Z",
+ "applies_to": ["camino_a", "camino_b"],
+ "scope_note": "COMUN_CAMINO_A_Y_B: este contrato rige la entrega de preauditoría en ambos caminos. Cualquier modificación en (1) sistema de slots, (2) pedido/sistema de preauditoría, o (3) proceso de bucles, debe reflejarse simultáneamente en ambos caminos. Ningún GPT debe interpretar este archivo como exclusivo de su camino.",
+ "deliverables": {
+  "1_zip_limpio": {
+   "definition": "sin archivos de auditorías viejas ni innecesarios; solo lo mínimo indispensable de la última versión; criterio minimalista: nada puede faltar, nada puede sobrar",
+   "1_1_zip_plano": {
+    "description": "zip plano sin carpetas ni directorios; nombres aplanados",
+    "ideal_max_files": 10,
+    "hard_max_files": 50,
+    "on_exceed_hard_max": "avisar al operador humano y preguntar si igual lo quiere; si no lo quiere, entregar solo el zip 1.2",
+    "flatten_separator": "__"
+   },
+   "1_2_zip_con_subcarpetas": {
+    "description": "zip con estructura de subcarpetas si existen; mismo criterio minimalista; sin máximo de archivos",
+    "skip_condition": "si no hay subcarpetas y hay 50 archivos o menos, no se entrega porque sería idéntico al 1.1"
+   },
+   "1_3_hilo_copiar_pegar": {
+    "description": "texto listo para copiar y pegar con el pedido de auditoría completo"
+   }
+  },
+  "2_contexto_minimo": "CONTEXTO_MINIMO_AUDITORIA.md",
+  "3_manifest_minimo": "MANIFEST_MINIMO_AUDITORIA.json",
+  "4_pedido_auditorias": "PEDIDO_AUDITORIAS_MANUALES.md",
+  "5_changelog": "CHANGELOG_CORRECCION_AUDITORIA.md",
+  "6_pedido_copiar_pegar": "PEDIDO_COPIAR_PEGAR.md (mismo contenido que 1.3, como archivo)",
+  "7_zip_plano_o_semiplano": "cubierto por 1.1/1.2 según reglas de conteo y estructura",
+  "8_manifest_sha256": "manifest con SHA-256 actualizado de cada archivo incluido",
+  "9_lista_incluidos_excluidos": "INCLUIDOS_EXCLUIDOS.md con cada archivo incluido y cada regla/archivo excluido con motivo",
+  "10_instrucciones_multiagente": "INSTRUCCIONES_MULTIAGENTE.md generado según multiagent_policy"
+ },
+ "multiagent_policy": {
+  "description": "el preauditor decide la cantidad de agentes por auditoría priorizando máxima eficiencia, según el tipo de auditoría y el estado de los benchmarks de eficiencia multirol de los últimos 3 meses",
+  "benchmark_snapshot": {
+   "snapshot_utc": "2026-07-05",
+   "consensus": "4 roles de multiagente es bastante eficiente para auditorías generales",
+   "review_required_every_days": 90,
+   "review_rule": "el preauditor debe revisar benchmarks vigentes antes de asignar roles; si el snapshot tiene más de 90 días, la revisión es obligatoria y este archivo debe actualizarse"
+  },
+  "default_agents": 4,
+  "max_parallel_agents": 12,
+  "one_role_per_agent": true,
+  "role_catalog": [
+   {"role_id": "canon_slots_providers", "name": "Canon / slots / providers"},
+   {"role_id": "runtime_python", "name": "Runtime Python"},
+   {"role_id": "seguridad_io", "name": "Seguridad IO / manifests / hashes / secrets"},
+   {"role_id": "packaging_preaudit", "name": "Packaging / preauditoría limpia"},
+   {"role_id": "gateway_archivos_grandes", "name": "Gateway / archivos grandes / chunks"},
+   {"role_id": "bucles_cierre", "name": "Bucles / cierre / aprobación"},
+   {"role_id": "adversarial_general", "name": "Auditor adversarial general"},
+   {"role_id": "estado_persistencia", "name": "Estado / SQLite / persistencia"},
+   {"role_id": "contratos_prompts", "name": "Contratos / prompts generados / consistencia documental"},
+   {"role_id": "costos_presupuesto", "name": "Costos / presupuesto / cost_class"},
+   {"role_id": "concurrencia_procesos", "name": "Concurrencia / procesos / locks"},
+   {"role_id": "esquemas_validacion", "name": "Esquemas JSON / validación de datos"}
+  ],
+  "per_agent_instruction_fields": [
+   "rol",
+   "alcance",
+   "archivos prioritarios",
+   "preguntas específicas",
+   "formato de salida común",
+   "reglas de bucle interno"
+  ],
+  "assignment_rule": "asignar exactamente un rol del catálogo a cada agente; nunca exceder max_parallel_agents; con auditoría acotada usar menos agentes; con auditoría de sistema completo escalar hasta lo que el tipo de auditoría justifique"
+ },
+ "internal_loop_contract_ref": {
+  "source_of_truth": "canon/CANON_WORKFLOW_SLOTS.v1.json -> general_rules.internal_loop_contract",
+  "summary": "slots 1, 4, 7, 8: bucle interno obligatorio .001-.010 (auditar -> detectar -> corregir -> testear -> reauditar -> decidir); slots 3, 6, 10, 11, 12, 13, 14: bucle de slot con conteo en campo 'loops'; toda IA externa manual también itera .001-.010 según PEDIDO_AUDITORIAS_MANUALES.md"
+ }
+}

@@ -10,10 +10,11 @@ Repo base para coordinar Camino A, Camino B y el material compartido entre GPT, 
 
 ## Estado actual recuperado
 
-- El repo local estaba vacio y sin commits.
-- El repo GitHub existe como `garantias3-afk/multiauditoria` y tambien estaba vacio.
-- Lo ultimo inconcluso recuperado fue el intento real de `run_slot14_subscription_smoke.py --max-attempts 1`, que quedo pedido pero no cerrado en la sesion.
-- El ultimo fix confirmado en los artefactos del otro workspace fue cerrar `stdin` con `subprocess.DEVNULL` en el worker de fallback de Codex y agregar la regresion correspondiente.
+- El runtime recuperado esta versionado en `camino-a/runtime/`.
+- Camino B conserva sus componentes dentro del runtime importable y su indice en `camino-b/README.md`.
+- El fallback de slot 14 cierra `stdin`, usa Codex por suscripcion y conserva el binding de evidencia previa por SHA.
+- La corrida real `RUN_20260713_022749_eb68e_slot14_subscription_smoke` cerro limpia.
+- La suite autoritativa termino con `106 passed` y `RUN_TESTS_OK`.
 
 ## Regla de trabajo
 
@@ -21,4 +22,3 @@ Repo base para coordinar Camino A, Camino B y el material compartido entre GPT, 
 - Los hilos de IA se guardan en `shared/threads/`.
 - Camino A mantiene la capa orquestadora.
 - Camino B mantiene la capa ejecutora o puente.
-

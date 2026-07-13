@@ -1,0 +1,269 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://camino-b-ultimo.marianogrammatico.com.ar/schemas/camino_b_slot14_bridge.schema.json",
+  "title": "Camino B slot 14 local bridge contracts",
+  "description": "Contract-only schema. It does not assert that the public Gateway handlers or outbound Mac agent are deployed.",
+  "x-camino-deployment-status": "contract_only_not_deployed",
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "relativeRef": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\u0000-\\u001f]+$"
+    },
+    "reviewRequest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "path_id",
+        "run_id",
+        "slot_id",
+        "source_slot_id",
+        "candidate_sha256",
+        "prior_slots_complete",
+        "request_path",
+        "request_sha256",
+        "slot14_audit_request_ref",
+        "slot14_audit_request_sha256",
+        "diff_path",
+        "diff_sha256",
+        "idempotency_key"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "camino_b_slot14_review_request.v1"
+        },
+        "path_id": {
+          "const": "camino_b"
+        },
+        "run_id": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,199}$"
+        },
+        "slot_id": {
+          "const": "14"
+        },
+        "source_slot_id": {
+          "const": "13"
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "prior_slots_complete": {
+          "const": true
+        },
+        "request_path": {
+          "$ref": "#/$defs/relativeRef"
+        },
+        "request_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "slot14_audit_request_ref": {
+          "$ref": "#/$defs/relativeRef"
+        },
+        "slot14_audit_request_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "diff_path": {
+          "$ref": "#/$defs/relativeRef"
+        },
+        "diff_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "idempotency_key": {
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{15,127}$"
+        },
+        "requested_at_utc": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "metadata": {
+          "type": "object"
+        }
+      }
+    },
+    "status": {
+      "type": "object",
+      "required": [
+        "status",
+        "handoff_id",
+        "run_id",
+        "slot_id",
+        "candidate_sha256",
+        "request_sha256",
+        "diff_sha256",
+        "bridge_request_sha256",
+        "fallback_armed",
+        "result_ready",
+        "terminal_approval",
+        "requires_terminal_gate_validation"
+      ],
+      "properties": {
+        "status": {
+          "enum": [
+            "awaiting_slot14_local_worker",
+            "claimed",
+            "completed",
+            "blocked"
+          ]
+        },
+        "handoff_id": {
+          "type": "string",
+          "pattern": "^B14_[a-f0-9]{32}$"
+        },
+        "run_id": {
+          "type": "string"
+        },
+        "slot_id": {
+          "const": "14"
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "request_path": {
+          "$ref": "#/$defs/relativeRef"
+        },
+        "request_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "diff_path": {
+          "$ref": "#/$defs/relativeRef"
+        },
+        "diff_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bridge_request_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "claim": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/claimReceipt"}
+          ]
+        },
+        "fallback_armed": {
+          "type": "boolean"
+        },
+        "result_ready": {
+          "type": "boolean"
+        },
+        "operator_action": {
+          "type": ["string", "null"]
+        },
+        "terminal_approval": {
+          "const": false
+        },
+        "requires_terminal_gate_validation": {
+          "const": true
+        }
+      }
+    },
+    "claimReceipt": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "handoff_id",
+        "claim_id",
+        "worker_id",
+        "route_id",
+        "host_id",
+        "candidate_sha256",
+        "bridge_request_sha256",
+        "slot14_audit_request_sha256",
+        "diff_sha256",
+        "claim_receipt_sha256"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": "camino_b_slot14_claim_receipt.v1"
+        },
+        "handoff_id": {
+          "type": "string"
+        },
+        "claim_id": {
+          "type": "string"
+        },
+        "worker_id": {
+          "enum": ["claude_code", "codex_fallback"]
+        },
+        "route_id": {
+          "enum": [
+            "claude_code_subscription_cli",
+            "codex_gpt_5_6_sol_ultra_subscription_cli"
+          ]
+        },
+        "host_id": {
+          "type": "string"
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "bridge_request_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "slot14_audit_request_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "diff_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "claim_receipt_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "required": [
+        "status",
+        "handoff_id",
+        "candidate_sha256",
+        "result_ready",
+        "terminal_approval",
+        "requires_terminal_gate_validation"
+      ],
+      "properties": {
+        "status": {
+          "enum": ["awaiting_slot14_local_worker", "claimed", "completed", "blocked"]
+        },
+        "handoff_id": {
+          "type": "string"
+        },
+        "candidate_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "result_ready": {
+          "type": "boolean"
+        },
+        "transport_completed": {
+          "type": "boolean"
+        },
+        "terminal_approval": {
+          "const": false
+        },
+        "requires_terminal_gate_validation": {
+          "const": true
+        },
+        "completion": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "anyOf": [
+    {"$ref": "#/$defs/reviewRequest"},
+    {"$ref": "#/$defs/status"},
+    {"$ref": "#/$defs/claimReceipt"},
+    {"$ref": "#/$defs/result"}
+  ]
+}

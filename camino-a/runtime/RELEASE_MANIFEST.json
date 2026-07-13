@@ -1,0 +1,630 @@
+{
+  "release_name": "Camino Nocturno Canon Mutable",
+  "version": "v1.3.21-slot14-handoff",
+  "built_at_utc": "2026-07-13T02:28:36.900036+00:00",
+  "file_count": 124,
+  "total_size_bytes": 1933753,
+  "run_tests_exit_code": 0,
+  "files": [
+    {
+      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_BUNDLE_UNICO_v1_3_21-slot14-handoff.md",
+      "sha256": "d9cba15bfc6bbe5d44ac974db9e774871b3050063e187ed078db593a4a8623ca",
+      "size_bytes": 187521
+    },
+    {
+      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_BUNDLE_UNICO_v1_3_21-slot14-handoff.zip",
+      "sha256": "50b702b36f50d8c8221bba041f2b0ec6ccccafcc9fd8f3cebd07c0e6e351f0ba",
+      "size_bytes": 42911
+    },
+    {
+      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.manifest.json",
+      "sha256": "d6a3e17186ca37d38c0e17b3163dfd76b05c94b4454c777e3c28663aa5400a37",
+      "size_bytes": 3545
+    },
+    {
+      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.md",
+      "sha256": "d9cba15bfc6bbe5d44ac974db9e774871b3050063e187ed078db593a4a8623ca",
+      "size_bytes": 187521
+    },
+    {
+      "path": "CHANGELOG_V1_3_21_SLOT14_HANDOFF.md",
+      "sha256": "a49ae5740ec7611748f07ddd86b4aa65117fc463316183d5f576a471155521da",
+      "size_bytes": 1817
+    },
+    {
+      "path": "QUICKSTART.md",
+      "sha256": "bdc7e5a2f15686fec3996727c3381956cf8072c80dc53acc038b4f73d2ac0cd9",
+      "size_bytes": 5434
+    },
+    {
+      "path": "RUNBOOK_CODEX.md",
+      "sha256": "cc206c5e8f4e0c1e00e9b5da045cb8c117e940105e335e099d20531fbea5e3b2",
+      "size_bytes": 6101
+    },
+    {
+      "path": "VALIDATION_RESULTS.json",
+      "sha256": "efe3fcbf81daa23ed67afb21026c0416f9f500a1a8231156259c87c1665b2864",
+      "size_bytes": 8218
+    },
+    {
+      "path": "actions/CAMINO_A_ACTIONS_DEPLOYMENT_GUIDE.md",
+      "sha256": "b253bb89a059771901fb87196983ba52a3f246b34d8ae2d8dff1e1ee5108b3b4",
+      "size_bytes": 2914
+    },
+    {
+      "path": "actions/CAMINO_A_CEREBRO_ACTIONS.v1.yaml",
+      "sha256": "8b9b04c39e6f3f2b8d137926c2cfad7ad0ce9763294d0e60d54a9a0ec46ef24b",
+      "size_bytes": 29570
+    },
+    {
+      "path": "actions/CAMINO_B_GPT_BUILDER_INSTRUCTIONS.md",
+      "sha256": "f33cd57598f2181f0a81499c4c4ea356dd0e814499fa13b457491b9a0e7739b8",
+      "size_bytes": 4388
+    },
+    {
+      "path": "actions/CAMINO_B_SLOT14_BRIDGE_ACTIONS.v1.yaml",
+      "sha256": "0c100009120f2260a5260e8ce3783cdc7f7364ee2794a6a8020d21e7c070381d",
+      "size_bytes": 9346
+    },
+    {
+      "path": "actions/CAMINO_B_SLOT14_BRIDGE_DEPLOYMENT.md",
+      "sha256": "5957814f8a5c5a12167f88b6c63d1614544ceec223829114917a9d8589911549",
+      "size_bytes": 3953
+    },
+    {
+      "path": "actions/SOL56_ACTIONS_EVAL_PROTOCOL.md",
+      "sha256": "578a51a1f43f4e558ddac1ee13ba0dae3248d83a73c192d6a026e6854acb25fd",
+      "size_bytes": 3603
+    },
+    {
+      "path": "bin/launch_sandbox.sh",
+      "sha256": "a7cc74ce91d6fb5daf87fd62a871e15a46cfc3b1eacf8e59c0f23154b7b7a0f1",
+      "size_bytes": 129
+    },
+    {
+      "path": "bin/manual_submit.sh",
+      "sha256": "4d5b0c7e4916b3673389513c0c184502fd57065723b22ec7d13a5eb6a53ba3a6",
+      "size_bytes": 128
+    },
+    {
+      "path": "bin/run_tests.sh",
+      "sha256": "3c6be04b13599c0d1899d1306b290693a738cdb652cf0e774411bac7f32a40d0",
+      "size_bytes": 1295
+    },
+    {
+      "path": "bin/start_overnight.sh",
+      "sha256": "17ad8d07d1dc5d292bf586eef7692ff49d883c4707dcb37c9beb20ca29a3359f",
+      "size_bytes": 130
+    },
+    {
+      "path": "canon/CANON_CHANGE_PROTOCOL_v1.md",
+      "sha256": "d1455540a67ad548986c98162ae2191860db1b0639f798e3b206ce8aa4774155",
+      "size_bytes": 2693
+    },
+    {
+      "path": "canon/CANON_PREAUDIT_DELIVERY.v1.json",
+      "sha256": "f00aa2fa6667805b74c1386a01723463bc26066b9a01982c5271c9df003a1aea",
+      "size_bytes": 4788
+    },
+    {
+      "path": "canon/CANON_PROVIDER_MODEL_ROUTES.v1.json",
+      "sha256": "541a10f2facd3be97761fb6028576d6dc22a1814eb6dd98bba74f999e3e6b2f8",
+      "size_bytes": 39729
+    },
+    {
+      "path": "canon/CANON_PROVIDER_MODEL_ROUTES.v1.schema.json",
+      "sha256": "c3c3951443a82535d9758611cd0be03da265de66e6dbfc18b968092e8808030a",
+      "size_bytes": 2092
+    },
+    {
+      "path": "canon/CANON_RUNTIME_POLICY.v1.json",
+      "sha256": "7ee7020d085d1b6d44118c613c59e24a804add8d7813c59e6f439b4d34e92bd4",
+      "size_bytes": 5258
+    },
+    {
+      "path": "canon/CANON_SHARED_CONTRACT_v1.md",
+      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8",
+      "size_bytes": 16049
+    },
+    {
+      "path": "canon/CANON_WORKFLOW_SLOTS.v1.json",
+      "sha256": "3569eb3b0f88a8f271a0e951cc88e6d6b8761d4e2a4a9396b1596cda5326db23",
+      "size_bytes": 19085
+    },
+    {
+      "path": "canon/CANON_WORKFLOW_SLOTS.v1.schema.json",
+      "sha256": "d7dc7c0b71295047b4e875f4688a23faaa5a497ab93fc306c43804f287e010e4",
+      "size_bytes": 1862
+    },
+    {
+      "path": "config/budget.policy.json",
+      "sha256": "d6f68c2c705d9ef817ed202ee6efef8d65f73b44ebaa5ffb691c673b3dd61c2e",
+      "size_bytes": 1482
+    },
+    {
+      "path": "config/drive.policy.json",
+      "sha256": "c9db6d49fcdc22e890be2c2ff0479d030941464b34ce4bc0ec71b965b824021e",
+      "size_bytes": 798
+    },
+    {
+      "path": "config/host_runtime.policy.json",
+      "sha256": "4bafa419ea77c975028fed02c0dc4317af16a9bfc569a2b0994fa9859eb5a110",
+      "size_bytes": 2801
+    },
+    {
+      "path": "config/path_roles.json",
+      "sha256": "a74deb00de28da41a6d833f461a4df593a30b9fa981292c1e27c56eef9ac4f6a",
+      "size_bytes": 1819
+    },
+    {
+      "path": "config/primary_brain_policy.json",
+      "sha256": "8eabc628ede359ef4c432779d656786d75762c08e2b0129e887f94ec55b9ef5c",
+      "size_bytes": 1859
+    },
+    {
+      "path": "config/provider.policy.json",
+      "sha256": "bf70b9b0e572cae8565c9fdd79ca84963b58111e4780e086ec6571568d9d1eb8",
+      "size_bytes": 2546
+    },
+    {
+      "path": "config/roles.json",
+      "sha256": "13495cddb5af3557ae7a93321350b3934ae3d599d640b7621f18cd6c6bb4375c",
+      "size_bytes": 3202
+    },
+    {
+      "path": "config/workers.plan.json",
+      "sha256": "4011cdd193fbf39bb4557bb1c90d170407582feb4d251095b5b7ce177787341f",
+      "size_bytes": 689
+    },
+    {
+      "path": "contracts/CAMINO_SHARED_CONTRACT.md",
+      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8",
+      "size_bytes": 16049
+    },
+    {
+      "path": "contracts/CANON_ACTION_TRANSFER_POLICY_v1.md",
+      "sha256": "2622731f174830a393ffa40fa7c607e70bc2b225931db19e77aa5910d5880ca8",
+      "size_bytes": 4534
+    },
+    {
+      "path": "generated/AGENTS.md",
+      "sha256": "a23b0faf6d4cfc305a257e009b236ef753e20f6cd97bb182646a946cfd962f8a",
+      "size_bytes": 16380
+    },
+    {
+      "path": "generated/CAMINO_B_GATEWAY_POLICY.md",
+      "sha256": "d129084493f1b5b631c50a02e69499b104105eb989ad0ae9d9da150205fc46f9",
+      "size_bytes": 16417
+    },
+    {
+      "path": "generated/CLAUDE.md",
+      "sha256": "f6161bd251f2c96a4c45f90eb1d73a9d279194606a01dbcb4421a819122125d8",
+      "size_bytes": 16350
+    },
+    {
+      "path": "generated/GPT_BUILDER_INSTRUCTIONS.md",
+      "sha256": "5ecb658f176e1222bc17a43b903f3fd51ee33640b36df3276a3f4fa919ab2a75",
+      "size_bytes": 5707
+    },
+    {
+      "path": "generated/GPT_SHARED_INSTRUCTIONS.md",
+      "sha256": "a8ed3e5a5c2a8cd9c383b01a45e0f703f49da8f0fe115b8e5a3584ba261d0a0a",
+      "size_bytes": 16142
+    },
+    {
+      "path": "generated/PROMPT_CLAUDE_CODE.md",
+      "sha256": "8598fced059d87f4a8376235a383c7e656ce2e0dd5aee401ca86e4a0658b6a93",
+      "size_bytes": 16111
+    },
+    {
+      "path": "generated/PROMPT_CLAUDE_WEB.md",
+      "sha256": "b52542716864e244f0fd1967eb67ca6b7eee2c25e0c38adc1a7cbb3d9369699e",
+      "size_bytes": 16192
+    },
+    {
+      "path": "generated/PROMPT_CODEX.md",
+      "sha256": "9c9304fe7e897756a30d5576a38045d70cbda720811ae5f2b9268f011c19e2c3",
+      "size_bytes": 16354
+    },
+    {
+      "path": "generated/PROMPT_GPT_WEB.md",
+      "sha256": "0009cff6963739581d9b6f2c779dcc73704746fac7340e3f3d4384577df1dbff",
+      "size_bytes": 16186
+    },
+    {
+      "path": "reports/LIVE_CODEX_FALLBACK_ATTEMPT_20260711.json",
+      "sha256": "ba36f509ff0882a9ee308face16d80fae1d1ea1c94ed3193f67128163050c24c",
+      "size_bytes": 1572
+    },
+    {
+      "path": "reports/LIVE_SOL56_SUBSCRIPTION_PROBE_20260711.json",
+      "sha256": "49ffd4c7d82d6e2f689c384ef83d040ef420ae8d204d43dc9d77b84a09541e53",
+      "size_bytes": 1554
+    },
+    {
+      "path": "reports/SSH_DUAL_HOST_EVIDENCE_20260711.json",
+      "sha256": "aa04073d74e453e646ea6e5652889e8fadf2ef1c745deb4832fc68c095c02052",
+      "size_bytes": 903
+    },
+    {
+      "path": "schemas/camino_b_slot14_bridge.schema.json",
+      "sha256": "34792a3fef45b7e32d79248d51c37b59e8f2db0796d22307c7841a094ae8f898",
+      "size_bytes": 6681
+    },
+    {
+      "path": "schemas/schemas.json",
+      "sha256": "fe86e342261cdc9b1f589b70e922dd264e74e95418ea0b0502fc9498165e0ff9",
+      "size_bytes": 7783
+    },
+    {
+      "path": "scripts/__init__.py",
+      "sha256": "ca78f530d1ae4a685c203d613a73e72c45d84abd00cb907c125298689307337c",
+      "size_bytes": 46
+    },
+    {
+      "path": "scripts/assert_run_state.py",
+      "sha256": "30dfd60ad09e5f5487408f165bf18c2840526e22479c0a6fdf9b7fa8865b38cd",
+      "size_bytes": 2741
+    },
+    {
+      "path": "scripts/ast_analysis.py",
+      "sha256": "90931103b32530ffa50cce7596225e5f5ca0aaf6acd5ee6ccf48dd22b4ef663a",
+      "size_bytes": 14564
+    },
+    {
+      "path": "scripts/budget.py",
+      "sha256": "9a4e2b8a428500c57a2182594d5188fda62abd7b500b1143508d9afacd88137f",
+      "size_bytes": 1259
+    },
+    {
+      "path": "scripts/build_gpt_knowledge_bundle.py",
+      "sha256": "a8267e74de6732cca23d50e7338bd31abba1e10714b6dd9982edad203c0fb6a9",
+      "size_bytes": 7713
+    },
+    {
+      "path": "scripts/build_preaudit_package.py",
+      "sha256": "a458b1892f15912260917b907073eaae2f0380acef9fa442af1752442f4b4446",
+      "size_bytes": 21459
+    },
+    {
+      "path": "scripts/camino_a_worker_bus.py",
+      "sha256": "28d86803eb6c293c2711ae553a71c3958193a043f5f88b079109d1b2073c7eb0",
+      "size_bytes": 19381
+    },
+    {
+      "path": "scripts/camino_b_slot14_bridge.py",
+      "sha256": "56445a79153cfa9aefb237bcf6abc502d3ddb94ac63ceefa0821c6c8df9ed133",
+      "size_bytes": 36881
+    },
+    {
+      "path": "scripts/candidate_updates.py",
+      "sha256": "66069ff9acdb03c8dcf596c7d95590a3157954633f099ed085b5aa2bf654103a",
+      "size_bytes": 16958
+    },
+    {
+      "path": "scripts/canon_loader.py",
+      "sha256": "ddeedf2f0c8f79215989af898331d700f68c5b7be304ef872f46ad0eb3ba8933",
+      "size_bytes": 17837
+    },
+    {
+      "path": "scripts/canon_plumbing.py",
+      "sha256": "c058a40e59c99ed360f5ad49fbde7e86e52724d34a81da71953d9779f544265b",
+      "size_bytes": 2663
+    },
+    {
+      "path": "scripts/consolidate_results.py",
+      "sha256": "7ca9b74f205626b45453e49b85477a917bbd267034c2815c5ebe0a04e2a33353",
+      "size_bytes": 2282
+    },
+    {
+      "path": "scripts/drive_fuse.py",
+      "sha256": "4751b53f49f7227b64d52046dcfcf577fc0633cdbe37aa67aa96d85e938c4e00",
+      "size_bytes": 4614
+    },
+    {
+      "path": "scripts/drive_locator.py",
+      "sha256": "1b99e132f62db2c71ddf896f6119dd066e53159bd248fc9bf2d9c92641575677",
+      "size_bytes": 13746
+    },
+    {
+      "path": "scripts/event_log.py",
+      "sha256": "a0894d167e220ca725c25b8d0311a0b30f851481ab4ef3a7700250823ed667a3",
+      "size_bytes": 1165
+    },
+    {
+      "path": "scripts/hash_tree.py",
+      "sha256": "fb183b9f07a9bd75894124db0d753ada18d2fc26fedf4e5b931c4b1986e15c4d",
+      "size_bytes": 1574
+    },
+    {
+      "path": "scripts/host_runtime.py",
+      "sha256": "fc432a41171b3cb1b6a7edbde49a04afa5afa912a4bf5deb3408eb971e8fcec1",
+      "size_bytes": 27335
+    },
+    {
+      "path": "scripts/internal_loop_runner.py",
+      "sha256": "08793035b6973d55f7fbc4f2f6ac9dec138cfd9dd31b91f204c36d0b9aefc70b",
+      "size_bytes": 18809
+    },
+    {
+      "path": "scripts/launch_sandbox.py",
+      "sha256": "1036b7afb83c6321ec2482dde27b6773c97c5bb08d49a6dbcf0cb84c80fae86b",
+      "size_bytes": 7064
+    },
+    {
+      "path": "scripts/manual_submit.py",
+      "sha256": "d9a17373076cf3342bdc0bab198b7f7eb4fb047ab5a79e26b398819ad917825e",
+      "size_bytes": 25581
+    },
+    {
+      "path": "scripts/overnight_master.py",
+      "sha256": "3e26782dd063533bd15f540eac06c131671ec2578219e8a553e4136d2ded2657",
+      "size_bytes": 144548
+    },
+    {
+      "path": "scripts/package_final.py",
+      "sha256": "6b97110c5cab0d972cc09fa8a91b0cb235b96e335077007c9adb2407c46c8652",
+      "size_bytes": 4452
+    },
+    {
+      "path": "scripts/package_release.py",
+      "sha256": "1148f5489686eac5e79bb8f54f5059cfefc91f8df65bd8ac8d1d63a5173f05b7",
+      "size_bytes": 15672
+    },
+    {
+      "path": "scripts/peer_executor.py",
+      "sha256": "fa25d84a44994a46d5c9becc1058554a19734bcef3bd78d64222684a81585412",
+      "size_bytes": 25051
+    },
+    {
+      "path": "scripts/preflight_env.py",
+      "sha256": "91656ff7c62c701e2547555b77ce479995ce53a3327d3f6fb574ddf4c7a090d4",
+      "size_bytes": 4332
+    },
+    {
+      "path": "scripts/prepare_manual_audit_folder.py",
+      "sha256": "5150cb28cd3c40a81251c64bb78bc4db0384b8587de887c95af4b16897068e7f",
+      "size_bytes": 8123
+    },
+    {
+      "path": "scripts/primary_brain_adapter.py",
+      "sha256": "afe3793d83c106e5e600235c68fa43099803bb796ac56a4b2541ed77aa122320",
+      "size_bytes": 18053
+    },
+    {
+      "path": "scripts/probe_live_routes.py",
+      "sha256": "52ddf8baa7b2b0bf46ae07a1181569e5c0281a618bf8fbbdf1ef2ded128b9235",
+      "size_bytes": 28902
+    },
+    {
+      "path": "scripts/quality_log.py",
+      "sha256": "a4690efc8f0b71d086e89d576decd961ad4deb4bdd2088dfbcf67d5a57993457",
+      "size_bytes": 9538
+    },
+    {
+      "path": "scripts/render_contracts.py",
+      "sha256": "d06efa96d75541e84fb0cb1bdef819eb65d544cd5a6d21495b8dd1c033db16fa",
+      "size_bytes": 12360
+    },
+    {
+      "path": "scripts/resource_scheduler.py",
+      "sha256": "129ea393c294b344d1567830919f3644622506a09212096d9be75b9b24766fa4",
+      "size_bytes": 18204
+    },
+    {
+      "path": "scripts/retry_policy.py",
+      "sha256": "db569b4a4ad198e243160a0895dc12d12c05358cb15ed6e7fdc93b48ba67a352",
+      "size_bytes": 1193
+    },
+    {
+      "path": "scripts/run_multiaudit_cycle.py",
+      "sha256": "4109f54c69ffeb47db94f528c9a40aae9da7a8fa8e293e84c62dc0e35d3695c9",
+      "size_bytes": 22578
+    },
+    {
+      "path": "scripts/run_multiaudit_cycle_legacy.py",
+      "sha256": "d4d4d6a7488ddda34862041b21420d9026dcbc87baf6b3f42331f2a02a47c0f5",
+      "size_bytes": 182099
+    },
+    {
+      "path": "scripts/run_slot14_subscription_smoke.py",
+      "sha256": "8d55a36563e63738e529a91735401cd7b946377a2f5273173c091019e3128321",
+      "size_bytes": 5564
+    },
+    {
+      "path": "scripts/slot14_handoff.py",
+      "sha256": "d058b93e35ebc07897b6b88fc2b7112683fc9ae84f5a4e76dac21948d94196ff",
+      "size_bytes": 32874
+    },
+    {
+      "path": "scripts/slot_execution.py",
+      "sha256": "f0ab83f9a91218ec69e5dd46540bf234369f7e06d97259eb71cc53f06bd7621a",
+      "size_bytes": 5081
+    },
+    {
+      "path": "scripts/slot_runtime.py",
+      "sha256": "0b5955512d225a156aa82d21b26561ee94742b153da1ed03a61ea3d30931766b",
+      "size_bytes": 11082
+    },
+    {
+      "path": "scripts/start_overnight.py",
+      "sha256": "0c136ce4106c4691f96bc662cd08c7dcc64865b885cff46aff83d213560e761a",
+      "size_bytes": 12029
+    },
+    {
+      "path": "scripts/state_db.py",
+      "sha256": "3b10bc38b3832734b08e6bdcb2b534b2e76920474c95ccb8746e0c571e972e08",
+      "size_bytes": 22303
+    },
+    {
+      "path": "scripts/test_cerebro_actions_contract.py",
+      "sha256": "6d6ce606a1ec6b56605345b53d7bfdb783d26301a0c7b7bb23cbf146bd200a8a",
+      "size_bytes": 6069
+    },
+    {
+      "path": "scripts/test_drive_locator.py",
+      "sha256": "08a83a6ad51f1f8bd250266ef2a0ce543e9a00ccbf9be7cfda38f6afddf3b52e",
+      "size_bytes": 5863
+    },
+    {
+      "path": "scripts/test_gateway_protocol.py",
+      "sha256": "7e5cd63482babeeb390a9398cbbc6faa93b2f6c498f3a1b3af6ec3192dc886f3",
+      "size_bytes": 11203
+    },
+    {
+      "path": "scripts/test_gateway_strict.py",
+      "sha256": "861faa302e68fb63f7ca4dfef8521f55e6340231e143109d2dda62247a2b48bd",
+      "size_bytes": 6538
+    },
+    {
+      "path": "scripts/test_manual_submit_batch.py",
+      "sha256": "1665c0fafbefffebd828d5f571c12c1282c06a566374156114eb7faf08b1df69",
+      "size_bytes": 7732
+    },
+    {
+      "path": "scripts/validate_bundle.py",
+      "sha256": "0ef250fdeaf81eaa4156b2c2866cc63639251bced9d388a3284958b1386dd2cc",
+      "size_bytes": 5656
+    },
+    {
+      "path": "scripts/validate_output.py",
+      "sha256": "d3df00334c17271d27ee988d40538275baeabd2f02ff52dd4b1080cd0113a462",
+      "size_bytes": 1902
+    },
+    {
+      "path": "scripts/worker_agentic_local.py",
+      "sha256": "a573e476b4a6cd11342b712e247aa2a8b90b07ae2d78a9c31e3329d6dbc9727d",
+      "size_bytes": 7040
+    },
+    {
+      "path": "scripts/worker_claude_code.py",
+      "sha256": "5f12b7c7509abc06f68b4a9a327ccb70d77e23643be85ad44ba75148714d2612",
+      "size_bytes": 28516
+    },
+    {
+      "path": "scripts/worker_codex.py",
+      "sha256": "f26a9f85512e61556aa3d27149a2d2e074fde615921152495bbccff6843c3df5",
+      "size_bytes": 10951
+    },
+    {
+      "path": "scripts/worker_codex_fallback.py",
+      "sha256": "82472c5187aedc1b3f56c4b9b5d0d95d230ccd79bfbd5e2f4260f51395da7bbe",
+      "size_bytes": 32773
+    },
+    {
+      "path": "scripts/worker_gateway.py",
+      "sha256": "2b9f7af44b68a26c57d10921f84ac72d7854ea7227ab098f2b1d5ebd5f062f82",
+      "size_bytes": 42454
+    },
+    {
+      "path": "scripts/worker_lmstudio.py",
+      "sha256": "87d31ef8007a5735dde468550e43e10712cd5bba9452e0157e08f6678d8116c3",
+      "size_bytes": 28074
+    },
+    {
+      "path": "scripts/worker_local_static.py",
+      "sha256": "226016120de885f0c8d3ac7b6dc3af815ae0c98fb6717d62a3d4a899dc4704d1",
+      "size_bytes": 6358
+    },
+    {
+      "path": "sql/state_schema.sql",
+      "sha256": "b4e35bfb89ad2067b2e5a5fe758ddd2981f84970305677a239682839abbd2740",
+      "size_bytes": 1238
+    },
+    {
+      "path": "tests/test_agentic_local_runtime.py",
+      "sha256": "05240bca163f366d199e35388ea616f6d34c0e838af543b40d4c87d1da5283b7",
+      "size_bytes": 772
+    },
+    {
+      "path": "tests/test_all_canonical_internal_loops.py",
+      "sha256": "a1e17e8d36a6951bda856b8b93de37992f753bb898745188b60f971239c748c2",
+      "size_bytes": 5487
+    },
+    {
+      "path": "tests/test_camino_b_slot14_bridge.py",
+      "sha256": "c73b8e043fc2126cfc670c9160f9d95be49a077ca2894769ab936ffb27c16dbd",
+      "size_bytes": 11861
+    },
+    {
+      "path": "tests/test_candidate_lifecycle.py",
+      "sha256": "a955173919a12f69882cfb1a14203c6215800d1cd4f38609422d06e3c42897e6",
+      "size_bytes": 7119
+    },
+    {
+      "path": "tests/test_canonical_master_slots.py",
+      "sha256": "8f42a601dbd892ddf65a50b65b34dd2b98d34937f6f648c78d23636a0eae3365",
+      "size_bytes": 7606
+    },
+    {
+      "path": "tests/test_codex_fallback.py",
+      "sha256": "35b4f63a4decb995be4f98a0d5e5ebaf6cc0cd2b01f6c6c59e33864d2dd99a11",
+      "size_bytes": 9402
+    },
+    {
+      "path": "tests/test_harvest_job_binding.py",
+      "sha256": "d2b27f73705dfab8f8149e0dc3285808aa9df16d49e0be940eec8e94c0626d8d",
+      "size_bytes": 3177
+    },
+    {
+      "path": "tests/test_host_runtime.py",
+      "sha256": "63df2438cd64f9565ef83b597152abb4ed2266436817c75de99a80cae2bacccb",
+      "size_bytes": 9135
+    },
+    {
+      "path": "tests/test_parallel_workers.py",
+      "sha256": "247a16821bd7416e5ce171aa1b7eaf8dad9ed95b017c7ed8399be9a3dd4b60f4",
+      "size_bytes": 6304
+    },
+    {
+      "path": "tests/test_peer_executor.py",
+      "sha256": "eb7820118a85e96bcd5c67a7966aa9169850e8325047350434823edc2cec9bc6",
+      "size_bytes": 2940
+    },
+    {
+      "path": "tests/test_primary_brain_adapter.py",
+      "sha256": "48e403b9b23e39f2315d15fd91a9a67a153e20a97cc1b9a5d9460e40727fbe6b",
+      "size_bytes": 2026
+    },
+    {
+      "path": "tests/test_release_hygiene.py",
+      "sha256": "192ac842c776678c1ffc0b4f8924a4e3c3ba378429f12de11b4b78b7f116f7cf",
+      "size_bytes": 3115
+    },
+    {
+      "path": "tests/test_resource_scheduler.py",
+      "sha256": "816d99edd31dd0fd2ac5e9f7602438dbe10bf5981eae2057967457a74e98fae9",
+      "size_bytes": 5018
+    },
+    {
+      "path": "tests/test_slot14_handoff.py",
+      "sha256": "a12e3f670407c0f09abd18b9d0a0846616f260c122a55a7e5e53b4d8baac8883",
+      "size_bytes": 10917
+    },
+    {
+      "path": "tests/test_slot14_subscription_smoke.py",
+      "sha256": "426c4dd7507cef90b0caba1383ee2630d491a52f2258ed0e782eb2a3fbf72a7e",
+      "size_bytes": 654
+    },
+    {
+      "path": "tests/test_slot_execution.py",
+      "sha256": "b9bd2a9e07ebc6378ced31091129257c8762fb93617d5d22b5c1db0684d4efb2",
+      "size_bytes": 2089
+    },
+    {
+      "path": "tests/test_terminal_authority.py",
+      "sha256": "5b36a7e50ac18a4fa5c341f760402f6b002e400857cf2da982628f4e7e7bafaa",
+      "size_bytes": 13931
+    },
+    {
+      "path": "tests/test_v1319_routing_claude.py",
+      "sha256": "43dfab119c2e56ad20d2305b5e54f774b5e56454c9446dd3e1b682099eccac83",
+      "size_bytes": 19235
+    },
+    {
+      "path": "tests/test_workspace_isolation.py",
+      "sha256": "183fb907fe27ce346b293494c63b67a09842c916c8c9f4a08ddaf0cc49700622",
+      "size_bytes": 2697
+    }
+  ]
+}

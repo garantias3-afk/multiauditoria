@@ -1,0 +1,33 @@
+{
+  "schema_version": "camino_live_attempt.v1",
+  "recorded_at_utc": "2026-07-11T05:51:16Z",
+  "run_id": "RUN_20260711_054609_ca2ae_real_codex_fallback",
+  "target_sha256": "97b3b3f93db34afabd3347ab791ab65309c87a82b9e9a7d560d402bde813998d",
+  "slot_id": "14",
+  "worker_id": "codex_fallback",
+  "route_id": "codex_gpt_5_6_sol_ultra_subscription_cli",
+  "requested_model_id": "gpt-5.6-sol",
+  "requested_reasoning_effort": "ultra",
+  "requested_auth_method": "chatgpt_subscription",
+  "api_key_auth_allowed": false,
+  "preflight": {
+    "claude_cli_version": "2.1.205",
+    "claude_logged_in": false,
+    "claude_auth_method": "none",
+    "codex_login_status": "Logged in using ChatGPT"
+  },
+  "status": "not_executed_usage_limit",
+  "process_started": false,
+  "output_bundle": null,
+  "approval_eligible": false,
+  "admission_error": "You've hit your usage limit. Upgrade to Pro, purchase more credits or try again at 7:22 AM.",
+  "retry_time_note": "The control supplied 7:22 AM without a timezone; no timezone is inferred here.",
+  "report_updated_at_utc": "2026-07-11T13:30:24Z",
+  "subsequent_admission_control": {
+    "status": "rejected_before_execution",
+    "process_started": false,
+    "message": "You've hit your usage limit; try again at 2:44 PM.",
+    "retry_time_note": "The control supplied 2:44 PM without a timezone; no timezone is inferred here. No workaround was attempted."
+  },
+  "interpretation": "The live subscription review was blocked before execution. This is not a passing review and is not evidence that slot 14 is operational end-to-end."
+}

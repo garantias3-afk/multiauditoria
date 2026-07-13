@@ -1,0 +1,37 @@
+{
+  "schema_version": "1.0",
+  "workers": [
+    {
+      "id": "codex",
+      "type": "cli",
+      "command": "codex",
+      "workspace_isolated": true,
+      "max_cycles": 3,
+      "timeout_minutes": 120
+    },
+    {
+      "id": "claude_code",
+      "type": "cli",
+      "command": "claude",
+      "workspace_isolated": true,
+      "max_passes": 1,
+      "timeout_minutes": 45
+    },
+    {
+      "id": "gateway",
+      "type": "api",
+      "workspace_isolated": true,
+      "require_probe": true
+    },
+    {
+      "id": "manual_gpt",
+      "type": "manual",
+      "manual_only": true
+    },
+    {
+      "id": "manual_claude",
+      "type": "manual",
+      "manual_only": true
+    }
+  ]
+}

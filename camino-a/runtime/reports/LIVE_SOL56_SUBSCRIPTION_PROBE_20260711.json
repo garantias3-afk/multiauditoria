@@ -1,0 +1,41 @@
+{
+  "schema_version": "camino_sol56_subscription_probe.v1",
+  "date_utc": "2026-07-11",
+  "api_credentials_removed": [
+    "OPENAI_API_KEY",
+    "ANTHROPIC_API_KEY"
+  ],
+  "installation": {
+    "chatgpt_desktop_version": "26.707.41301",
+    "codex_cli_version": "0.144.0-alpha.4",
+    "login_status": "Logged in using ChatGPT"
+  },
+  "local_model_preflight": {
+    "status": "verified",
+    "catalog_source": "codex debug models --bundled",
+    "model_id": "gpt-5.6-sol",
+    "reasoning_effort": "ultra"
+  },
+  "successful_minimal_probe_observed_earlier_same_task": {
+    "exit_code": 0,
+    "model_id": "gpt-5.6-sol",
+    "reasoning_effort": "ultra",
+    "auth_method": "chatgpt_subscription",
+    "sandbox": "read-only",
+    "response_exact": "SOL56_ULTRA_OK",
+    "usage": {
+      "input_tokens": 11628,
+      "cached_input_tokens": 8960,
+      "output_tokens": 9
+    }
+  },
+  "current_recheck": {
+    "attempted_at_utc": "2026-07-11T18:33:45Z",
+    "status": "not_started_usage_control",
+    "first_attempt": "sandbox blocked state DB/network before model execution",
+    "approved_execution_attempt": "rejected before launch by subscription usage control",
+    "retry_after_local_time": "20:07",
+    "model_response_observed": false
+  },
+  "interpretation": "The installed Codex subscription path exposes gpt-5.6-sol/ultra and produced one prior exact live response without API credentials. The current recheck did not start because of usage control. Neither event is a complete slot-14 review with job binding, bundle, manifest and DONE marker."
+}
