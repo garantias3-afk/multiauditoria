@@ -36,6 +36,8 @@
 - mantener commits pequenos por cambio importante
 - publicar Camino B requiere exponer el Gateway por HTTPS y actualizar la Action en GPT Builder; la parte de navegador la realiza el usuario
 - no queda codigo funcional pendiente para el backend local de Camino B
+- GPT Builder fue actualizado en Chrome y devolvio `GPT actualizado` para `auditor externo`
+- el host configurado `https://camino-b-ultimo.marianogrammatico.com.ar` no resolvio desde esta maquina, asi que la publicacion HTTPS real sigue dependiendo de infraestructura externa accesible
 
 ## Evidencia operativa del cierre
 
