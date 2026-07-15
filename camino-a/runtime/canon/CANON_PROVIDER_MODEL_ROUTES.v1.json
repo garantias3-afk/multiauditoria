@@ -1,7 +1,7 @@
 {
   "schema_version": "canon_provider_model_routes.v1",
-  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
-  "updated_utc": "2026-07-11T00:00:00Z",
+  "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+  "updated_utc": "2026-07-15T10:18:38Z",
   "identity_fields": [
     "slot_id",
     "route_id",
@@ -749,7 +749,7 @@
               "remote_bundle_sha256": "64e163fd6582dc5b5a83d36c531a5a42f604184a261e93aa5fae2c71c39cfb8f",
               "remote_bundle_size_bytes": 116796,
               "remote_source_count": 14,
-              "knowledge_sync": "mismatch_with_local_v1.3.21"
+              "knowledge_sync": "mismatch_with_local_v1.3.22"
             }
           },
           "camino_b_auditor_externo": {

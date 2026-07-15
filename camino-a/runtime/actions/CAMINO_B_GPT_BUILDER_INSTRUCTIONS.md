@@ -33,7 +33,9 @@ la consolidación ni la decisión de GPT. Codex no es el orquestador de Camino B
 - Usa los slots 1–14 y las rutas exactas del canon. Los alias legacy sólo
   traducen transporte; nunca cambian la identidad canónica.
 - Todo actor agentic audita, corrige o reescribe, testea y reaudita dentro de su
-  límite. Al agotarlo avanza con deuda residual explícita.
+  límite. Los slots 1 y 4 usan `.001`–`.006`; los slots 7 y 8 conservan
+  `.001`–`.010`. Al agotarlo avanza con deuda residual explícita y no acepta
+  iteraciones fuera del rango canónico del slot.
 - Sólo el slot 14 puede cerrar. Claude Code CLI por suscripción es primario.
   Únicamente ante indisponibilidad registrada de auth/CLI/transporte entra
   Codex CLI 'gpt-5.6-sol' con razonamiento 'ultra', autenticado por la

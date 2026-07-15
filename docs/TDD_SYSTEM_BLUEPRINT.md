@@ -40,10 +40,10 @@ Slot 14: unico punto con capacidad de aprobacion final. La ruta primaria es Clau
 
 | Slot | Ciclo | Rol | Rutas primarias | Fallback | Iteraciones | Bloqueo |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | A | Auditores iniciales paralelos | Gemini, Vertex, DeepSeek, Blackbox, OpenRouter, NVIDIA/Groq, LM Studio local | no aplica | bucle interno .001-.010 | no bloquea |
+| 1 | A | Auditores iniciales paralelos | Gemini, Vertex, DeepSeek, Blackbox, OpenRouter, NVIDIA/Groq, LM Studio local | no aplica | bucle interno .001-.006 | no bloquea |
 | 2 | A | Harvest manual | resultados manuales validados | no aplica | sin bucle interno | no bloquea |
 | 3 | A | Consolidator/writer GPT | `chatgpt_gpt_5_6_sol_actions_plan` | `chatgpt_gpt_5_5_plan` | 5 | bloquea dentro del limite |
-| 4 | B | Auditores intermedios paralelos | DeepSeek Pro, Vertex, Blackbox, DeepInfra Qwen 480B, LM Studio | no aplica | bucle interno .001-.010 | no bloquea |
+| 4 | B | Auditores intermedios paralelos | DeepSeek Pro, Vertex, Blackbox, DeepInfra Qwen 480B, LM Studio | no aplica | bucle interno .001-.006 | no bloquea |
 | 5 | B | Consolidator | `deepseek_v4_pro` | no aplica | sin bucle interno | no bloquea |
 | 6 | B | Writer GPT | `chatgpt_gpt_5_6_sol_actions_plan` | `chatgpt_gpt_5_5_plan` | 3 | bloquea dentro del limite |
 | 7 | C | GLM gate | `zai_glm_5_1` | LM Studio Qwen, GPT 5.6 plan, GPT 5.5 plan | bucle interno .001-.010 | no bloquea |
@@ -122,7 +122,9 @@ flowchart TD
 
 ### 1.5 Contrato de Iteracion y Handoff
 
-Slots con bucle interno agentico: `1`, `4`, `7`, `8`. Cada modelo puede iterar de `candidate.001` hasta `candidate.010`.
+Slots con bucle interno agentico: `1`, `4`, `7`, `8`. Los slots `1` y `4`
+iteran de `candidate.001` hasta `candidate.006`; los slots `7` y `8` conservan
+el rango `candidate.001`–`candidate.010`.
 
 Slots con bucle de slot externo: `3`, `6`, `10`, `11`, `12`, `13`, `14`. El maximo sale del campo `loops`.
 

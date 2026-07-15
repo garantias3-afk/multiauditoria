@@ -1,7 +1,7 @@
 {
  "schema_version": "canon_preaudit_delivery.v1",
- "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
- "updated_utc": "2026-07-11T00:00:00Z",
+ "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+ "updated_utc": "2026-07-15T10:18:38Z",
  "applies_to": ["camino_a", "camino_b"],
  "scope_note": "COMUN_CAMINO_A_Y_B: este contrato rige la entrega de preauditoría en ambos caminos. Cualquier modificación en (1) sistema de slots, (2) pedido/sistema de preauditoría, o (3) proceso de bucles, debe reflejarse simultáneamente en ambos caminos. Ningún GPT debe interpretar este archivo como exclusivo de su camino.",
  "deliverables": {
@@ -69,6 +69,6 @@
  },
  "internal_loop_contract_ref": {
   "source_of_truth": "canon/CANON_WORKFLOW_SLOTS.v1.json -> general_rules.internal_loop_contract",
-  "summary": "slots 1, 4, 7, 8: bucle interno obligatorio .001-.010 (auditar -> detectar -> corregir -> testear -> reauditar -> decidir); slots 3, 6, 10, 11, 12, 13, 14: bucle de slot con conteo en campo 'loops'; toda IA externa manual también itera .001-.010 según PEDIDO_AUDITORIAS_MANUALES.md"
+  "summary": "slots 1 y 4: bucle interno obligatorio .001-.006; slots 7 y 8: bucle interno obligatorio .001-.010; secuencia común auditar -> detectar -> corregir -> testear -> reauditar -> decidir; slots 3, 6, 10, 11, 12, 13, 14: bucle de slot con conteo en campo 'loops'; toda IA externa manual ligada a un slot respeta el límite de ese slot"
  }
 }

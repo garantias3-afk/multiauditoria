@@ -27,7 +27,7 @@ class CanonRoutingTests(unittest.TestCase):
     def test_versions_and_slot14_contract_are_coherent(self) -> None:
         bundle = load_canon(ROOT)
         self.assertTrue((bundle.canon_dir / CANON_FILENAMES["change_protocol"]).is_file())
-        self.assertEqual(bundle.canon_version, "camino_shared_canon.v1.3.21-slot14-handoff")
+        self.assertEqual(bundle.canon_version, "camino_shared_canon.v1.3.22-slot1-slot4-six-loops")
         self.assertEqual(bundle.routes["canon_version"], bundle.slots["canon_version"])
         self.assertEqual(bundle.routes["canon_version"], bundle.runtime_policy["canon_version"])
         self.assertEqual(bundle.runtime_policy["default_profile"], "with_claude")

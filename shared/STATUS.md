@@ -8,8 +8,8 @@
 - El worker de fallback usa `stdin=subprocess.DEVNULL` y Codex por suscripcion.
 - El handoff conserva `candidate_sha256` en la evidencia compacta de slots previos.
 - El flujo canonico promueve bundles validados a `ACCEPTED/` antes de consultar la autoridad terminal.
-- Suite autoritativa: `110 passed` y `RUN_TESTS_OK`.
-- Release verificable regenerada con 132 archivos y los entrypoints de Camino B.
+- Suite autoritativa vigente: `112 passed` y `RUN_TESTS_OK`.
+- Release verificable vigente: `v1.3.22-slot1-slot4-six-loops`, 133 archivos.
 - Smoke real final: `terminal_clean_codex_fallback=true`.
 - Camino B: bridge, actions, schema y pruebas incluidos en el runtime recuperado.
 - Camino B local terminado: Gateway HTTP, agente saliente, cola, fallback secuencial y smoke operativo incluidos.
@@ -30,6 +30,26 @@
 3. Si el cambio afecta Camino A, anotar el motivo antes de tocar Camino B.
 4. Si el cambio afecta Camino B, registrar evidencia operativa y resultado.
 5. Si una corrida queda abierta, dejar el ultimo comando exacto y el motivo.
+
+## Cambio canónico 2026-07-15 — loops internos slots 1 y 4
+
+- slots 1 y 4: máximo `6`, versiones `candidate.001`–`candidate.006`
+- slots 7 y 8: permanecen en máximo `10`, versiones
+  `candidate.001`–`candidate.010`
+- regla común aplicada a Camino A y Camino B; GPT Cerebro y GPT Auditor Externo
+  fueron sincronizados en sus Instructions versionadas
+- canon: `camino_shared_canon.v1.3.22-slot1-slot4-six-loops`
+- Knowledge: `v1.3.22-slot1-slot4-six-loops`
+- Knowledge SHA-256:
+  `e7164ee0a70159160a10e06112e586bacdf237c7f7d119b65138a174953b78f2`
+- suite dirigida: `27 passed`
+- suite autoritativa fuera del sandbox: `112 passed`, `RUN_TESTS_OK`
+- packaging canónico: OK, 133 archivos; smoke `reference_smoke_complete`
+- ZIP de release SHA-256:
+  `91a1d9bb8760ee6efb4f44a4ada156ead4b669d6c9c0c461a5f208dff62495c0`
+- la primera suite dentro del sandbox dio `111 passed, 1 failed` únicamente
+  porque el entorno negó abrir un socket efímero en `127.0.0.1`; la repetición
+  autorizada pasó completa
 
 ## Pendientes inmediatos
 

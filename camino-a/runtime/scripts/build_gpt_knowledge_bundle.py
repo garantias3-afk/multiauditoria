@@ -41,7 +41,7 @@ def sha256(data: bytes) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", default=str(ROOT))
-    parser.add_argument("--version", default="v1.3.21-slot14-handoff")
+    parser.add_argument("--version", default="v1.3.22-slot1-slot4-six-loops")
     parser.add_argument("--output-dir")
     parser.add_argument(
         "--check",

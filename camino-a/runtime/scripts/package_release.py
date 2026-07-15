@@ -31,7 +31,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 
-VERSION = "v1.3.21-slot14-handoff"
+VERSION = "v1.3.22-slot1-slot4-six-loops"
 RELEASE_NAME = "Camino Nocturno Canon Mutable"
 
 # Basura que nunca entra a la release.

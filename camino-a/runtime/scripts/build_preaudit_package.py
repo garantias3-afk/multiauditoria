@@ -154,10 +154,10 @@ ROLE_SCOPE = {
                       "¿El fallback C solo se habilita con 404/405/501?"],
     },
     "bucles_cierre": {
-        "alcance": "bucle grande, bucles internos .001-.010, cierre de corrida, aprobación slot 14",
+        "alcance": "bucle grande, bucles internos 1/4 .001-.006 y 7/8 .001-.010, cierre de corrida, aprobación slot 14",
         "archivos": ["canon/CANON_WORKFLOW_SLOTS.v1.json", "scripts/overnight_master.py",
                      "PEDIDO_AUDITORIAS_MANUALES.md"],
-        "preguntas": ["¿El bucle interno .001-.010 está exigido en slots 1,4,7,8 y en el pedido manual?",
+        "preguntas": ["¿Los slots 1/4 exigen .001-.006 y los slots 7/8 conservan .001-.010, también en el pedido manual ligado al slot?",
                       "¿Ninguna ruta permite aprobación global fuera del slot 14?"],
     },
     "adversarial_general": {
@@ -254,9 +254,10 @@ def render_multiagent_md(canon: dict, agents: list[dict], audit_type: str,
         "",
         "## Reglas de bucle interno (obligatorias para todos los agentes)",
         "",
-        "Iterar versiones .001 a .010: auditar → detectar bug/mejora/deuda → corregir o",
-        "reescribir → testear/validar → reauditar la corrección → decidir si queda limpio",
-        "dentro del alcance del rol. Terminar sin nuevos hallazgos en el alcance o en .010.",
+        "Respetar el límite del slot: slots 1/4 iteran .001 a .006; slots 7/8 iteran",
+        ".001 a .010. Auditar → detectar bug/mejora/deuda → corregir o reescribir →",
+        "testear/validar → reauditar la corrección → decidir si queda limpio dentro del",
+        "alcance del rol. Un agente no ligado a esos slots conserva máximo .010.",
         "Entregar: última versión, diff acumulado, historial de iteraciones, tests,",
         "deuda residual, veredicto de ronda.",
         "",
@@ -274,7 +275,7 @@ def render_multiagent_md(canon: dict, agents: list[dict], audit_type: str,
         lines += [f"  - {q}" for q in a["preguntas_especificas"]]
         lines += [
             "- formato de salida común: el de `PEDIDO_AUDITORIAS_MANUALES.md`",
-            "- reglas de bucle interno: .001–.010 según sección anterior",
+            "- reglas de bucle interno: límite específico del slot según sección anterior",
             "",
         ]
     return "\n".join(lines) + "\n"

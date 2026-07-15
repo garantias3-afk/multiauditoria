@@ -1,7 +1,7 @@
 {
   "schema_version": "canon_runtime_policy.v1",
-  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
-  "updated_utc": "2026-07-11T00:00:00Z",
+  "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+  "updated_utc": "2026-07-15T10:18:38Z",
   "default_profile": "with_claude",
   "profiles": {
     "with_claude": {

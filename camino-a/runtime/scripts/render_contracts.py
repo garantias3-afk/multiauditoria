@@ -123,7 +123,9 @@ alternativos. No es daemon, no observa el filesystem y no usa OpenAI API.
    técnicas reales, pero eso no cambia slots, gates ni autoridad final.
 5. Todo auditor agentic ejecuta su bucle interno: auditar; generar una nueva
    versión corrigiendo bugs y mejoras técnicas no cosméticas; testear; reauditar;
-   repetir hasta no hallar pendientes o agotar el límite del slot.
+   repetir hasta no hallar pendientes o agotar el límite del slot. Los slots 1
+   y 4 usan exactamente el rango `.001`–`.006`; los slots 7 y 8 conservan
+   `.001`–`.010`. Nunca extender 1 o 4 hasta `.010` ni recortar 7 u 8 a `.006`.
 6. Al agotar el límite, avanzar según `correction_policy` y registrar deuda
    residual; nunca ocultarla.
 7. Aceptar un output solo si tiene `OUTPUT_MANIFEST.json`, todos sus hashes son

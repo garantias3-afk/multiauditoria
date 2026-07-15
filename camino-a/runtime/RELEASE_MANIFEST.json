@@ -1,30 +1,30 @@
 {
   "release_name": "Camino Nocturno Canon Mutable",
-  "version": "v1.3.21-slot14-handoff",
-  "built_at_utc": "2026-07-13T03:05:31.198871+00:00",
-  "file_count": 132,
-  "total_size_bytes": 1971690,
+  "version": "v1.3.22-slot1-slot4-six-loops",
+  "built_at_utc": "2026-07-15T10:23:24.619944+00:00",
+  "file_count": 133,
+  "total_size_bytes": 1978395,
   "run_tests_exit_code": 0,
   "files": [
     {
-      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_BUNDLE_UNICO_v1_3_21-slot14-handoff.md",
-      "sha256": "d9cba15bfc6bbe5d44ac974db9e774871b3050063e187ed078db593a4a8623ca",
-      "size_bytes": 187521
+      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_BUNDLE_UNICO_v1_3_22-slot1-slot4-six-loops.md",
+      "sha256": "e7164ee0a70159160a10e06112e586bacdf237c7f7d119b65138a174953b78f2",
+      "size_bytes": 188318
     },
     {
-      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_BUNDLE_UNICO_v1_3_21-slot14-handoff.zip",
-      "sha256": "50b702b36f50d8c8221bba041f2b0ec6ccccafcc9fd8f3cebd07c0e6e351f0ba",
-      "size_bytes": 42911
+      "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_BUNDLE_UNICO_v1_3_22-slot1-slot4-six-loops.zip",
+      "sha256": "e263c4e9e3c97f5e292ba7a5ee1da9825b181aa03079c1a9e896d66eafbb4bf4",
+      "size_bytes": 43143
     },
     {
       "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.manifest.json",
-      "sha256": "d6a3e17186ca37d38c0e17b3163dfd76b05c94b4454c777e3c28663aa5400a37",
-      "size_bytes": 3545
+      "sha256": "ff056792fe90efe79e69ad153e367e2df4ec8ac3218036f38706d3728898a579",
+      "size_bytes": 3552
     },
     {
       "path": "CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.md",
-      "sha256": "d9cba15bfc6bbe5d44ac974db9e774871b3050063e187ed078db593a4a8623ca",
-      "size_bytes": 187521
+      "sha256": "e7164ee0a70159160a10e06112e586bacdf237c7f7d119b65138a174953b78f2",
+      "size_bytes": 188318
     },
     {
       "path": "CHANGELOG_V1_3_21_SLOT14_HANDOFF.md",
@@ -32,24 +32,29 @@
       "size_bytes": 1817
     },
     {
+      "path": "CHANGELOG_V1_3_22_INTERNAL_LOOP_LIMITS.md",
+      "sha256": "18fad9ab627d16c5be3dc83f428ad37698f367669e000df19691e64faa338783",
+      "size_bytes": 1167
+    },
+    {
       "path": "QUICKSTART.md",
-      "sha256": "bdc7e5a2f15686fec3996727c3381956cf8072c80dc53acc038b4f73d2ac0cd9",
-      "size_bytes": 5434
+      "sha256": "9176a34658623d7163b8ab638c1e02c71660c5661849b9042ccd720a5696f997",
+      "size_bytes": 5442
     },
     {
       "path": "RUNBOOK_CODEX.md",
-      "sha256": "cc206c5e8f4e0c1e00e9b5da045cb8c117e940105e335e099d20531fbea5e3b2",
-      "size_bytes": 6101
+      "sha256": "fb2c39e24fe9e4e6546145ff5d486ecbe3cc89609fe8dffcee2783c9bdd36328",
+      "size_bytes": 6113
     },
     {
       "path": "VALIDATION_RESULTS.json",
-      "sha256": "2a1659534d0fc52b63e505c896a606235939a54c280c3161b92d8391adf9b4c7",
-      "size_bytes": 8218
+      "sha256": "e63db8b8cf90cc9856a07b77fc8a59375bd9e6daa2aa0a7448844aceecfde5aa",
+      "size_bytes": 8237
     },
     {
       "path": "actions/CAMINO_A_ACTIONS_DEPLOYMENT_GUIDE.md",
-      "sha256": "b253bb89a059771901fb87196983ba52a3f246b34d8ae2d8dff1e1ee5108b3b4",
-      "size_bytes": 2914
+      "sha256": "33b0a098b8167893fb0f63bac903e35ad914ba3e49bf0233110ccb17c11c8840",
+      "size_bytes": 2931
     },
     {
       "path": "actions/CAMINO_A_CEREBRO_ACTIONS.v1.yaml",
@@ -58,8 +63,8 @@
     },
     {
       "path": "actions/CAMINO_B_GPT_BUILDER_INSTRUCTIONS.md",
-      "sha256": "f33cd57598f2181f0a81499c4c4ea356dd0e814499fa13b457491b9a0e7739b8",
-      "size_bytes": 4388
+      "sha256": "1b98947236cc1c4ae912d7bfdaec88b71327e430570b657a6d2451635e5f287c",
+      "size_bytes": 4532
     },
     {
       "path": "actions/CAMINO_B_SLOT14_BRIDGE_ACTIONS.v1.yaml",
@@ -73,8 +78,8 @@
     },
     {
       "path": "actions/SOL56_ACTIONS_EVAL_PROTOCOL.md",
-      "sha256": "578a51a1f43f4e558ddac1ee13ba0dae3248d83a73c192d6a026e6854acb25fd",
-      "size_bytes": 3603
+      "sha256": "0a61e33df08d8f3643bb4998de8f10ea9661e960200bb5214f8ff36f897cb04f",
+      "size_bytes": 3830
     },
     {
       "path": "bin/launch_sandbox.sh",
@@ -93,8 +98,8 @@
     },
     {
       "path": "bin/run_tests.sh",
-      "sha256": "3c6be04b13599c0d1899d1306b290693a738cdb652cf0e774411bac7f32a40d0",
-      "size_bytes": 1295
+      "sha256": "e2d46b9f8e1038f61870c3fd7f73e26a32856d1903ec6e43bc7f7159505f37cf",
+      "size_bytes": 1302
     },
     {
       "path": "bin/start_camino_b_gateway.sh",
@@ -113,13 +118,13 @@
     },
     {
       "path": "canon/CANON_PREAUDIT_DELIVERY.v1.json",
-      "sha256": "f00aa2fa6667805b74c1386a01723463bc26066b9a01982c5271c9df003a1aea",
-      "size_bytes": 4788
+      "sha256": "e105af87a96449c9d9fb510ee5fa205870de420c17e551bf77b7b82d7161eed4",
+      "size_bytes": 4842
     },
     {
       "path": "canon/CANON_PROVIDER_MODEL_ROUTES.v1.json",
-      "sha256": "541a10f2facd3be97761fb6028576d6dc22a1814eb6dd98bba74f999e3e6b2f8",
-      "size_bytes": 39729
+      "sha256": "ec56eafa020a045ce3ebcb6b1d5689aae5d103c5791c5c8dd57ba84ded63f691",
+      "size_bytes": 39736
     },
     {
       "path": "canon/CANON_PROVIDER_MODEL_ROUTES.v1.schema.json",
@@ -128,18 +133,18 @@
     },
     {
       "path": "canon/CANON_RUNTIME_POLICY.v1.json",
-      "sha256": "7ee7020d085d1b6d44118c613c59e24a804add8d7813c59e6f439b4d34e92bd4",
-      "size_bytes": 5258
+      "sha256": "800255e6063b867eca2079909dff55cff2ca91489cb58358db5a5c801229a8de",
+      "size_bytes": 5265
     },
     {
       "path": "canon/CANON_SHARED_CONTRACT_v1.md",
-      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8",
-      "size_bytes": 16049
+      "sha256": "4b95629e86f5c4d321e8a1dfaaa017865aaff8fef0a0dddf8b23c586fa51d860",
+      "size_bytes": 16205
     },
     {
       "path": "canon/CANON_WORKFLOW_SLOTS.v1.json",
-      "sha256": "3569eb3b0f88a8f271a0e951cc88e6d6b8761d4e2a4a9396b1596cda5326db23",
-      "size_bytes": 19085
+      "sha256": "4cf48f0cf86fac2973824c1dbc0d6427f402922b4e468e6806956ea0c5d1bc66",
+      "size_bytes": 19078
     },
     {
       "path": "canon/CANON_WORKFLOW_SLOTS.v1.schema.json",
@@ -193,58 +198,58 @@
     },
     {
       "path": "contracts/CAMINO_SHARED_CONTRACT.md",
-      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8",
-      "size_bytes": 16049
+      "sha256": "4b95629e86f5c4d321e8a1dfaaa017865aaff8fef0a0dddf8b23c586fa51d860",
+      "size_bytes": 16205
     },
     {
       "path": "contracts/CANON_ACTION_TRANSFER_POLICY_v1.md",
-      "sha256": "2622731f174830a393ffa40fa7c607e70bc2b225931db19e77aa5910d5880ca8",
-      "size_bytes": 4534
+      "sha256": "06364a3f9de1491b947bd4ef314cd67c53b7ebb71b98ccbe61a7374895afd6e3",
+      "size_bytes": 4541
     },
     {
       "path": "generated/AGENTS.md",
-      "sha256": "a23b0faf6d4cfc305a257e009b236ef753e20f6cd97bb182646a946cfd962f8a",
-      "size_bytes": 16380
+      "sha256": "c2fd579aa5d487d7ed88d3c51e4c36078eac748acb5c4dc9c8b07ddc43f755f0",
+      "size_bytes": 16536
     },
     {
       "path": "generated/CAMINO_B_GATEWAY_POLICY.md",
-      "sha256": "d129084493f1b5b631c50a02e69499b104105eb989ad0ae9d9da150205fc46f9",
-      "size_bytes": 16417
+      "sha256": "85575984038707f264db947e08ad154abf352774f5cf786b2bc9d6c6d0c9d9d3",
+      "size_bytes": 16573
     },
     {
       "path": "generated/CLAUDE.md",
-      "sha256": "f6161bd251f2c96a4c45f90eb1d73a9d279194606a01dbcb4421a819122125d8",
-      "size_bytes": 16350
+      "sha256": "f93e6d50268548fc2885fc24685c4fa75d468110c69e0aa93f3dce7b0a5b6995",
+      "size_bytes": 16506
     },
     {
       "path": "generated/GPT_BUILDER_INSTRUCTIONS.md",
-      "sha256": "5ecb658f176e1222bc17a43b903f3fd51ee33640b36df3276a3f4fa919ab2a75",
-      "size_bytes": 5707
+      "sha256": "7aa621445ea7ddc236e66ccc5764ca79f7d9d31cb0e1fe66e49d5ffb4b9cd947",
+      "size_bytes": 5877
     },
     {
       "path": "generated/GPT_SHARED_INSTRUCTIONS.md",
-      "sha256": "a8ed3e5a5c2a8cd9c383b01a45e0f703f49da8f0fe115b8e5a3584ba261d0a0a",
-      "size_bytes": 16142
+      "sha256": "3553c171b32e9db736e6b382248b9c0b4a74b4dcee0ca98e1c95b5892c6626ed",
+      "size_bytes": 16298
     },
     {
       "path": "generated/PROMPT_CLAUDE_CODE.md",
-      "sha256": "8598fced059d87f4a8376235a383c7e656ce2e0dd5aee401ca86e4a0658b6a93",
-      "size_bytes": 16111
+      "sha256": "76890e0aab4a4c1a283e362ee051bc79efb70ad49116f4090da1824c6693fbbc",
+      "size_bytes": 16267
     },
     {
       "path": "generated/PROMPT_CLAUDE_WEB.md",
-      "sha256": "b52542716864e244f0fd1967eb67ca6b7eee2c25e0c38adc1a7cbb3d9369699e",
-      "size_bytes": 16192
+      "sha256": "bbbfb158d0fd88eba00a87d34b66b7d625593fa97cd40488d377dee4746402e3",
+      "size_bytes": 16348
     },
     {
       "path": "generated/PROMPT_CODEX.md",
-      "sha256": "9c9304fe7e897756a30d5576a38045d70cbda720811ae5f2b9268f011c19e2c3",
-      "size_bytes": 16354
+      "sha256": "6b9d6b745b22fa23468ce2a5598ea02689a5848eea061e91416602222ffddf6a",
+      "size_bytes": 16510
     },
     {
       "path": "generated/PROMPT_GPT_WEB.md",
-      "sha256": "0009cff6963739581d9b6f2c779dcc73704746fac7340e3f3d4384577df1dbff",
-      "size_bytes": 16186
+      "sha256": "968249d423cc25fe410c4ecf57ee28560c3cd9dbe6711866046fd279cd5e90c9",
+      "size_bytes": 16342
     },
     {
       "path": "reports/LIVE_CODEX_FALLBACK_ATTEMPT_20260711.json",
@@ -293,13 +298,13 @@
     },
     {
       "path": "scripts/build_gpt_knowledge_bundle.py",
-      "sha256": "a8267e74de6732cca23d50e7338bd31abba1e10714b6dd9982edad203c0fb6a9",
-      "size_bytes": 7713
+      "sha256": "37ad2f228b23e9cd2faa0c6fb4962b997038d833c006bf63d9e3e36ce074dca8",
+      "size_bytes": 7720
     },
     {
       "path": "scripts/build_preaudit_package.py",
-      "sha256": "a458b1892f15912260917b907073eaae2f0380acef9fa442af1752442f4b4446",
-      "size_bytes": 21459
+      "sha256": "3f014fbfedfe3422a9a8ea90e5c9f29620307b6d0236d74e18927c07ba9f8f43",
+      "size_bytes": 21600
     },
     {
       "path": "scripts/camino_a_worker_bus.py",
@@ -393,8 +398,8 @@
     },
     {
       "path": "scripts/package_release.py",
-      "sha256": "efd94c8db7e3ecd53a5f02361859ae4eedbdf36f59ec3a931617e086cc55fe50",
-      "size_bytes": 15742
+      "sha256": "91cab17325088a6628258144584f478846f6cc9f7dbf2095a4cf6371a7a4565b",
+      "size_bytes": 15749
     },
     {
       "path": "scripts/peer_executor.py",
@@ -428,8 +433,8 @@
     },
     {
       "path": "scripts/render_contracts.py",
-      "sha256": "d06efa96d75541e84fb0cb1bdef819eb65d544cd5a6d21495b8dd1c033db16fa",
-      "size_bytes": 12360
+      "sha256": "7dc601389f7f026d6c298be7fc8b0e318aefc257c703d8ed7c64254d9debd2a5",
+      "size_bytes": 12530
     },
     {
       "path": "scripts/resource_scheduler.py",
@@ -568,8 +573,8 @@
     },
     {
       "path": "tests/test_all_canonical_internal_loops.py",
-      "sha256": "a1e17e8d36a6951bda856b8b93de37992f753bb898745188b60f971239c748c2",
-      "size_bytes": 5487
+      "sha256": "4275316132379634c94a4b37d3c43e0f1bd3c387c7546d57d0f48bfe2af0c537",
+      "size_bytes": 6047
     },
     {
       "path": "tests/test_camino_b_gateway.py",
@@ -628,8 +633,8 @@
     },
     {
       "path": "tests/test_release_hygiene.py",
-      "sha256": "f09897138b187ee11bf464348b9e197d83a29469dc964387e5f7c3f0fd64116f",
-      "size_bytes": 3360
+      "sha256": "612b027100a415ad350be1eb49dff0ee7ed078ad03b031e3e720fcc27e50d95e",
+      "size_bytes": 3941
     },
     {
       "path": "tests/test_resource_scheduler.py",
@@ -658,8 +663,8 @@
     },
     {
       "path": "tests/test_v1319_routing_claude.py",
-      "sha256": "43dfab119c2e56ad20d2305b5e54f774b5e56454c9446dd3e1b682099eccac83",
-      "size_bytes": 19235
+      "sha256": "73e83a4815209ecfdc54049772852e9d25b5376126c2439ff72bb61a84f0d641",
+      "size_bytes": 19242
     },
     {
       "path": "tests/test_workspace_isolation.py",

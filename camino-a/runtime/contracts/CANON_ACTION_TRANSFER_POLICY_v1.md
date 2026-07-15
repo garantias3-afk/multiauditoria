@@ -1,6 +1,6 @@
 # CANON_ACTION_TRANSFER_POLICY_v1 — Camino A Cerebro/Gateway
 
-Estado: v1.3.21-slot14-handoff.
+Estado: v1.3.22-slot1-slot4-six-loops.
 
 ## Decisión consolidada
 

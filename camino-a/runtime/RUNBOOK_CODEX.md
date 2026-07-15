@@ -1,4 +1,4 @@
-# RUNBOOK_CODEX — operación verificable v1.3.21 slot 14 handoff
+# RUNBOOK_CODEX — operación verificable v1.3.22 loops internos 1/4 acotados
 
 El canon vive en `canon/`. Camino A usa Codex como orquestador lógico, GPT como
 cerebro y `overnight_master` como motor mecánico. Camino B usa GPT como cerebro

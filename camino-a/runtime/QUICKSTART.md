@@ -1,4 +1,4 @@
-# Quickstart — Camino A/B v1.3.21 handoff adversarial + portable dual host
+# Quickstart — Camino A/B v1.3.22 loops internos 1/4 acotados + portable dual host
 
 ## 1. Verificación mecánica
 

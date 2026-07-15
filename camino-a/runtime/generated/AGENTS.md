@@ -137,17 +137,18 @@ exige cero cambios, cero findings, SHA vigente y slots 1–13 completos.
 
 ## Bucle interno agentic
 
-Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno de 1 a 10
-iteraciones únicamente cuando el slot declara `internal_loop.required=true`.
-Los slots con `loop_type=external_slot_loop`, incluido el 14, usan sólo el límite
-externo del slot y no crean versiones `.001`–`.010`. Cuando corresponde, cada
-iteración interna contiene:
+Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno únicamente
+cuando el slot declara `internal_loop.required=true`. Los slots 1 y 4 tienen un
+máximo de 6 iteraciones (`.001`–`.006`); los slots 7 y 8 conservan un máximo de
+10 (`.001`–`.010`). Los slots con `loop_type=external_slot_loop`, incluido el
+14, usan sólo el límite externo del slot y no crean versiones internas
+`.001`–`.NNN`. Cuando corresponde, cada iteración interna contiene:
 auditar, reparar o reescribir, testear, reauditar y decidir. Cada corrección usa
-tercer numeral `.001` a `.010`. La salida contiene sólo la última versión, diff
+el tercer numeral permitido por el contrato del slot. La salida contiene sólo la última versión, diff
 acumulado desde el seed, historial de iteraciones, tests y reauditoría final.
 Un estado limpio exige cero bugs y cero mejoras técnicas pendientes. Al agotar
-10 iteraciones se entrega la última versión con deuda residual explícita, nunca
-un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
+el límite canónico del slot se entrega la última versión con deuda residual
+explícita, nunca un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
 “reescrito”. El actor puede declarar que su ronda quedó sin nuevos hallazgos,
 pero no alterar el flujo ni aprobar el proceso, salvo la autoridad de slot 14:
 Claude primario o Codex por suscripción como fallback comprobado.

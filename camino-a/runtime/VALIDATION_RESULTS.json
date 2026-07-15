@@ -1,7 +1,7 @@
 {
   "release_name": "Camino Nocturno Canon Mutable",
-  "version": "v1.3.21-slot14-handoff",
-  "built_at_utc": "2026-07-13T03:05:19.941951+00:00",
+  "version": "v1.3.22-slot1-slot4-six-loops",
+  "built_at_utc": "2026-07-15T10:23:12.999916+00:00",
   "render_contracts_check": {
     "command": "/Library/Developer/CommandLineTools/usr/bin/python3 scripts/render_contracts.py --root . --check",
     "exit_code": 0,
@@ -10,10 +10,10 @@
     "stderr_tail": ""
   },
   "knowledge_current_check": {
-    "command": "/Library/Developer/CommandLineTools/usr/bin/python3 scripts/build_gpt_knowledge_bundle.py --root . --version v1.3.21-slot14-handoff --check",
+    "command": "/Library/Developer/CommandLineTools/usr/bin/python3 scripts/build_gpt_knowledge_bundle.py --root . --version v1.3.22-slot1-slot4-six-loops --check",
     "exit_code": 0,
     "stdout_summary": [],
-    "stdout_tail": "{\n  \"status\": \"ok\",\n  \"bundle_version\": \"v1.3.21-slot14-handoff\",\n  \"source_count\": 19,\n  \"errors\": []\n}",
+    "stdout_tail": "{\n  \"status\": \"ok\",\n  \"bundle_version\": \"v1.3.22-slot1-slot4-six-loops\",\n  \"source_count\": 19,\n  \"errors\": []\n}",
     "stderr_tail": ""
   },
   "compileall": {
@@ -33,11 +33,11 @@
       "operation_ids=15 paths=15",
       "RESULTADO: 16 passed, 0 failed",
       "RESULTADO: 14 passed, 0 failed",
-      "110 passed in 5.76s",
+      "112 passed in 5.73s",
       "RUN_TESTS_OK"
     ],
-    "stdout_tail": "  PASS: multiple roots fail closed\n  PASS: staging on Drive rejected\n=== DRIVE 4: localized My Drive discovery and safe creation ===\n  PASS: localized missing root is not ready\n  PASS: localized root created only under Mi unidad\n  PASS: localized root rediscovered\n\nRESULTADO: 14 passed, 0 failed\n........................................................................ [ 65%]\n......................................                                   [100%]\n110 passed in 5.76s\nRUN_TESTS_OK",
-    "stderr_tail": "ERROR: secret_detected:manual_file:secret.txt\nERROR: symlink_rejected:/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/tmpaz3oovda/linked.md\nERROR: zip_path_traversal:unsafe.zip:../escape.txt\nERROR: file_too_large:audit.md:69>16"
+    "stdout_tail": "  PASS: multiple roots fail closed\n  PASS: staging on Drive rejected\n=== DRIVE 4: localized My Drive discovery and safe creation ===\n  PASS: localized missing root is not ready\n  PASS: localized root created only under Mi unidad\n  PASS: localized root rediscovered\n\nRESULTADO: 14 passed, 0 failed\n........................................................................ [ 64%]\n........................................                                 [100%]\n112 passed in 5.73s\nRUN_TESTS_OK",
+    "stderr_tail": "ERROR: secret_detected:manual_file:secret.txt\nERROR: symlink_rejected:/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/tmpcq0fh6s7/linked.md\nERROR: zip_path_traversal:unsafe.zip:../escape.txt\nERROR: file_too_large:audit.md:69>16"
   },
   "residual_risk_tests": {
     "command": "pytest tests/test_v132_residual_risks.py tests/test_v133_quality_log.py",
@@ -68,7 +68,7 @@
       "terminal_reason": "reference_smoke_complete",
       "final_zip_exists": true,
       "accepted": [
-        "local_static_local_static_2026-07-13T03-05-29.659164+00-00"
+        "local_static_local_static_2026-07-15T10-23-23.041750+00-00"
       ],
       "rejected": []
     }
@@ -81,7 +81,7 @@
       "phase": "closed",
       "terminal_reason": "reference_smoke_complete",
       "accepted_evidence": [
-        "local_static_local_static_2026-07-13T03-05-31.150332+00-00"
+        "local_static_local_static_2026-07-15T10-23-24.568604+00-00"
       ],
       "final_zip_exists": true,
       "quality_delta_count": 10,
@@ -107,9 +107,9 @@
             "schema_version": "camino_internal_loop_result.v1",
             "slot_id": "1",
             "worker_id": "agentic_local",
-            "max_internal_loops": 10,
+            "max_internal_loops": 6,
             "evidence_scope": "mechanical_reference_only",
-            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_c7q40gwj/RUN_20260713_030529_797cc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_nly0pxkt/RUN_20260715_102323_a058f_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
             "status": "clean_no_corrections",
             "advanced": true,
             "iteration_count": 0,
@@ -124,9 +124,9 @@
             "schema_version": "camino_internal_loop_result.v1",
             "slot_id": "4",
             "worker_id": "agentic_local",
-            "max_internal_loops": 10,
+            "max_internal_loops": 6,
             "evidence_scope": "mechanical_reference_only",
-            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_c7q40gwj/RUN_20260713_030529_797cc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_nly0pxkt/RUN_20260715_102323_a058f_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
             "status": "clean_no_corrections",
             "advanced": true,
             "iteration_count": 0,
@@ -143,7 +143,7 @@
             "worker_id": "agentic_local",
             "max_internal_loops": 10,
             "evidence_scope": "mechanical_reference_only",
-            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_c7q40gwj/RUN_20260713_030529_797cc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_nly0pxkt/RUN_20260715_102323_a058f_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
             "status": "clean_no_corrections",
             "advanced": true,
             "iteration_count": 0,
@@ -160,7 +160,7 @@
             "worker_id": "agentic_local",
             "max_internal_loops": 10,
             "evidence_scope": "mechanical_reference_only",
-            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_c7q40gwj/RUN_20260713_030529_797cc_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
+            "cumulative_candidate_path": "/private/var/folders/35/t29_620x7q7fq1rfz4x4vt3c0000gn/T/camino_rel_runs_nly0pxkt/RUN_20260715_102323_a058f_canon_multiaudit/INTERNAL_LOOP/cumulative_candidate",
             "status": "clean_no_corrections",
             "advanced": true,
             "iteration_count": 0,

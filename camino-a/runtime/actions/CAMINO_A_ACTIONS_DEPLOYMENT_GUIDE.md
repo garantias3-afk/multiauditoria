@@ -1,4 +1,4 @@
-# CAMINO_A_ACTIONS_DEPLOYMENT_GUIDE v1.3.21 Slot 14 Handoff
+# CAMINO_A_ACTIONS_DEPLOYMENT_GUIDE v1.3.22 Slot 1/4 Six Loops
 
 ## Estado
 
@@ -21,8 +21,8 @@ en canon hasta completar el gate de Builder y el smoke Action.
 7. No pegar endpoints admin/provider en los GPT.
 8. Actualizar Knowledge o asegurar que Gateway sirva:
    - `CAMINO_A_OVERNIGHT_KNOWLEDGE_CURRENT.md`
-   - Versión: `v1.3.21-slot14-handoff`
-   - SHA-256: `d9cba15bfc6bbe5d44ac974db9e774871b3050063e187ed078db593a4a8623ca`
+   - Versión: `v1.3.22-slot1-slot4-six-loops`
+   - SHA-256: `e7164ee0a70159160a10e06112e586bacdf237c7f7d119b65138a174953b78f2`
 
 ## Smoke obligatorio antes de activar Sol
 
@@ -46,8 +46,8 @@ respuesta validada. Repetir en Camino A y B. Sólo entonces completar
 
 No marcar `knowledge_current_matches_gateway=true` hasta que
 `getCurrentCaminoAKnowledge.bundle_version` devuelva
-`v1.3.21-slot14-handoff` y su `sha256` sea
-`d9cba15bfc6bbe5d44ac974db9e774871b3050063e187ed078db593a4a8623ca`.
+`v1.3.22-slot1-slot4-six-loops` y su `sha256` sea
+`e7164ee0a70159160a10e06112e586bacdf237c7f7d119b65138a174953b78f2`.
 
 ## Archivos y fallback fail-closed
 

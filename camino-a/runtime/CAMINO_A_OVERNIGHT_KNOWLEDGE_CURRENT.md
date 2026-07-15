@@ -1,4 +1,4 @@
-# CAMINO A OVERNIGHT - KNOWLEDGE BUNDLE UNICO v1.3.21-slot14-handoff
+# CAMINO A OVERNIGHT - KNOWLEDGE BUNDLE UNICO v1.3.22-slot1-slot4-six-loops
 
 Uso previsto: subir este unico Markdown como Knowledge del GPT Camino A.
 Reemplaza bundles anteriores; no se deben conservar simultaneamente versiones
@@ -21,25 +21,25 @@ viejas como Knowledge activo.
 ```json
 {
   "bundle_schema": "camino_a_knowledge_bundle.unico.v2",
-  "bundle_version": "v1.3.21-slot14-handoff",
-  "generated_utc": "2026-07-12T12:53:23.972627+00:00",
+  "bundle_version": "v1.3.22-slot1-slot4-six-loops",
+  "generated_utc": "2026-07-15T10:21:31.409769+00:00",
   "brain_current": "gpt_manual_or_configured",
   "source_count": 19,
   "source_manifest": [
     {
       "path": "generated/GPT_SHARED_INSTRUCTIONS.md",
-      "bytes": 16142,
-      "sha256": "a8ed3e5a5c2a8cd9c383b01a45e0f703f49da8f0fe115b8e5a3584ba261d0a0a"
+      "bytes": 16298,
+      "sha256": "3553c171b32e9db736e6b382248b9c0b4a74b4dcee0ca98e1c95b5892c6626ed"
     },
     {
       "path": "contracts/CAMINO_SHARED_CONTRACT.md",
-      "bytes": 16049,
-      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8"
+      "bytes": 16205,
+      "sha256": "4b95629e86f5c4d321e8a1dfaaa017865aaff8fef0a0dddf8b23c586fa51d860"
     },
     {
       "path": "contracts/CANON_ACTION_TRANSFER_POLICY_v1.md",
-      "bytes": 4534,
-      "sha256": "2622731f174830a393ffa40fa7c607e70bc2b225931db19e77aa5910d5880ca8"
+      "bytes": 4541,
+      "sha256": "06364a3f9de1491b947bd4ef314cd67c53b7ebb71b98ccbe61a7374895afd6e3"
     },
     {
       "path": "actions/CAMINO_A_CEREBRO_ACTIONS.v1.yaml",
@@ -48,13 +48,13 @@ viejas como Knowledge activo.
     },
     {
       "path": "actions/SOL56_ACTIONS_EVAL_PROTOCOL.md",
-      "bytes": 3603,
-      "sha256": "578a51a1f43f4e558ddac1ee13ba0dae3248d83a73c192d6a026e6854acb25fd"
+      "bytes": 3830,
+      "sha256": "0a61e33df08d8f3643bb4998de8f10ea9661e960200bb5214f8ff36f897cb04f"
     },
     {
       "path": "canon/CANON_SHARED_CONTRACT_v1.md",
-      "bytes": 16049,
-      "sha256": "c1341b03f3b1eec2854ad0330b268d0b9176a5992f342e71da91c64b816de5a8"
+      "bytes": 16205,
+      "sha256": "4b95629e86f5c4d321e8a1dfaaa017865aaff8fef0a0dddf8b23c586fa51d860"
     },
     {
       "path": "canon/CANON_CHANGE_PROTOCOL_v1.md",
@@ -63,23 +63,23 @@ viejas como Knowledge activo.
     },
     {
       "path": "canon/CANON_PROVIDER_MODEL_ROUTES.v1.json",
-      "bytes": 39729,
-      "sha256": "541a10f2facd3be97761fb6028576d6dc22a1814eb6dd98bba74f999e3e6b2f8"
+      "bytes": 39736,
+      "sha256": "ec56eafa020a045ce3ebcb6b1d5689aae5d103c5791c5c8dd57ba84ded63f691"
     },
     {
       "path": "canon/CANON_WORKFLOW_SLOTS.v1.json",
-      "bytes": 19085,
-      "sha256": "3569eb3b0f88a8f271a0e951cc88e6d6b8761d4e2a4a9396b1596cda5326db23"
+      "bytes": 19078,
+      "sha256": "4cf48f0cf86fac2973824c1dbc0d6427f402922b4e468e6806956ea0c5d1bc66"
     },
     {
       "path": "canon/CANON_RUNTIME_POLICY.v1.json",
-      "bytes": 5258,
-      "sha256": "7ee7020d085d1b6d44118c613c59e24a804add8d7813c59e6f439b4d34e92bd4"
+      "bytes": 5265,
+      "sha256": "800255e6063b867eca2079909dff55cff2ca91489cb58358db5a5c801229a8de"
     },
     {
       "path": "canon/CANON_PREAUDIT_DELIVERY.v1.json",
-      "bytes": 4788,
-      "sha256": "f00aa2fa6667805b74c1386a01723463bc26066b9a01982c5271c9df003a1aea"
+      "bytes": 4842,
+      "sha256": "e105af87a96449c9d9fb510ee5fa205870de420c17e551bf77b7b82d7161eed4"
     },
     {
       "path": "config/roles.json",
@@ -113,13 +113,13 @@ viejas como Knowledge activo.
     },
     {
       "path": "QUICKSTART.md",
-      "bytes": 5434,
-      "sha256": "bdc7e5a2f15686fec3996727c3381956cf8072c80dc53acc038b4f73d2ac0cd9"
+      "bytes": 5442,
+      "sha256": "9176a34658623d7163b8ab638c1e02c71660c5661849b9042ccd720a5696f997"
     },
     {
       "path": "RUNBOOK_CODEX.md",
-      "bytes": 6101,
-      "sha256": "cc206c5e8f4e0c1e00e9b5da045cb8c117e940105e335e099d20531fbea5e3b2"
+      "bytes": 6113,
+      "sha256": "fb2c39e24fe9e4e6546145ff5d486ecbe3cc89609fe8dffcee2783c9bdd36328"
     }
   ]
 }
@@ -258,17 +258,18 @@ exige cero cambios, cero findings, SHA vigente y slots 1–13 completos.
 
 ## Bucle interno agentic
 
-Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno de 1 a 10
-iteraciones únicamente cuando el slot declara `internal_loop.required=true`.
-Los slots con `loop_type=external_slot_loop`, incluido el 14, usan sólo el límite
-externo del slot y no crean versiones `.001`–`.010`. Cuando corresponde, cada
-iteración interna contiene:
+Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno únicamente
+cuando el slot declara `internal_loop.required=true`. Los slots 1 y 4 tienen un
+máximo de 6 iteraciones (`.001`–`.006`); los slots 7 y 8 conservan un máximo de
+10 (`.001`–`.010`). Los slots con `loop_type=external_slot_loop`, incluido el
+14, usan sólo el límite externo del slot y no crean versiones internas
+`.001`–`.NNN`. Cuando corresponde, cada iteración interna contiene:
 auditar, reparar o reescribir, testear, reauditar y decidir. Cada corrección usa
-tercer numeral `.001` a `.010`. La salida contiene sólo la última versión, diff
+el tercer numeral permitido por el contrato del slot. La salida contiene sólo la última versión, diff
 acumulado desde el seed, historial de iteraciones, tests y reauditoría final.
 Un estado limpio exige cero bugs y cero mejoras técnicas pendientes. Al agotar
-10 iteraciones se entrega la última versión con deuda residual explícita, nunca
-un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
+el límite canónico del slot se entrega la última versión con deuda residual
+explícita, nunca un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
 “reescrito”. El actor puede declarar que su ronda quedó sin nuevos hallazgos,
 pero no alterar el flujo ni aprobar el proceso, salvo la autoridad de slot 14:
 Claude primario o Codex por suscripción como fallback comprobado.
@@ -555,17 +556,18 @@ exige cero cambios, cero findings, SHA vigente y slots 1–13 completos.
 
 ## Bucle interno agentic
 
-Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno de 1 a 10
-iteraciones únicamente cuando el slot declara `internal_loop.required=true`.
-Los slots con `loop_type=external_slot_loop`, incluido el 14, usan sólo el límite
-externo del slot y no crean versiones `.001`–`.010`. Cuando corresponde, cada
-iteración interna contiene:
+Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno únicamente
+cuando el slot declara `internal_loop.required=true`. Los slots 1 y 4 tienen un
+máximo de 6 iteraciones (`.001`–`.006`); los slots 7 y 8 conservan un máximo de
+10 (`.001`–`.010`). Los slots con `loop_type=external_slot_loop`, incluido el
+14, usan sólo el límite externo del slot y no crean versiones internas
+`.001`–`.NNN`. Cuando corresponde, cada iteración interna contiene:
 auditar, reparar o reescribir, testear, reauditar y decidir. Cada corrección usa
-tercer numeral `.001` a `.010`. La salida contiene sólo la última versión, diff
+el tercer numeral permitido por el contrato del slot. La salida contiene sólo la última versión, diff
 acumulado desde el seed, historial de iteraciones, tests y reauditoría final.
 Un estado limpio exige cero bugs y cero mejoras técnicas pendientes. Al agotar
-10 iteraciones se entrega la última versión con deuda residual explícita, nunca
-un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
+el límite canónico del slot se entrega la última versión con deuda residual
+explícita, nunca un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
 “reescrito”. El actor puede declarar que su ronda quedó sin nuevos hallazgos,
 pero no alterar el flujo ni aprobar el proceso, salvo la autoridad de slot 14:
 Claude primario o Codex por suscripción como fallback comprobado.
@@ -730,7 +732,7 @@ providers inventados.
 ```markdown
 # CANON_ACTION_TRANSFER_POLICY_v1 — Camino A Cerebro/Gateway
 
-Estado: v1.3.21-slot14-handoff.
+Estado: v1.3.22-slot1-slot4-six-loops.
 
 ## Decisión consolidada
 
@@ -1631,6 +1633,9 @@ identidad/versiones no habilitan la ruta.
    cerrado, sin aprobación.
 7. Output grande: start/chunks/status/finalize y resultado ligado al upload.
 8. Autoridad: intentar una operación fuera del slot/alcance y comprobar rechazo.
+9. Bucles internos: verificar que Camino A Cerebro y Camino B Auditor Externo
+   aplican `.001`–`.006` en slots 1/4 y `.001`–`.010` en slots 7/8, rechazando
+   cualquier iteración que exceda el límite canónico del slot.
 
 La activación exige que los casos aplicables pasen en Camino A y Camino B. Una
 mejora subjetiva de redacción no sustituye esta matriz.
@@ -1784,17 +1789,18 @@ exige cero cambios, cero findings, SHA vigente y slots 1–13 completos.
 
 ## Bucle interno agentic
 
-Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno de 1 a 10
-iteraciones únicamente cuando el slot declara `internal_loop.required=true`.
-Los slots con `loop_type=external_slot_loop`, incluido el 14, usan sólo el límite
-externo del slot y no crean versiones `.001`–`.010`. Cuando corresponde, cada
-iteración interna contiene:
+Todo actor agentic de GPT, Codex o Claude ejecuta el bucle interno únicamente
+cuando el slot declara `internal_loop.required=true`. Los slots 1 y 4 tienen un
+máximo de 6 iteraciones (`.001`–`.006`); los slots 7 y 8 conservan un máximo de
+10 (`.001`–`.010`). Los slots con `loop_type=external_slot_loop`, incluido el
+14, usan sólo el límite externo del slot y no crean versiones internas
+`.001`–`.NNN`. Cuando corresponde, cada iteración interna contiene:
 auditar, reparar o reescribir, testear, reauditar y decidir. Cada corrección usa
-tercer numeral `.001` a `.010`. La salida contiene sólo la última versión, diff
+el tercer numeral permitido por el contrato del slot. La salida contiene sólo la última versión, diff
 acumulado desde el seed, historial de iteraciones, tests y reauditoría final.
 Un estado limpio exige cero bugs y cero mejoras técnicas pendientes. Al agotar
-10 iteraciones se entrega la última versión con deuda residual explícita, nunca
-un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
+el límite canónico del slot se entrega la última versión con deuda residual
+explícita, nunca un cierre limpio. “Confirmado” o “detectado” no reemplaza “reparado” o
 “reescrito”. El actor puede declarar que su ronda quedó sin nuevos hallazgos,
 pero no alterar el flujo ni aprobar el proceso, salvo la autoridad de slot 14:
 Claude primario o Codex por suscripción como fallback comprobado.
@@ -2014,8 +2020,8 @@ operación productiva de extremo a extremo.
 ```json
 {
   "schema_version": "canon_provider_model_routes.v1",
-  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
-  "updated_utc": "2026-07-11T00:00:00Z",
+  "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+  "updated_utc": "2026-07-15T10:18:38Z",
   "identity_fields": [
     "slot_id",
     "route_id",
@@ -2763,7 +2769,7 @@ operación productiva de extremo a extremo.
               "remote_bundle_sha256": "64e163fd6582dc5b5a83d36c531a5a42f604184a261e93aa5fae2c71c39cfb8f",
               "remote_bundle_size_bytes": 116796,
               "remote_source_count": 14,
-              "knowledge_sync": "mismatch_with_local_v1.3.21"
+              "knowledge_sync": "mismatch_with_local_v1.3.22"
             }
           },
           "camino_b_auditor_externo": {
@@ -3084,8 +3090,8 @@ operación productiva de extremo a extremo.
 ```json
 {
   "schema_version": "canon_workflow_slots.v1",
-  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
-  "updated_utc": "2026-07-11T00:00:00Z",
+  "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+  "updated_utc": "2026-07-15T10:18:38Z",
   "big_loop": {
     "name": "bucle_grande",
     "slots": [
@@ -3135,7 +3141,7 @@ operación productiva de extremo a extremo.
     "loop_limit_reached": "advance_with_explicit_residual_debt",
     "approval": "slot_14_claude_or_codex_subscription_fallback_only_without_corrections_or_findings",
     "agentic_internal_loop": "audit_patch_reaudit_repeat",
-    "internal_loop_contract": "COMUN_CAMINO_A_Y_B: todo auditor IA con bucle interno obligatorio (slots 1, 4, 7, 8) debe iterar versiones .001 a .010: genera versión, la reaudita, genera la siguiente; secuencia obligatoria por iteración: auditar -> detectar bug/mejora/deuda -> corregir o reescribir -> testear/validar -> reauditar la corrección -> decidir si queda limpio dentro del alcance del slot. Termina al no encontrar nuevos hallazgos en su alcance o al llegar a .010. Entrega: última versión, diff acumulado, historial de iteraciones, tests, deuda residual, veredicto de ronda. El veredicto de ronda nunca es aprobación global.",
+    "internal_loop_contract": "COMUN_CAMINO_A_Y_B: todo auditor IA con bucle interno obligatorio ejecuta la secuencia auditar -> detectar bug/mejora/deuda -> corregir o reescribir -> testear/validar -> reauditar la corrección -> decidir si queda limpio dentro del alcance del slot. Los slots 1 y 4 iteran versiones .001 a .006 y terminan al quedar limpios o alcanzar .006. Los slots 7 y 8 conservan versiones .001 a .010 y terminan al quedar limpios o alcanzar .010. Entrega: última versión, diff acumulado, historial de iteraciones, tests, deuda residual, veredicto de ronda. El veredicto de ronda nunca es aprobación global.",
     "external_slot_loops": "COMUN_CAMINO_A_Y_B: slots 3, 6, 10, 11, 12, 13, 14 iteran por bucle de slot con conteo definido en el campo 'loops' de cada slot; no usan el bucle interno .001-.010.",
     "lmstudio_bridge_rules": {
       "provider_id": "lmstudio_macbook_bridge",
@@ -3236,8 +3242,8 @@ operación productiva de extremo a extremo.
       "internal_loop": {
         "required": true,
         "loop_type": "internal_agentic",
-        "max_iterations": 10,
-        "version_suffixes": "candidate.001 hasta candidate.010",
+        "max_iterations": 6,
+        "version_suffixes": "candidate.001 hasta candidate.006",
         "mandatory_sequence": [
           "auditar",
           "detectar bug/mejora/deuda",
@@ -3246,10 +3252,10 @@ operación productiva de extremo a extremo.
           "reauditar la corrección",
           "decidir si queda limpio dentro del alcance del slot"
         ],
-        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .006",
         "stop_conditions": [
           "sin nuevos hallazgos dentro del alcance del slot",
-          "alcanzada la iteración .010"
+          "alcanzada la iteración .006"
         ],
         "delivery_requirements": [
           "última versión corregida",
@@ -3332,8 +3338,8 @@ operación productiva de extremo a extremo.
       "internal_loop": {
         "required": true,
         "loop_type": "internal_agentic",
-        "max_iterations": 10,
-        "version_suffixes": "candidate.001 hasta candidate.010",
+        "max_iterations": 6,
+        "version_suffixes": "candidate.001 hasta candidate.006",
         "mandatory_sequence": [
           "auditar",
           "detectar bug/mejora/deuda",
@@ -3342,10 +3348,10 @@ operación productiva de extremo a extremo.
           "reauditar la corrección",
           "decidir si queda limpio dentro del alcance del slot"
         ],
-        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .006",
         "stop_conditions": [
           "sin nuevos hallazgos dentro del alcance del slot",
-          "alcanzada la iteración .010"
+          "alcanzada la iteración .006"
         ],
         "delivery_requirements": [
           "última versión corregida",
@@ -3646,8 +3652,8 @@ operación productiva de extremo a extremo.
 ```json
 {
   "schema_version": "canon_runtime_policy.v1",
-  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
-  "updated_utc": "2026-07-11T00:00:00Z",
+  "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+  "updated_utc": "2026-07-15T10:18:38Z",
   "default_profile": "with_claude",
   "profiles": {
     "with_claude": {
@@ -3823,8 +3829,8 @@ operación productiva de extremo a extremo.
 ```json
 {
  "schema_version": "canon_preaudit_delivery.v1",
- "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
- "updated_utc": "2026-07-11T00:00:00Z",
+ "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+ "updated_utc": "2026-07-15T10:18:38Z",
  "applies_to": ["camino_a", "camino_b"],
  "scope_note": "COMUN_CAMINO_A_Y_B: este contrato rige la entrega de preauditoría en ambos caminos. Cualquier modificación en (1) sistema de slots, (2) pedido/sistema de preauditoría, o (3) proceso de bucles, debe reflejarse simultáneamente en ambos caminos. Ningún GPT debe interpretar este archivo como exclusivo de su camino.",
  "deliverables": {
@@ -3892,7 +3898,7 @@ operación productiva de extremo a extremo.
  },
  "internal_loop_contract_ref": {
   "source_of_truth": "canon/CANON_WORKFLOW_SLOTS.v1.json -> general_rules.internal_loop_contract",
-  "summary": "slots 1, 4, 7, 8: bucle interno obligatorio .001-.010 (auditar -> detectar -> corregir -> testear -> reauditar -> decidir); slots 3, 6, 10, 11, 12, 13, 14: bucle de slot con conteo en campo 'loops'; toda IA externa manual también itera .001-.010 según PEDIDO_AUDITORIAS_MANUALES.md"
+  "summary": "slots 1 y 4: bucle interno obligatorio .001-.006; slots 7 y 8: bucle interno obligatorio .001-.010; secuencia común auditar -> detectar -> corregir -> testear -> reauditar -> decidir; slots 3, 6, 10, 11, 12, 13, 14: bucle de slot con conteo en campo 'loops'; toda IA externa manual ligada a un slot respeta el límite de ese slot"
  }
 }
 ```
@@ -4350,7 +4356,7 @@ operación productiva de extremo a extremo.
 ## SOURCE: QUICKSTART.md
 
 ```markdown
-# Quickstart — Camino A/B v1.3.21 handoff adversarial + portable dual host
+# Quickstart — Camino A/B v1.3.22 loops internos 1/4 acotados + portable dual host
 
 ## 1. Verificación mecánica
 
@@ -4498,7 +4504,7 @@ no se declara equivalente hasta desplegar y probar el handler server-side.
 ## SOURCE: RUNBOOK_CODEX.md
 
 ```markdown
-# RUNBOOK_CODEX — operación verificable v1.3.21 slot 14 handoff
+# RUNBOOK_CODEX — operación verificable v1.3.22 loops internos 1/4 acotados
 
 El canon vive en `canon/`. Camino A usa Codex como orquestador lógico, GPT como
 cerebro y `overnight_master` como motor mecánico. Camino B usa GPT como cerebro

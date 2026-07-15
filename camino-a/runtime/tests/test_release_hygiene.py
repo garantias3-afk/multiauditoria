@@ -54,6 +54,19 @@ def test_camino_b_builder_instructions_preserve_current_authority_and_fallback()
     assert "Codex CLI 'gpt-5.6-sol' con razonamiento 'ultra'" in instructions
     assert "OpenAI API, Anthropic API y Claude API están prohibidas" in instructions
     assert "'approveReservedProvider'" in instructions
+    assert "Los slots 1 y 4 usan `.001`–`.006`" in instructions
+    assert "los slots 7 y 8 conservan" in instructions
+    assert "`.001`–`.010`" in instructions
+
+
+def test_camino_a_brain_instructions_preserve_slot_specific_loop_limits() -> None:
+    instructions = (
+        ROOT / "generated" / "GPT_BUILDER_INSTRUCTIONS.md"
+    ).read_text(encoding="utf-8")
+    assert "Los slots 1" in instructions
+    assert "y 4 usan exactamente el rango `.001`–`.006`" in instructions
+    assert "los slots 7 y 8 conservan" in instructions
+    assert "`.001`–`.010`" in instructions
 
 
 def test_packaging_fails_closed_when_compileall_fails(tmp_path, monkeypatch) -> None:

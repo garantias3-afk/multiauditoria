@@ -19,7 +19,7 @@ python3 -m compileall -q tests
 
 python3 scripts/render_contracts.py --root . --check >/dev/null
 python3 scripts/build_gpt_knowledge_bundle.py --root . \
-  --version v1.3.21-slot14-handoff --check >/dev/null
+  --version v1.3.22-slot1-slot4-six-loops --check >/dev/null
 python3 scripts/canon_loader.py --root . --profile without_claude --validate >/dev/null
 python3 scripts/canon_loader.py --root . --profile with_claude --validate >/dev/null
 python3 scripts/probe_live_routes.py --self-test

@@ -49,6 +49,9 @@ identidad/versiones no habilitan la ruta.
    cerrado, sin aprobación.
 7. Output grande: start/chunks/status/finalize y resultado ligado al upload.
 8. Autoridad: intentar una operación fuera del slot/alcance y comprobar rechazo.
+9. Bucles internos: verificar que Camino A Cerebro y Camino B Auditor Externo
+   aplican `.001`–`.006` en slots 1/4 y `.001`–`.010` en slots 7/8, rechazando
+   cualquier iteración que exceda el límite canónico del slot.
 
 La activación exige que los casos aplicables pasen en Camino A y Camino B. Una
 mejora subjetiva de redacción no sustituye esta matriz.

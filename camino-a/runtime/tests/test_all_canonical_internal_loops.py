@@ -12,6 +12,19 @@ from scripts.worker_lmstudio import _decode_json_object, _valid_external_loop
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def test_slot_specific_internal_loop_limits_are_canonical() -> None:
+    bundle = load_canon(ROOT)
+    plan = build_slot_plan(bundle, resolve_profile(bundle, "with_claude"))
+    expected = {"1": 6, "4": 6, "7": 10, "8": 10}
+
+    for slot_id, limit in expected.items():
+        contract = plan.slot(slot_id).internal_loop
+        assert contract["required"] is True
+        assert contract["max_iterations"] == limit
+        assert contract["version_suffixes"].endswith(f".{limit:03d}")
+        assert contract["stop_conditions"][-1].endswith(f".{limit:03d}")
+
+
 def test_all_enabled_required_internal_loops_are_executed(tmp_path: Path) -> None:
     run = tmp_path / "RUN_internal_loops"
     snapshot = run / "INPUT" / "target_snapshot"
@@ -96,7 +109,7 @@ def test_reference_internal_loop_never_satisfies_external_slot_evidence(tmp_path
         "slot_id": "1",
         "worker_id": "agentic_local",
         "evidence_scope": "mechanical_reference_only",
-        "max_internal_loops": 10,
+        "max_internal_loops": 6,
         "status": "clean_no_corrections",
         "advanced": True,
         "iteration_count": 0,

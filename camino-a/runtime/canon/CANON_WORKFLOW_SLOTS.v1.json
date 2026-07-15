@@ -1,7 +1,7 @@
 {
   "schema_version": "canon_workflow_slots.v1",
-  "canon_version": "camino_shared_canon.v1.3.21-slot14-handoff",
-  "updated_utc": "2026-07-11T00:00:00Z",
+  "canon_version": "camino_shared_canon.v1.3.22-slot1-slot4-six-loops",
+  "updated_utc": "2026-07-15T10:18:38Z",
   "big_loop": {
     "name": "bucle_grande",
     "slots": [
@@ -51,7 +51,7 @@
     "loop_limit_reached": "advance_with_explicit_residual_debt",
     "approval": "slot_14_claude_or_codex_subscription_fallback_only_without_corrections_or_findings",
     "agentic_internal_loop": "audit_patch_reaudit_repeat",
-    "internal_loop_contract": "COMUN_CAMINO_A_Y_B: todo auditor IA con bucle interno obligatorio (slots 1, 4, 7, 8) debe iterar versiones .001 a .010: genera versión, la reaudita, genera la siguiente; secuencia obligatoria por iteración: auditar -> detectar bug/mejora/deuda -> corregir o reescribir -> testear/validar -> reauditar la corrección -> decidir si queda limpio dentro del alcance del slot. Termina al no encontrar nuevos hallazgos en su alcance o al llegar a .010. Entrega: última versión, diff acumulado, historial de iteraciones, tests, deuda residual, veredicto de ronda. El veredicto de ronda nunca es aprobación global.",
+    "internal_loop_contract": "COMUN_CAMINO_A_Y_B: todo auditor IA con bucle interno obligatorio ejecuta la secuencia auditar -> detectar bug/mejora/deuda -> corregir o reescribir -> testear/validar -> reauditar la corrección -> decidir si queda limpio dentro del alcance del slot. Los slots 1 y 4 iteran versiones .001 a .006 y terminan al quedar limpios o alcanzar .006. Los slots 7 y 8 conservan versiones .001 a .010 y terminan al quedar limpios o alcanzar .010. Entrega: última versión, diff acumulado, historial de iteraciones, tests, deuda residual, veredicto de ronda. El veredicto de ronda nunca es aprobación global.",
     "external_slot_loops": "COMUN_CAMINO_A_Y_B: slots 3, 6, 10, 11, 12, 13, 14 iteran por bucle de slot con conteo definido en el campo 'loops' de cada slot; no usan el bucle interno .001-.010.",
     "lmstudio_bridge_rules": {
       "provider_id": "lmstudio_macbook_bridge",
@@ -152,8 +152,8 @@
       "internal_loop": {
         "required": true,
         "loop_type": "internal_agentic",
-        "max_iterations": 10,
-        "version_suffixes": "candidate.001 hasta candidate.010",
+        "max_iterations": 6,
+        "version_suffixes": "candidate.001 hasta candidate.006",
         "mandatory_sequence": [
           "auditar",
           "detectar bug/mejora/deuda",
@@ -162,10 +162,10 @@
           "reauditar la corrección",
           "decidir si queda limpio dentro del alcance del slot"
         ],
-        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .006",
         "stop_conditions": [
           "sin nuevos hallazgos dentro del alcance del slot",
-          "alcanzada la iteración .010"
+          "alcanzada la iteración .006"
         ],
         "delivery_requirements": [
           "última versión corregida",
@@ -248,8 +248,8 @@
       "internal_loop": {
         "required": true,
         "loop_type": "internal_agentic",
-        "max_iterations": 10,
-        "version_suffixes": "candidate.001 hasta candidate.010",
+        "max_iterations": 6,
+        "version_suffixes": "candidate.001 hasta candidate.006",
         "mandatory_sequence": [
           "auditar",
           "detectar bug/mejora/deuda",
@@ -258,10 +258,10 @@
           "reauditar la corrección",
           "decidir si queda limpio dentro del alcance del slot"
         ],
-        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .010",
+        "iteration_rule": "la IA genera versión .001, la reaudita, genera .002, la reaudita, y así sucesivamente hasta quedar limpia dentro de su alcance o llegar a .006",
         "stop_conditions": [
           "sin nuevos hallazgos dentro del alcance del slot",
-          "alcanzada la iteración .010"
+          "alcanzada la iteración .006"
         ],
         "delivery_requirements": [
           "última versión corregida",
