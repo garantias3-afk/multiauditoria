@@ -1,5 +1,27 @@
 # Estado recuperado
 
+## Checkpoint 2026-07-26 — ROUTER v5 R2 y arquitectura local
+
+- Se preservó en `shared/audits/router-v5-r2/` el motor R2, sus suites,
+  canarios K3/ZCode e informes con hashes.
+- Implementador: Kimi Code; modelo exacto `NO_CONSTA`.
+- Reauditor externo: ZCode; modelo exacto
+  `builtin:zai-coding-plan/GLM-5.2`.
+- Estado adjudicado del router: apto para integración controlada; no producción.
+- El mapeo de sólo lectura se guardó en
+  `shared/threads/2026-07-26-ZDESK-MAPEO-PREVIO-ROUTER-V5-R2.md`.
+- Hecho central: Camino A actual orquesta slots/proveedores y entrega snapshots
+  completos; no consume ejes, TaskCards, packets ni `domain_rules_hash`.
+- No se realizó integración funcional. Copiar el router sin decidir su rol no
+  produciría ningún efecto y podría mezclar dos arquitecturas diferentes.
+- Camino A documenta el bloqueo en
+  `camino-a/ROUTER_V5_R2_PREINTEGRATION_STATUS.md`.
+- Camino B queda sin cambios funcionales; su límite está documentado en
+  `camino-b/ROUTER_V5_R2_PREINTEGRATION_STATUS.md`.
+- Próxima prioridad: cerrar primero el ejecutor local de OpenClaw y después
+  adjudicar si el router en Camino A enriquece prompts/evidencia o sólo aporta
+  trazabilidad.
+
 ## Estado cerrado actual
 
 - Runtime recuperado en `camino-a/runtime/` con 124 archivos de release.
