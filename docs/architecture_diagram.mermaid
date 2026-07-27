@@ -1,0 +1,31 @@
+<!-- Architecture diagram for multiauditoria in Mermaid format -->
+
+%% Archivo: docs/architecture_diagram.mermaid
+%% Generado por Copilot: diagrama de alto nivel de Camino A / Camino B / shared
+
+flowchart LR
+  subgraph Repo["multiauditoria (repo)"]
+    direction TB
+    CA["camino-a\n(orquestador)"]
+    CB["camino-b\n(ejecutor / puente)"]
+    SH["shared\n(estado / evidencia)"]
+    DOC["docs\n(TDD_SYSTEM_BLUEPRINT.md)"]
+    TESTS["tests & validation\n(VALIDATION_RESULTS.json)"]
+  end
+
+  CA --> RUNTIME["camino-a/runtime\n(scripts, schemas, manifests, tests)"]
+  RUNTIME -->|entrypoints| Scripts["run_multiaudit_cycle.py\novernight_master.py\nslot14_handoff.py ..."]
+  RUNTIME --> Schemas["schemas/* (JSON schemas)"]
+  RUNTIME --> Manifests["RELEASE_MANIFEST.json / bundles"]
+
+  CB -.->|referencia / importa (NO duplicar)| RUNTIME
+  CB -->|implementa| Gateway["Gateway HTTP / bridge / agents"]
+  SH -->|lee / escribe| RUNTIME
+  SH -->|lee / escribe| CB
+  DOC -->|guía| CA
+  DOC -->|guía| CB
+  RUNTIME --> TESTS
+  TESTS --> SH
+
+  classDef repoStyle fill:#f8f9fa,stroke:#333,stroke-width:1px;
+  class Repo repoStyle;
