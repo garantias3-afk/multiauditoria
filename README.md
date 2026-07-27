@@ -2,6 +2,24 @@
 
 Repo base para coordinar Camino A, Camino B y el material compartido entre GPT, GLM, Claude y Codex.
 
+## Contexto rápido (para vos y para cualquier IA — leer primero)
+
+Repo **público**. Forma parte de un ecosistema más grande junto a otros
+proyectos relacionados en la misma máquina que comparten arquitectura de
+canon/slots — ese detalle se mantiene fuera de este repo público a propósito.
+
+```mermaid
+graph TD
+  MA[multiauditoria] --> camino_a["camino-a/ - orquestacion y control del flujo"]
+  MA --> camino_b["camino-b/ - ejecucion, puente y materiales operativos"]
+  MA --> docs["docs/ - blueprint tecnico"]
+  MA --> shared["shared/ - estado comun, hilos de IA, pendientes"]
+  MA --> deliverables["deliverables/ - paquetes generados (gitignoreado)"]
+  MA --> apps["apps/, tools/"]
+```
+
+Decisiones pendientes: ver `DECISIONES_PENDIENTES.md` en esta misma carpeta.
+
 ## Estructura
 
 - `camino-a/`: orquestacion y control del flujo.

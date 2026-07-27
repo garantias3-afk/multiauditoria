@@ -14,3 +14,13 @@ build/
 camino-a/runtime/dist/
 camino-a/runtime/outputs/
 camino-a/runtime/work/
+
+# Agregado por Claude: este repo es PÚBLICO. Estas carpetas contienen
+# detalles internos de tus otros repos privados (camino-z, robot-os-mellizo,
+# openclaw) y artefactos empaquetados grandes — no deberían subirse a GitHub.
+shared/audits/
+deliverables/
+
+
+# Graphify: grafo de conocimiento local, se regenera solo
+graphify-out/
