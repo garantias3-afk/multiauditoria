@@ -20,6 +20,10 @@ graph TD
 
 Decisiones pendientes: ver `DECISIONES_PENDIENTES.md` en esta misma carpeta.
 
+**Deuda tecnica abierta: ver [`DEUDAS.md`](DEUDAS.md).** Lo que se sabe que
+esta mal o sin decidir, relevado el 2026-07-27. Leerlo antes de tocar
+arquitectura, documentacion de estructura o los canarios de seguridad.
+
 ## Estructura
 
 - `camino-a/`: orquestacion y control del flujo.

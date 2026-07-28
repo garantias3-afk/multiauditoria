@@ -24,7 +24,7 @@ CASES = [
     ("JS regex literal is not executable eval", "a.js", "const r = /eval(userInput)/;\n", "seguridad", False),
     ("JS template interpolation executes eval", "a.js", "const x = `${eval(userInput)}`;\n", "seguridad", True),
     ("JS commented crypto import", "a.js", "// import crypto from 'crypto';\nconst x=1;\n", "seguridad", False),
-    ("JS commented secret assignment", "a.js", "// const api_key = 'AKIA123456';\nconst x=1;\n", "seguridad", False),
+    ("JS commented secret assignment", "a.js", "// const api_key = '" + "AKI" + "A123456';\nconst x=1;\n", "seguridad", False),
     ("shell command substitution executes curl", "d.sh", "#!/bin/sh\necho \"$(curl https://example.invalid)\"\n", "seguridad", True),
     # Reappearance of substring matching in SECRET_NAME.search().
     ("monkey is not key", "zoo.py", "monkey = 'banana'\n", "seguridad", False),

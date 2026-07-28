@@ -72,7 +72,7 @@ CASES = [
      "seguridad", True),
     ("K3-11 secreto en kwarg api_key no se detecta",
      "client.py",
-     "def login(**kw): pass\nlogin(api_key='AKIAREALKEY123')\n",
+     "def login(**kw): pass\nlogin(api_key='" + "AKI" + "AREALKEY123')\n",
      "seguridad", True),
 
     # --- Datos (JSON/YAML) ---

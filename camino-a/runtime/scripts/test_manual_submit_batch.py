@@ -120,7 +120,12 @@ with tempfile.TemporaryDirectory() as td:
 
     print("=== MANUAL 4: secrets/symlinks/ZIP traversal fail closed ===")
     secret = base / "secret.txt"
-    secret.write_text('api_key = "sk-proj-ABCDEFGHIJKLMNOPQRSTUV123456789"\n', encoding="utf-8")
+    # Canario sintetico: el literal se arma en runtime para que no quede
+    # escrito en el fuente (evita alertas de secret scanning y lecturas
+    # erroneas). El valor es identico, asi el detector bajo prueba sigue
+    # rechazando el archivo.
+    fake_key = "sk-" + "proj-" + "ABCDEFGHIJKLMNOPQRSTUV" + "123456789"
+    secret.write_text('api_key = "%s"\n' % fake_key, encoding="utf-8")
     before = len(list((run / "13_WORKER_BUS/manual_gpt/OUT").iterdir()))
     rc = submit_main([
         "--run", str(run), "--worker", "manual_gpt", "--stage", "external_audit",

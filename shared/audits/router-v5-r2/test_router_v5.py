@@ -46,7 +46,7 @@ for name, path, src, axis in [
     ("async/await",           "m.py",         "import asyncio\nasync def f():\n    await asyncio.sleep(0)\n", "concurrencia"),
     ("jsonschema",            "m.py",         "import jsonschema\ndef v(d,s):\n    jsonschema.validate(d,s)\n", "contratos"),
     ("shell con sudo",        "deploy.sh",    "#!/bin/bash\nsudo rm -rf /tmp/x\n", "seguridad"),
-    ("secreto en YAML",       "conf/app.yml", "api_key: AKIA123456\n", "seguridad"),
+    ("secreto en YAML",       "conf/app.yml", "api_key: " + "AKI" + "A123456\n", "seguridad"),
 ]:
     check(name, axis in axes_of(path, src))
 
@@ -145,7 +145,7 @@ for name, src in [
     ("token vacio",                  '{"token": ""}'),
 ]:
     check(name, "seguridad" not in axes_of("t.json", src))
-check("api_key con valor real SI dispara", "seguridad" in axes_of("t.json",'{"api_key":"AKIA1234567890"}'))
+check("api_key con valor real SI dispara", "seguridad" in axes_of("t.json",'{"api_key":"' + "AKI" + 'A1234567890"}'))
 
 print("\n=== O. Semantica fuerte sin ruta auth ===")
 check("def authorize() py", "seguridad" in axes_of("handler.py","def authorize(u,r):\n    return True\n"))
