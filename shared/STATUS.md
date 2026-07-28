@@ -1,5 +1,62 @@
 # Estado recuperado
 
+## Checkpoint 2026-07-27 — canon global, contrato de salida y sincronizacion de los 4 repos
+
+**Leer antes que cualquier otra seccion de este archivo.** Lo de abajo es
+anterior y puede estar superado.
+
+### Documentos nuevos, sincronizados e identicos en los 4 repos
+
+- `CANON_GLOBAL.md` (`bfdf107e`) — objetivo del ecosistema, aristas donde se
+  tocan los repos, 10 reglas que todo proceso respeta, diagramas separados de
+  estado actual (derivado de Graphify) y estado objetivo (a mano), y 6 decisiones
+  abiertas D1-D6.
+- `CONTRATO_SALIDA.md` (`6e1f3d61`) — **cierra D6**. Cintura angosta: entrada
+  multiforma con aceptacion mecanica y procedencia obligatoria, gate semantico
+  explicito, sobre de salida estricto. `status` es enum de 4 (OK / INCOMPLETE /
+  BLOCKED / REJECTED) y `reason_code` es obligatorio cuando no es OK.
+- `DEUDAS.md` — deuda abierta. La version de multiauditoria es reducida por ser
+  repo publico; la completa esta en los 3 privados.
+
+### Estado de los repos
+
+Los 4 quedaron sincronizados con origin, sin archivos sueltos. camino-z y
+multiauditoria se rebasearon sobre `origin/main`; multiauditoria no tenia
+upstream configurado y ahora si.
+
+### Hallazgos que condicionan el trabajo siguiente
+
+- **Duplicacion entre repos:** 6 archivos del runtime `camino_b` son
+  byte-identicos entre `camino-a/runtime/scripts/` y `robot-os-mellizo/scripts/`.
+  Bloquea la centralizacion en OpenClaw P2.
+- **`state_db.py` divergio:** 3 copias; solo la de camino-z define
+  `_redact_secrets`. **Decision D5 pendiente de Mariano.**
+- **`quality_log.py` es byte-identico (`a4690efc`) en los 3 repos que lo tienen.**
+  Es la unica pieza que hoy cumple el canon de log compartido. No tocarla sin
+  sincronizar las tres copias.
+- **`cost_ledger.py` existe solo en camino-z**: el log de gasto lo cumple 1 de 4.
+- **P1, P2 y P3 de OpenClaw ya tienen esqueleto en `robot-os-mellizo/src/`**, no
+  en el repo `openclaw` (que son 15 archivos de configuracion).
+- Graphify no detecta **ninguna arista** entre `apps/desktop` y
+  `camino-a/runtime`: se hablan por HTTP/SSE y ese contrato no estaba escrito.
+- `docs/architecture_diagram.mermaid` ahora se **genera** con
+  `python3 tools/graph_to_mermaid.py`. No editarlo a mano.
+- `shared/audits/` esta en `.gitignore` pero tiene 10 archivos versionados:
+  archivos nuevos ahi quedan invisibles en silencio.
+- Canarios con forma de credencial (`sk-proj-`, `AKIA`) reescritos para armarse
+  en runtime. Ninguno era real. Suites sin cambio de resultado.
+
+### Pendientes inmediatos del checkpoint
+
+1. **D5** (divergencia de `state_db.py`): responde Mariano.
+2. **D2** (que canon de ruteo manda: camino-z o `openclaw/routing.yaml`): bloquea
+   a P2, porque el contrato exige `identity.route` y hoy hay dos fuentes.
+3. **Medicion de OpenClaw P2 en curso.** Debe emitir el sobre de
+   `CONTRATO_SALIDA.md` §3 aunque sea parcial, con `job.*` y `timing.*`, o los
+   numeros no seran comparables con la proxima iteracion.
+4. Auditoria del contrato: hilo nuevo e independiente del hilo de C7, para no
+   ensuciar los contadores de escalamiento de ese ciclo.
+
 ## Checkpoint 2026-07-26 — ROUTER v5 R2 y arquitectura local
 
 - Se preservó en `shared/audits/router-v5-r2/` el motor R2, sus suites,
@@ -133,6 +190,20 @@
 
 ## Notas para la siguiente sesion
 
+- **Orden de lectura obligatorio al entrar: `CANON_GLOBAL.md` -> `CONTRATO_SALIDA.md`
+  -> `DEUDAS.md` -> este archivo (checkpoint 2026-07-27 primero) -> `shared/RUNBOOK.md`.**
+- Los tres primeros estan sincronizados e identicos en los 4 repos. Si editas uno,
+  actualiza las otras tres copias y la fecha de `Sincronizado`. Fechas distintas
+  entre copias = alguien edito una sola.
+- Las secciones de este archivo anteriores al checkpoint 2026-07-27 son historicas
+  y pueden estar superadas. La lista "Ultimos 5 pedidos del usuario" quedo vencida.
+- Para estructura de codigo real usar el grafo de Graphify, no grepear a ciegas.
+  El CLI `graphify` NO esta en el PATH del iMac; la invocacion real es
+  `/Library/Frameworks/Python.framework/Versions/3.14/bin/python3.14 -m graphify`.
+- `docs/architecture_diagram.mermaid` se genera, no se edita. Los diagramas del
+  estado objetivo viven en `CANON_GLOBAL.md` §5 y si se editan a mano.
+- Ninguna IA decide arquitectura. Las decisiones abiertas son D1-D6 de
+  `CANON_GLOBAL.md` §6 y las toma Mariano.
 - antes de cambiar el modelo, leer `shared/RUNBOOK.md`
 - al retomar Camino A o Camino B, empezar por el estado mas reciente, no por el historico completo
 - cada IA debe volver a este archivo despues de cualquier cambio importante
