@@ -24,3 +24,9 @@ deliverables/
 
 # Graphify: grafo de conocimiento local, se regenera solo
 graphify-out/
+
+# Backups locales pre-edicion: nunca deben entrar al repo
+*.bak
+*.bak[0-9]*
+*.backup
+*.backup-*
