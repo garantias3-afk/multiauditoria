@@ -5,6 +5,10 @@
 > aristas donde se tocan, reglas que todo proceso respeta, diagramas de estado
 > actual y objetivo, y decisiones abiertas. Sincronizado entre los 4 repos.
 > Cualquier IA que entre a trabajar aca debe leerlo antes de proponer cambios.
+>
+> **[`CONTRATO_SALIDA.md`](CONTRATO_SALIDA.md)** — canon de interoperacion entre
+> procesos: sobre de ingesta multiforma, sobre de salida estricto, enums cerrados,
+> y proyeccion a app de escritorio y de telefono.
 
 
 Repo base para coordinar Camino A, Camino B y el material compartido entre GPT, GLM, Claude y Codex.
