@@ -1,31 +1,33 @@
-<!-- Architecture diagram for multiauditoria in Mermaid format -->
-
-%% Archivo: docs/architecture_diagram.mermaid
-%% Generado por Copilot: diagrama de alto nivel de Camino A / Camino B / shared
+%% GENERADO AUTOMATICAMENTE — no editar a mano.
+%% Fuente: graphify-out/graph.json (Graphify reconstruye el grafo en cada commit).
+%% Regenerar con: python3 tools/graph_to_mermaid.py
+%% graph.json built_at_commit: 06aeb925171d971d78734f6d07e450a339113f5f
+%% HEAD al generar: 06aeb92
+%% nodos: 1886  aristas: 4967  aristas entre modulos: 0
 
 flowchart LR
-  subgraph Repo["multiauditoria (repo)"]
+  subgraph camino_a_runtime["camino-a/runtime — 1438 nodos"]
     direction TB
-    CA["camino-a\n(orquestador)"]
-    CB["camino-b\n(ejecutor / puente)"]
-    SH["shared\n(estado / evidencia)"]
-    DOC["docs\n(TDD_SYSTEM_BLUEPRINT.md)"]
-    TESTS["tests & validation\n(VALIDATION_RESULTS.json)"]
+    camino_a_runtime_scripts["scripts<br/>985"]
+    camino_a_runtime_tests["tests<br/>173"]
+    camino_a_runtime_schemas["schemas<br/>139"]
+    camino_a_runtime_canon["canon<br/>127"]
+    camino_a_runtime_bin["bin<br/>14"]
+  end
+  subgraph apps_desktop["apps/desktop — 312 nodos"]
+    direction TB
+    apps_desktop_src["src<br/>154"]
+    apps_desktop_package_json["package.json<br/>50"]
+    apps_desktop_src_tauri["src-tauri<br/>31"]
+    apps_desktop_tests["tests<br/>30"]
+    apps_desktop_tsconfig_json["tsconfig.json<br/>29"]
+    apps_desktop_mocks["mocks<br/>17"]
+    apps_desktop_vite_config_ts["vite.config.ts<br/>1"]
+  end
+  subgraph tools["tools — 4 nodos"]
+    direction TB
+    tools_find_duplicates_py["find_duplicates.py<br/>4"]
   end
 
-  CA --> RUNTIME["camino-a/runtime\n(scripts, schemas, manifests, tests)"]
-  RUNTIME -->|entrypoints| Scripts["run_multiaudit_cycle.py\novernight_master.py\nslot14_handoff.py ..."]
-  RUNTIME --> Schemas["schemas/* (JSON schemas)"]
-  RUNTIME --> Manifests["RELEASE_MANIFEST.json / bundles"]
-
-  CB -.->|referencia / importa (NO duplicar)| RUNTIME
-  CB -->|implementa| Gateway["Gateway HTTP / bridge / agents"]
-  SH -->|lee / escribe| RUNTIME
-  SH -->|lee / escribe| CB
-  DOC -->|guía| CA
-  DOC -->|guía| CB
-  RUNTIME --> TESTS
-  TESTS --> SH
-
-  classDef repoStyle fill:#f8f9fa,stroke:#333,stroke-width:1px;
-  class Repo repoStyle;
+  %% Graphify no detecto NINGUNA arista entre estos modulos:
+  %% son bases de codigo aisladas dentro del mismo repo.

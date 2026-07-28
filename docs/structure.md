@@ -1,27 +1,47 @@
 # Estructura del repositorio — multiauditoria
 
-Este documento resume los principales directorios y archivos del repositorio, con notas rápidas sobre su propósito.
+Resumen de directorios con notas rápidas. Para el mapa de código real y sus
+dependencias, la fuente de verdad es el grafo de Graphify
+(`graphify-out/graph.json`), no este archivo.
 
 ```text
 multiauditoria/
   README.md                 - visión general y reglas de trabajo
   camino-a/                 - capa orquestadora
-    README.md
-    runtime/                - runtime importable: scripts, schemas, manifests, tests
-      scripts/              - entrypoints y adaptadores (run_multiaudit_cycle.py, overnight_master.py, slot14_handoff.py, etc.)
+    runtime/                - runtime importable (1438 nodos de código)
+      scripts/              - entrypoints y adaptadores (run_multiaudit_cycle.py,
+                              overnight_master.py, slot14_handoff.py, ...)
       schemas/              - contratos / JSON schema
-      actions/              - acciones / instrucciones de despliegue
+      canon/                - canon de rutas, slots y proveedores
+      tests/                - suite del runtime
+      bin/                  - ejecutables auxiliares
       VALIDATION_RESULTS.json
       RELEASE_MANIFEST.json
-  camino-b/                 - ejecución operativa / puente (documenta sus componentes, pero no duplica código)
-    README.md
-  shared/                   - estado común, hilos/threads, evidencia, RUNBOOK.md, STATUS.md
-  docs/                     - blueprint técnico (TDD_SYSTEM_BLUEPRINT.md) y diagramas
-  tools/                    - utilidades (find_duplicates.py)
+  camino-b/                 - SOLO documentación (0 archivos de código)
+  apps/
+    desktop/                - cliente Tauri v2 + React/TypeScript (312 nodos)
+      src/                  - componentes, core (api/sse/recovery), estado, utils
+      src-tauri/            - capa Rust de Tauri
+      tests/                - suite del cliente
+      mocks/                - servidor mock para tests de integración
+  shared/                   - estado común, hilos, evidencia
+    STATUS.md, RUNBOOK.md   - estado y procedimientos
+    threads/                - hilos de trabajo
+    audits/                 - auditorías (router-v5-r2, ...)
+  docs/                     - arquitectura y diagrama generado
+    architecture.md         - cómo se genera el diagrama + lectura del grafo
+    architecture_diagram.mermaid  - GENERADO, no editar a mano
+    TDD_SYSTEM_BLUEPRINT.md
+  tools/
+    find_duplicates.py      - detección de duplicados
+    graph_to_mermaid.py     - genera el diagrama desde graphify-out/graph.json
 ```
 
 Notas:
-- Camino A contiene el runtime ejecutable; Camino B debe importar desde allí en lugar de copiar archivos.
-- shared/ es la fuente única de verdad para hilos/evidencia.
-- docs/ contiene la blueprint técnica y el diagrama mermaid activo.
 
+- `camino-a/runtime` contiene el runtime ejecutable. La regla de trabajo es que
+  Camino B referencie ese runtime en lugar de copiar archivos; hoy `camino-b/`
+  no tiene código, así que la regla no está siendo ejercida en ninguna dirección.
+- `shared/` es la fuente única de verdad para hilos y evidencia.
+- Graphify no detecta aristas entre `camino-a/runtime`, `apps/desktop` y `tools`:
+  son tres bases de código aisladas dentro del mismo repositorio.

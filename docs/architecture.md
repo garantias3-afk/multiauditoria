@@ -1,62 +1,57 @@
-# Architecture — Multiauditoria
+# Arquitectura — multiauditoria
 
-> Diagrama de arquitectura (Mermaid). Este archivo contiene el diagrama activo en formato Mermaid; un GitHub Action regenerará el SVG en docs/architecture_diagram.svg cuando se hagan cambios en los archivos relevantes.
+> **El diagrama de este documento se genera automáticamente desde Graphify.**
+> No se edita a mano. Fuente: `graphify-out/graph.json` → `docs/architecture_diagram.mermaid`.
 
-**Estado:** Diagrama en mermaid activo y versionado en docs/architecture_diagram.mermaid. El workflow `.github/workflows/ci_update_mermaid.yml` genera y comitea el SVG automáticamente.
+## Cómo se genera
 
----
+Graphify reconstruye `graphify-out/graph.json` en cada `git commit` / `checkout`
+(hook ya instalado; el grafo es local y está gitignoreado). Para regenerar el
+diagrama a partir de ese grafo:
 
-## Diagrama (Mermaid)
-
-```mermaid
-flowchart LR
-  subgraph Repo["multiauditoria (repo)"]
-    direction TB
-    CA["camino-a\n(orquestador)"]
-    CB["camino-b\n(ejecutor / puente)"]
-    SH["shared\n(estado / evidencia)"]
-    DOC["docs\n(TDD_SYSTEM_BLUEPRINT.md)"]
-    TESTS["tests & validation\n(VALIDATION_RESULTS.json)"]
-  end
-
-  CA --> RUNTIME["camino-a/runtime\n(scripts, schemas, manifests, tests)"]
-  RUNTIME -->|entrypoints| Scripts["run_multiaudit_cycle.py\novernight_master.py\nslot14_handoff.py ..."]
-  RUNTIME --> Schemas["schemas/* (JSON schemas)"]
-  RUNTIME --> Manifests["RELEASE_MANIFEST.json / bundles"]
-
-  CB -.->|referencia / importa (NO duplicar)| RUNTIME
-  CB -->|implementa| Gateway["Gateway HTTP / bridge / agents"]
-  SH -->|lee / escribe| RUNTIME
-  SH -->|lee / escribe| CB
-  DOC -->|guía| CA
-  DOC -->|guía| CB
-  RUNTIME --> TESTS
-  TESTS --> SH
-
-  classDef repoStyle fill:#f8f9fa,stroke:#333,stroke-width:1px;
-  class Repo repoStyle;
+```bash
+python3 tools/graph_to_mermaid.py
 ```
 
----
+Si `graphify-out/` no existe todavía en la máquina donde estás trabajando:
 
-## Notas de uso y actualización
-
-- El diagrama está embebido en este Markdown y también se mantiene como `docs/architecture_diagram.mermaid` (fuente canonical). La acción CI `ci_update_mermaid.yml` regenerará `docs/architecture_diagram.svg` desde ese archivo fuente cuando se hagan push a la rama por defecto.
-- Si necesitas exportar manualmente el SVG localmente puedes usar:
-
-```
-# instalar mermaid-cli (Node.js)
-npm install -g @mermaid-js/mermaid-cli
-# generar svg
-mmdc -i docs/architecture_diagram.mermaid -o docs/architecture_diagram.svg
+```bash
+graphify extract . --code-only
 ```
 
-- Para editar: modifica `docs/architecture_diagram.mermaid` o este bloque Mermaid y pushes; la acción CI actualizará el SVG automáticamente.
+**No hay CI que regenere un SVG.** Una versión anterior de este documento
+afirmaba que `.github/workflows/ci_update_mermaid.yml` generaba y comiteaba
+`docs/architecture_diagram.svg` automáticamente. Ese workflow nunca existió en
+el repositorio. Si en algún momento se decide agregarlo, tener en cuenta que un
+bot que comitea a la rama por defecto deja la copia local `behind` después de
+cada push; es una decisión a tomar explícitamente, no algo a heredar de esta
+documentación.
 
----
+## Diagrama
 
-## Enlaces rápidos
-- Fuente Mermaid: `docs/architecture_diagram.mermaid`
-- Diagrama generado (SVG): `docs/architecture_diagram.svg` (se genera automáticamente en CI)
-- Estructura del repo: `docs/structure.md`
-- Informe resumido: `docs/summary_report.md`
+El diagrama vigente está en [`architecture_diagram.mermaid`](architecture_diagram.mermaid),
+con los contadores de nodos y el commit de generación en las líneas de comentario
+del encabezado.
+
+## Lo que el grafo muestra hoy
+
+Graphify no detecta **ninguna arista entre los módulos de código** del repo. Hay
+tres bases de código aisladas conviviendo en el mismo repositorio:
+
+| Módulo | Nodos | Qué es |
+|---|---:|---|
+| `camino-a/runtime` | 1438 | Runtime ejecutable: `scripts/`, `tests/`, `schemas/`, `canon/`, `bin/` |
+| `apps/desktop` | 312 | Cliente Tauri v2 + React/TypeScript |
+| `tools` | 4 | `find_duplicates.py` |
+
+Consecuencias que conviene tener presentes al leer cualquier diagrama de este repo:
+
+- **`camino-b/` no aporta código.** Contiene solamente documentación. La regla
+  "camino-b importa desde camino-a/runtime, no duplica" está documentada pero no
+  hay ninguna importación real que la implemente ni que la viole.
+- **`shared/`** es estado, hilos y evidencia (más algunos scripts de auditoría
+  bajo `shared/audits/`), no un componente en tiempo de ejecución.
+- **`apps/desktop` y `camino-a/runtime` no se referencian entre sí.** Se comunican,
+  si lo hacen, por HTTP/SSE en tiempo de ejecución — un acoplamiento que el
+  análisis estático no ve y que ningún diagrama derivado del grafo va a mostrar.
+  Cualquier diagrama que dibuje esa flecha la está afirmando sin evidencia.
