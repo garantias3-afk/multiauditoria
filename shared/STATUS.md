@@ -5,7 +5,7 @@
 **Leer antes que cualquier otra seccion de este archivo.** Lo de abajo es
 anterior y puede estar superado.
 
-### Documentos nuevos, sincronizados e identicos en los 4 repos
+### Documentos nuevos, sincronizados en los 4 repos
 
 - `CANON_GLOBAL.md` (`bfdf107e`) — objetivo del ecosistema, aristas donde se
   tocan los repos, 10 reglas que todo proceso respeta, diagramas separados de
@@ -192,7 +192,9 @@ upstream configurado y ahora si.
 
 - **Orden de lectura obligatorio al entrar: `CANON_GLOBAL.md` -> `CONTRATO_SALIDA.md`
   -> `DEUDAS.md` -> este archivo (checkpoint 2026-07-27 primero) -> `shared/RUNBOOK.md`.**
-- Los tres primeros estan sincronizados e identicos en los 4 repos. Si editas uno,
+- `CANON_GLOBAL.md` y `CONTRATO_SALIDA.md` son identicos en los 4 repos.
+  **`DEUDAS.md` NO**: la copia de multiauditoria es reducida a proposito por ser
+  repo publico, y no debe reemplazarse por la version privada. Si editas uno,
   actualiza las otras tres copias y la fecha de `Sincronizado`. Fechas distintas
   entre copias = alguien edito una sola.
 - Las secciones de este archivo anteriores al checkpoint 2026-07-27 son historicas

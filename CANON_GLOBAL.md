@@ -332,14 +332,18 @@ Ninguna de estas está tomada. Están acá para que nadie las asuma resueltas.
 | D3 | ¿Se convierte Camino A/B/Z a OpenClaw con orquestación y transporte local? | Convergencia (§1.4) | Que P2 demuestre ser más barato y más eficiente |
 | D4 | ¿Cuántos procesos equivalentes quedan: uno o dos? | Retiro de código | Benchmark comparativo |
 | D5 | ¿La divergencia de `state_db.py` en camino-z fue deliberada? | A5, y la seguridad del repo público | Respuesta de Mariano |
-| D6 | ¿Cuál es el canon de salida (contrato) entre procesos? | A6 y toda integración nueva | Escribirlo; hoy no existe |
+| D6 | ¿Cuál es el canon de salida (contrato) entre procesos? | A6 y toda integración nueva | **En curso.** `CONTRATO_SALIDA.md` v1.1 escrito y auditado, régimen *se emite, no se exige*. Vinculante recién cuando el dato de campo confirme que los campos obligatorios son llenables |
 
 ### Orden recomendado
 
-D2 y D6 primero: son decisiones de escritorio, no requieren medir nada, y **D6
-bloquea todo lo demás** porque sin contrato de salida no hay integración que se
-pueda dar por terminada. D5 es urgente por seguridad. D1, D3 y D4 requieren que
-P2 exista y esté medido: no se deciden antes.
+**D6 ya no bloquea**: el contrato existe (`CONTRATO_SALIDA.md` v1.1) y se emite
+sin exigirse, así que las integraciones pueden avanzar registrando lo que no
+cumple. Queda cerrarlo con dato de campo, no con más discusión.
+
+**D2 es ahora la primera**: es decisión de escritorio, no requiere medir, y el
+contrato exige `identity.route` mientras hay dos fuentes que dicen cosas
+distintas. **D5 es urgente por seguridad.** D1, D3 y D4 requieren que P2 exista y
+esté medido: no se deciden antes.
 
 ### Criterio de medición para D1/D3/D4
 

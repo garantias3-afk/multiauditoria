@@ -1,31 +1,39 @@
 # CONTRATO DE SALIDA — canon de interoperación
 
-**Versión:** 1.0 · **Escrito:** 2026-07-27 · **Sincronizado:** 2026-07-27
-**Estado:** especificación. La materialización (schema, validadores) es trabajo derivado.
+**Versión:** 1.1 · **Escrito:** 2026-07-27 · **Sincronizado:** 2026-07-27
+**Estado:** especificación **no vinculante**. Se emite, no se exige. Ver §9.
 
-> Copia sincronizada en los 4 repos. Ver `CANON_GLOBAL.md` §D6.
+> Copia sincronizada en los 4 repos. Ver `CANON_GLOBAL.md` D6.
+> v1.1 incorpora 13 correcciones de la auditoría de Codex (modelo `NO_CONSTA`),
+> verificadas contra el código real. Changelog en §10.
 
 ---
 
 ## 0. El problema que resuelve
 
-La entrada es **multiforma y va a seguir siéndolo**: en la fase de incorporación
-manual entran auditorías por copy/paste en una ventana de IA, archivos `.md`,
-ZIPs, fotos, imágenes, PDFs. Eso es un requisito, no un defecto.
+La entrada es **multiforma y va a seguir siéndolo**: en la incorporación manual
+entran auditorías por copy/paste en una ventana de IA, archivos `.md`, ZIPs,
+fotos, imágenes, PDFs — **y combinaciones de todo eso en un mismo lote**.
+`manual_harvest.py` lo dice en su docstring: *"3 textos pegados en 1 input"*.
+Eso es un requisito, no un defecto.
 
 Hoy eso trae problemas para consolidar en Camino A, B o Z, y **según la
 inteligencia del orquestador muchas veces se rechaza**.
 
-Ahí está el diagnóstico: se está validando entrada multiforma contra un contrato
-pensado para la salida, y la decisión de aceptar o rechazar la toma un modelo.
-**Un LLM decidiendo validez de esquema es no determinista**: el mismo ZIP entra
-un martes y se rechaza un jueves, y nadie puede contar por qué.
+El diagnóstico: se valida entrada multiforma contra un contrato pensado para la
+salida, y la decisión de aceptar la toma un modelo. **Un LLM decidiendo validez
+de esquema es no determinista**: el mismo ZIP entra un martes y se rechaza un
+jueves, y nadie puede contar por qué.
 
-La regla que sigue de esto:
+De ahí la regla:
 
-> **La entrada se acepta ancha y se normaliza. La salida se emite angosta y
-> estricta. La decisión de aceptar es mecánica; la decisión semántica es un gate
-> posterior, explícito y registrado.**
+> **La entrada se acepta ancha y se normaliza. La salida se emite angosta.
+> La detección de formato es mecánica y reproducible. Ningún modelo decide
+> formato ni admisibilidad. El juicio semántico es un gate posterior, explícito
+> y registrado.**
+
+**Detectar por extensión o magic bytes está permitido y es lo correcto** — es
+determinista. Lo prohibido es que un modelo opine si el material sirve.
 
 ---
 
@@ -33,186 +41,277 @@ La regla que sigue de esto:
 
 ```mermaid
 flowchart LR
-  subgraph IN["Entrada · ANCHA"]
-    I1["copy/paste en ventana IA"]
-    I2[".md"]
+  subgraph IN["Entrada · ANCHA · lote heterogeneo"]
+    I1["paste en ventana IA"]
+    I2["archivos .md / pdf"]
     I3["ZIP"]
-    I4["foto / imagen"]
-    I5["PDF"]
+    I4["imagenes"]
   end
 
-  I1 --> ING["SOBRE DE INGESTA<br/>validacion mecanica<br/>+ procedencia obligatoria"]
+  I1 --> ING["SOBRE DE INGESTA<br/>declared_form + items[]<br/>deteccion MECANICA<br/>procedencia obligatoria"]
   I2 --> ING
   I3 --> ING
   I4 --> ING
-  I5 --> ING
 
-  ING --> NORM["Normalizacion<br/>a texto + adjuntos"]
+  ING --> NORM["Normalizacion<br/>texto + adjuntos"]
   NORM --> GATE["Gate semantico<br/>explicito y registrado"]
-  GATE --> OUT["CONTRATO DE SALIDA<br/>estricto · un solo sobre"]
+  GATE --> OUT["SOBRE DE SALIDA<br/>estricto · unit_kind"]
 
-  OUT --> CA["Camino A/B/Z"]
-  OUT --> P2["OpenClaw P2"]
+  OUT --> LEDGER["Escritor central<br/>del ledger<br/>encadena y adjudica"]
+  LEDGER --> QL["log de calidad"]
+  LEDGER --> CL["log de gasto"]
+  OUT --> CA["Camino A/B/Z · P2"]
   OUT --> DESK["App escritorio"]
-  OUT --> QL["log de calidad"]
-  OUT --> CL["log de gasto"]
 ```
 
-**Muchas formas de entrada, un sobre, muchos consumidores.** El error de hoy es
-que no hay cintura: cada camino valida a su manera y rechaza a su criterio.
+**Muchas formas de entrada, un sobre, muchos consumidores.**
 
-**Consecuencia dura:** el contrato de salida tiene una dependencia real sobre la
-ingesta. No se puede emitir `input_ref.sha256` si nadie hasheó el paste. **Si la
-ingesta no registra procedencia, el contrato de salida no se puede honrar.**
+Dos dependencias duras que se desprenden del diagrama:
+
+1. **Si la ingesta no registra procedencia, la salida no se puede emitir.** No se
+   puede poner `input_ref.raw_sha256` si nadie hasheó el paste.
+2. **El encadenamiento y la adjudicación NO los hace el emisor.** Los hace el
+   escritor central en el fan-in. Un hijo paralelo no sabe cuál sobre lo precede,
+   y ningún productor puede certificar sus propias obligaciones.
 
 ---
 
 ## 2. Sobre de ingesta (entrada multiforma)
 
-Lo mínimo que la ingesta debe registrar para que la salida sea emitible.
-**Aceptación mecánica**: si estos campos están, entra. No hay juicio de modelo.
+**Aceptación mecánica**: si están los campos obligatorios, entra. Sin juicio de
+modelo.
 
-| Campo | Tipo | Obligatorio | Nota |
+### 2.1 Nivel lote
+
+| Campo | Tipo | Oblig. | Nota |
 |---|---|---|---|
-| `ingest_id` | uuid | sí | Identidad única del material que entró |
-| `form` | enum | sí | `paste` · `md` · `zip` · `image` · `pdf` · `file` · `other` |
+| `ingest_id` | uuid | sí | Identidad del lote que entró |
+| `declared_form` | enum | sí | `paste` · `file` · `batch` · `other`. **Lo determina la acción de ingreso, no se le pregunta al humano** |
 | `received_at` | ISO-8601 UTC | sí | |
 | `origin` | enum | sí | `manual_human` · `manual_ai_window` · `automated` |
 | `declared_by` | string | sí | Quién dice haberlo producido. Si no consta: `NO_CONSTA` |
-| `raw_sha256` | hex64 | sí | Hash de los bytes tal como llegaron |
+| `batch_sha256` | hex64 | sí | Hash superior del lote (sobre los `item_sha256` ordenados) |
+| `item_count` | int | sí | |
+| `items[]` | array | sí | Al menos uno. §2.2 |
+
+### 2.2 Nivel ítem
+
+| Campo | Tipo | Oblig. | Nota |
+|---|---|---|---|
+| `item_id` | string | sí | Único dentro del lote |
+| `detected_format` | enum | sí | `md` · `txt` · `zip` · `image` · `pdf` · `json` · `binary` · `unknown`. **Detectado mecánicamente** (extensión, magic bytes) |
+| `detection_method` | enum | sí | `extension` · `magic_bytes` · `declared` |
+| `raw_sha256` | hex64 | sí | Bytes tal como llegaron |
 | `raw_bytes` | int | sí | |
 | `filename` | string | no | `null` para paste |
-| `container_items` | array | condicional | Obligatorio si `form=zip`: nombre + sha256 de cada ítem |
+| `container_items[]` | array | cond. | Si `detected_format=zip`: nombre + sha256 de cada entrada |
 | `normalized_sha256` | hex64 | sí | Hash del texto normalizado |
 | `normalization` | enum | sí | `none` · `text_extract` · `ocr` · `unzip_flatten` |
-| `ocr_confidence` | float | condicional | Obligatorio si `normalization=ocr` |
+| `ocr_confidence` | float | cond. | Obligatorio si `normalization=ocr` |
 
-### Reglas
+### 2.3 Reglas
 
-1. **`form` no se infiere del contenido.** Lo declara quien ingesta. Adivinar el
-   formato es la puerta de entrada al rechazo no determinista.
-2. **ZIP se aplana y se hashea ítem por ítem.** Un ZIP nunca entra como opaco.
-3. **`image` y `pdf` escaneado exigen `ocr_confidence`.** Por debajo del umbral no
-   se rechaza: entra con `status=INCOMPLETE` y `reason_code=OCR_LOW_CONFIDENCE`.
-   **Degradar a un estado declarado, no descartar en silencio.**
-4. **Nada se rechaza en ingesta salvo que falte un campo obligatorio.** Todo juicio
-   sobre si el contenido sirve pertenece al gate semántico, que emite contrato y
-   queda registrado.
+1. **`declared_form` es el canal, `detected_format` es el formato.** Son cosas
+   distintas y por eso son dos campos. Un lote de `declared_form=batch` puede
+   tener ítems `md`, `zip` e `image` a la vez.
+2. **Un ZIP nunca entra opaco.** Se aplana y se hashea entrada por entrada.
+3. **OCR con baja confianza no se descarta:** entra con `status=INCOMPLETE` y
+   `reason_code=INGEST_OCR_LOW_CONFIDENCE`. Degradar a estado declarado, nunca
+   descartar en silencio.
+4. **En ingesta solo se rechaza por campo obligatorio faltante.** Todo juicio
+   sobre si el contenido sirve pertenece al gate semántico, que emite sobre.
 
 ---
 
 ## 3. El sobre de salida
 
-Un solo sobre. Lo emite **todo** proceso que produzca un resultado: Camino A, B,
-Z, OpenClaw P1/P2/P3, OpenHands, Aider.
-
 ```jsonc
 {
-  "canon_version": "1.0",
+  "canon_version": "1.1",
   "emitted_at": "2026-07-27T23:41:07Z",
+  "unit_kind": "llm_call",        // §4.1 — DISCRIMINADOR: define que campos obligan
 
-  "producer": {                   // QUIEN lo emitio (la maquina/proceso)
-    "process": "openclaw_p2",     // enum cerrado, §4.1
+  "producer": {
+    "process": "openclaw_p2",     // §4.2
     "repo": "robot-os-mellizo",
-    "commit": "1a2c961",
-    "host": "mbp"                 // imac | mbp
+    "commit": "03b95da",
+    "component": "brains.m5_bridge",
+    "component_version": "1.4.0",
+    "host": "mbp"
   },
 
-  "identity": {                   // QUE modelo lo produjo — canon Camino B
+  "identity": {                   // OBLIGATORIO solo si unit_kind=llm_call
     "step": "audit_k3",
     "model_id": "qwen3-coder-30b-abliterated",
     "provider_id": "ollama-local",
     "provider_name": "Ollama",
     "route": "ollama/qwen-abliterated-agent",
-    "cost_class": "LOCAL",        // §4.3
-    "role": "auditor"             // §4.4
+    "role": "auditor"             // §4.5
   },
 
-  "job": {                        // DONDE encaja
+  "job": {
     "run_id": "uuid",
     "job_id": "uuid",
-    "parent_job_id": "uuid|null", // fan-out: quien lo lanzo
-    "fanout_index": 3,            // null si no es paralelo
+    "attempt_id": "uuid",         // los reintentos comparten job_id
+    "attempt_index": 1,
+    "parent_job_id": "uuid|null",
+    "fanout_index": 3,
     "fanout_total": 6,
     "task_class": "code_agent_loop",
-    "loop_index": 2               // para los contadores de escalamiento
+    "loop_index": 2
   },
 
-  "input_ref": {                  // DE QUE material salio — §2
+  "input_ref": {                  // DE QUE material entro — §2
     "ingest_id": "uuid",
-    "form": "zip",
-    "raw_sha256": "…",
-    "normalized_sha256": "…"
+    "batch_sha256": "…",
+    "item_ids": ["…"]
+  },
+
+  "subject_ref": {                // QUE se audito realmente. Puede diferir del input
+    "candidate_sha256": "…",      // tras una correccion, input != candidato
+    "candidate_label": "slot14/rev3"
   },
 
   "result": {
-    "status": "OK",               // §4.2 — enum cerrado de 4
+    "status": "OK",               // §4.6 — enum cerrado de 4
     "reason_code": null,          // OBLIGATORIO si status != OK
+    "reason_detail": null,
     "payload_sha256": "…",
-    "payload": { }                // libre, pero hasheado
+    "payload": { }
   },
 
   "timing": { "started_at": "…", "ended_at": "…", "duration_ms": 8140 },
 
-  "cost": {
-    "tokens_in": 18422, "tokens_out": 1190,
-    "cost_class": "LOCAL", "estimated_cost_usd": 0.0
+  "cost": {                       // OBLIGATORIO solo si unit_kind=llm_call
+    "cost_class": "LOCAL",        // §4.3 — contabilidad. UNICA fuente
+    "authorization_tier": "AUTO", // §4.4 — quien autorizo. Eje independiente
+    "tokens_in": 18422,
+    "tokens_out": 1190,
+    "tokens_basis": "provider_reported",  // provider_reported | estimated | unknown
+    "estimated_cost_usd": 0.0,
+    "cost_basis": "provider_reported"
   },
 
-  "quality": {
-    "obligations_met": true,
+  "quality": {                    // El productor NO se autocertifica
     "findings": 2,
-    "blocking": false
-  },
-
-  "chain": { "prev_sha256": "…", "self_sha256": "…" }
+    "blocking": false,
+    "self_reported_only": true,
+    "adjudication": "PENDIENTE"   // lo completa un verificador o arbitro
+  }
 }
 ```
+
+> **`chain` ya no está en el sobre.** El encadenamiento lo hace el escritor
+> central del ledger en el fan-in, que es el único que conoce el orden. Ver §5.
 
 ---
 
 ## 4. Enums cerrados
 
-**Nada de estos campos es texto libre.** Un enum abierto se convierte en texto
-libre en tres semanas y deja de ser contable.
+Nada de esto es texto libre. Un enum abierto se vuelve texto libre en tres
+semanas y deja de ser contable.
 
-### 4.1 `producer.process`
+### 4.1 `unit_kind` — el discriminador
+
+Define **qué bloques obligan**. Sin esto, un gate determinista sale `BLOCKED` por
+no tener `model_id`, que es el defecto que hundía a v1.0.
+
+| `unit_kind` | Obliga | No aplica |
+|---|---|---|
+| `llm_call` | `identity` completa + `cost` completo | — |
+| `manual_evidence` | `producer.declared_by` | `identity.model_id` puede ser `NO_CONSTA`; sin `cost` |
+| `deterministic_step` | `producer.component` + `component_version` + `commit` | sin `identity` LLM, sin `cost` |
+| `run_summary` | referencias a los sobres hijos (`job.run_id` + lista de `job_id`) | no se atribuye a un modelo único |
+
+### 4.2 `producer.process`
 
 `camino_a` · `camino_b` · `camino_z` · `openclaw_p1` · `openclaw_p2` ·
-`openclaw_p3` · `openhands` · `aider` · `desktop_app` · `mobile_app`
+`openclaw_p3` · `openhands` · `aider` · `desktop_app` · `ledger_writer`
 
-### 4.2 `result.status` — exactamente cuatro
+**`mobile_app` no está**: §6 declara que el teléfono no tiene autoridad, así que
+no puede ser productor de resultados autoritativos.
 
-| Valor | Significado | No confundir con |
-|---|---|---|
-| `OK` | Produjo resultado y cumplió sus obligaciones | — |
-| `INCOMPLETE` | Terminó sin completar: loops agotados, OCR bajo, contexto insuficiente | No es error: es un final declarado |
-| `BLOCKED` | Fail-closed. Faltante, adulteración, dependencia ausente, identidad no verificable | No es rechazo: el material podía servir |
-| `REJECTED` | El material no corresponde a este paso | No es `BLOCKED`: acá no hubo anomalía |
+### 4.3 `cost_class` — contabilidad
 
-Distinguir `BLOCKED` de `REJECTED` es lo que hoy no se puede hacer, y es la razón
-por la que "muchas veces se rechaza" sin que nadie pueda contar por qué.
+`LOCAL` · `FREE_QUOTA` · `SUBSCRIPTION` · `CREDIT` · `PAYG` · `MANUAL`
 
-### 4.3 `identity.cost_class`
+Mapeo desde `config/budget.policy.json`:
 
-`LOCAL` · `FREE_QUOTA` · `PAID_CHEAP` · `VIBE`
-(`VIBE` = autorizado por humano.)
+| Valor en producción | `cost_class` |
+|---|---|
+| `free_local` | `LOCAL` |
+| `included_in_plan` | `FREE_QUOTA` |
+| `flat_subscription` | `SUBSCRIPTION` |
+| `vertex_credit`, `prepaid_token_plan` | `CREDIT` |
+| `paid_intermediate` | `PAYG` |
+| `manual` | `MANUAL` |
 
-### 4.4 `identity.role`
+### 4.4 `authorization_tier` — quién autorizó
+
+`AUTO` · `HUMAN_AUTHORIZED`
+
+**Eje independiente del costo.** `VIBE` de la escalera de escalamiento es
+`authorization_tier=HUMAN_AUTHORIZED`, no una clase de costo: la escalera
+(`LOCAL → FREE_QUOTA → PAID_CHEAP → VIBE`) mezclaba contabilidad con
+autorización. Acá se separan y la escalera sigue funcionando igual.
+
+### 4.5 `identity.role`
 
 `orchestrator` · `writer` · `auditor` · `verifier` · `reviewer` · `scribe` ·
 `arbiter`
 
-### 4.5 `result.reason_code` — obligatorio si `status != OK`
+### 4.6 `result.status` — exactamente cuatro
 
-`OCR_LOW_CONFIDENCE` · `CONTEXT_OVERFLOW` · `LOOPS_EXHAUSTED` ·
-`SCHEMA_FIELD_MISSING` · `HASH_MISMATCH` · `IDENTITY_UNVERIFIABLE` ·
-`PROVIDER_UNAVAILABLE` · `CROSS_PROVIDER_FALLBACK_FORBIDDEN` ·
-`SECRET_DETECTED` · `PATH_TRAVERSAL` · `SYMLINK_ESCAPE` ·
-`OUT_OF_SCOPE_FOR_STEP` · `DUPLICATE_SUBMISSION` · `UNSUPPORTED_FORM`
+| Valor | Significado | No confundir con |
+|---|---|---|
+| `OK` | Produjo resultado | — |
+| `INCOMPLETE` | Terminó sin completar: loops agotados, OCR bajo, timeout | No es error: es un final declarado |
+| `BLOCKED` | Fail-closed: faltante, adulteración, dependencia ausente | No es rechazo: el material podía servir |
+| `REJECTED` | El material no corresponde a este paso | Acá no hubo anomalía |
 
-**Ampliable, pero solo por edición de este documento en los 4 repos.** Un
-`reason_code` nuevo inventado en runtime es una violación del canon.
+Distinguir `BLOCKED` de `REJECTED` es lo que hoy no se puede hacer, y por eso
+"muchas veces se rechaza" sin que nadie pueda contar por qué.
+
+### 4.7 `reason_code` — obligatorio si `status != OK`
+
+Agrupados por familia para poder agregar al medir.
+
+**`INGEST_`** — material de entrada
+`INGEST_OCR_LOW_CONFIDENCE` (INCOMPLETE) · `INGEST_UNSUPPORTED_FORM` (BLOCKED) ·
+`INGEST_LIMIT_EXCEEDED` (BLOCKED) · `INGEST_CONTENT_UNREADABLE` (BLOCKED) ·
+`INGEST_SCHEMA_FIELD_MISSING` (BLOCKED)
+
+**`EXEC_`** — ejecución
+`EXEC_EXECUTOR_UNAVAILABLE` (BLOCKED) · `EXEC_AUTHENTICATION_FAILED` (BLOCKED) ·
+`EXEC_QUOTA_EXHAUSTED` (BLOCKED) · `EXEC_PROVIDER_UNAVAILABLE` (BLOCKED) ·
+`EXEC_TIMEOUT` (INCOMPLETE) · `EXEC_CONTEXT_OVERFLOW` (INCOMPLETE) ·
+`EXEC_LOOPS_EXHAUSTED` (INCOMPLETE) · `EXEC_OUTPUT_MISSING` (BLOCKED)
+
+**`INTEG_`** — integridad
+`INTEG_HASH_MISMATCH` (BLOCKED) · `INTEG_CANDIDATE_STALE` (REJECTED) ·
+`INTEG_OUTPUT_CONTRACT_INVALID` (BLOCKED) · `INTEG_IDENTITY_UNVERIFIABLE` (BLOCKED) ·
+`INTEG_IDEMPOTENCY_CONFLICT` (REJECTED) · `INTEG_PATH_TRAVERSAL` (BLOCKED) ·
+`INTEG_SYMLINK_ESCAPE` (BLOCKED) · `INTEG_SECRET_DETECTED` (BLOCKED)
+
+**`POLICY_`** — política y gates
+`POLICY_CROSS_PROVIDER_FALLBACK_FORBIDDEN` (BLOCKED) ·
+`POLICY_OUT_OF_SCOPE_FOR_STEP` (REJECTED) · `POLICY_EVIDENCE_INSUFFICIENT` (INCOMPLETE) ·
+`POLICY_TERMINAL_GATE_FAILED` (BLOCKED) · `POLICY_OPERATOR_ACTION_REQUIRED` (BLOCKED) ·
+`POLICY_FINALIZATION_FAILED` (BLOCKED)
+
+**Criterio de admisión:** un código entra solo si **la acción que dispara es
+distinta** de la de todos los demás. Si no sabés qué harías diferente al verlo,
+no es un código: es `reason_detail`.
+
+**`EXEC_PROVIDER_UNAVAILABLE` es solo caída real del proveedor.** No absorbe
+autenticación, cuota, ejecutor ni configuración: las acciones son distintas.
+
+**`INTEG_IDEMPOTENCY_CONFLICT` reemplaza a `DUPLICATE_SUBMISSION`, y no es un
+rename.** Mismo contenido + misma clave **no es error**: se devuelve el resultado
+original con `status=OK`. El conflicto es misma clave con contenido distinto.
+
+Ampliable solo por edición de este documento en los 4 repos. Un código inventado
+en runtime es violación del canon.
 
 ---
 
@@ -220,91 +319,147 @@ por la que "muchas veces se rechaza" sin que nadie pueda contar por qué.
 
 1. **Un sobre por unidad de trabajo.** No se agrupan resultados de varios modelos
    en un sobre: rompe la identidad.
-2. **La identidad va completa o el sobre sale `BLOCKED`** con
-   `IDENTITY_UNVERIFIABLE`. Nunca nombres genéricos. El mismo modelo por distinto
-   proveedor son sobres distintos.
-3. **Un solo write, dos derivaciones.** El sobre se escribe una vez; el log de
-   calidad y el log de gasto se derivan de él. **Nunca dos escrituras
-   independientes**: es como los dos logs se desincronizan.
-4. **`payload` es libre pero `payload_sha256` es obligatorio.** El contrato no
-   opina sobre el contenido; garantiza que no cambió.
-5. **`chain.prev_sha256` encadena.** El sobre N apunta al N-1 del mismo `run_id`.
-   Un hueco en la cadena es truncamiento y se trata como `BLOCKED`.
-6. **`emitted_at` en UTC.** Hay dos máquinas; hora local es ambigua.
-7. **Fallback cruzado entre proveedores prohibido.** Si el proveedor cae, sale
-   `BLOCKED` + `PROVIDER_UNAVAILABLE`. No se reemplaza por otro y se sigue.
-8. **`loop_index` se incrementa y se escribe.** Es lo que hace que las compuertas
-   de escalamiento (7 cortos / 3 largos) disparen alguna vez.
-9. **Ningún proceso lee el sobre de otro para decidir.** Se leen los logs. Un
-   proceso que lee sobres de otro crea acoplamiento que el grafo no ve.
+2. **`unit_kind` primero.** Se declara antes de validar cualquier otro bloque.
+   Validar identidad sin saber si es un `llm_call` es lo que bloqueaba todo en v1.0.
+3. **Identidad completa solo para `llm_call`**, y ahí sí completa o
+   `INTEG_IDENTITY_UNVERIFIABLE`. Nunca nombres genéricos.
+4. **Reintentos comparten `job_id` y cambian `attempt_id`.** Es como lo modela
+   `state_db.py`, que tiene `attempts(attempt_id PK, job_id FK)`.
+5. **`input_ref` y `subject_ref` son distintos y ambos se registran.** El material
+   que entró y el candidato auditado divergen después de una corrección.
+6. **`payload` es libre; `payload_sha256` es obligatorio.** El contrato no opina
+   sobre el contenido, garantiza que no cambió.
+7. **El emisor no encadena y no adjudica.** `chain` y `quality.adjudication` los
+   escribe el ledger central en el fan-in. Un hijo paralelo no sabe qué lo precede
+   y ningún productor certifica sus propias obligaciones.
+8. **Un solo write, dos derivaciones.** El sobre se escribe una vez; los logs de
+   calidad y de gasto se derivan de él. Nunca dos escrituras independientes: así
+   es como los dos logs se desincronizan.
+9. **`emitted_at` en UTC.** Hay dos máquinas.
+10. **Fallback cruzado prohibido.** Si cae el proveedor: `BLOCKED` +
+    `EXEC_PROVIDER_UNAVAILABLE`. No se reemplaza por otro y se sigue.
+11. **`loop_index` se incrementa y se escribe.** Es lo que hace que las compuertas
+    de escalamiento (7 cortos / 3 largos) disparen alguna vez.
+12. **Ningún proceso lee el sobre de otro para decidir.** Se leen los logs.
 
 ---
 
 ## 6. Proyección a escritorio y teléfono
 
-El sobre es el formato de **interoperación entre procesos**, no el formato de UI.
-
 | Consumidor | Qué ve | Autoridad |
 |---|---|---|
 | Otro proceso | Sobre completo | Sí |
-| Log de calidad / gasto | Derivación del sobre | Sí |
-| **App de escritorio** | Sobre completo por HTTP/SSE | Sí, es el único puente |
-| **App de teléfono** | **Proyección** del sobre: `status`, `reason_code`, `process`, `identity.model_id`, `timing.duration_ms`, `cost` | **No** |
-
-### Reglas
+| Ledger / logs | Derivación del sobre | Sí |
+| **App de escritorio** | Sobre completo por HTTP/SSE | Sí, único puente |
+| **App de teléfono** | Proyección: `unit_kind`, `status`, `reason_code`, `process`, `identity.model_id`, `timing.duration_ms`, `cost` | **No** |
 
 1. **El teléfono habla con el escritorio, nunca con un proceso.** Una sola
    frontera de autenticación.
-2. **La proyección al teléfono es de solo lectura y sin `payload`.** El payload
-   puede traer material sensible del expediente; el teléfono es el dispositivo
-   más fácil de perder.
-3. **El teléfono no es fuente de verdad de nada.** Si escritorio y teléfono
-   discrepan, manda escritorio.
-4. **La proyección se define acá, no en la app.** Si el móvil necesita un campo
-   nuevo, se agrega a esta tabla primero.
+2. **La proyección es de solo lectura y sin `payload`.** El payload puede traer
+   material de expediente; el teléfono es el dispositivo más fácil de perder.
+3. **Si escritorio y teléfono discrepan, manda escritorio.**
+4. **La proyección se define acá, no en la app.**
 
 ---
 
-## 7. Cómo esto habilita la medición de P2 (en curso)
+## 7. Medición de P2 (en curso)
 
-P2 se está midiendo ahora, y todavía se prueba paralelismo con TaskCard u otros
-métodos. **El contrato es lo que convierte esa medición en una consulta sobre el
-log, en vez de instrumentación aparte que hay que rehacer con cada método.**
+El contrato convierte la medición en una consulta sobre el log, en vez de
+instrumentación que hay que rehacer con cada método de paralelismo.
 
-Los campos que hacen la medición posible:
-
-| Métrica de `CANON_GLOBAL.md` §6 | Se calcula con |
+| Métrica (`CANON_GLOBAL.md` §6) | Se calcula con |
 |---|---|
-| Costo por auditoría completa | `sum(cost.estimated_cost_usd) group by run_id` |
+| Costo por auditoría | `sum(cost.estimated_cost_usd) group by job.run_id`, **segmentado por `cost_basis`** |
 | Latencia extremo a extremo | `max(timing.ended_at) - min(timing.started_at) by run_id` |
-| Tasa de `INCOMPLETE` por loops | `count(status=INCOMPLETE AND reason_code=LOOPS_EXHAUSTED) / count(run_id)` |
-| Overhead de transporte | `duration_ms` del sobre padre − `sum(duration_ms)` de los hijos |
+| Tasa de `INCOMPLETE` por loops | `count(reason_code=EXEC_LOOPS_EXHAUSTED) / count(run_id)` |
+| Overhead de transporte | `duration_ms` del padre − `sum(duration_ms)` de los hijos |
 
-### Por qué `fanout_index` / `fanout_total` / `parent_job_id` importan ya
+### Núcleo estable (emitir ya)
 
-Sin esos tres campos, seis resultados paralelos son seis sobres sueltos y **no se
-puede reconstruir si el paralelismo ganó algo**. Con ellos:
+Estos campos **no van a cambiar** cualquiera sea el resultado de la auditoría
+pendiente, porque describen la forma del trabajo y no la política:
 
-- se detecta el **hijo más lento** (el que fija la latencia real del fan-out),
-- se detecta **fan-out incompleto** (`count(hijos) < fanout_total` = alguien se
-  perdió en silencio),
-- se compara **el mismo trabajo en serie vs en paralelo** sobre el mismo `run_id`.
+`job.run_id` · `job.job_id` · `job.attempt_id` · `job.parent_job_id` ·
+`job.fanout_index` · `job.fanout_total` · `timing.*` ·
+`cost.tokens_in` · `cost.tokens_out` · `cost.tokens_basis`
 
-**Esto es agnóstico de TaskCard.** Si mañana el método de paralelismo cambia, los
-campos siguen sirviendo: describen la forma del fan-out, no la herramienta.
+**`cost.cost_class` se registra en crudo, como venga de `budget.policy.json`.**
+Normalizar al enum de §4.3 es una transformación posterior sobre lo ya guardado.
+Un valor crudo registrado siempre se puede normalizar después; un valor que no se
+registró no se recupera nunca.
 
-> **Recomendación de secuencia:** emitir el sobre —aunque sea solo desde P2 y
-> aunque el resto siga como está— **antes** de terminar la medición. Medir sin
-> contrato produce números que no se van a poder comparar con los de la próxima
-> iteración.
+### Por qué `fanout_*` y `attempt_id` importan ya
+
+Sin `parent_job_id` + `fanout_index` + `fanout_total`, seis resultados paralelos
+son seis sobres sueltos y no se puede reconstruir si el paralelismo ganó algo.
+Con ellos:
+
+- se detecta el **hijo más lento**, que fija la latencia real del fan-out (no el
+  promedio, que la esconde),
+- se detecta **fan-out incompleto**: `count(hijos) < fanout_total` es alguien que
+  se perdió en silencio,
+- se compara el **mismo trabajo en serie contra en paralelo** sobre el mismo `run_id`.
+
+Sin `attempt_id`, tres reintentos de un job lento se ven como tres trabajos
+distintos y **el costo del reintento se cuenta como throughput**.
+
+**Todo esto es agnóstico de TaskCard**: describe la forma del fan-out, no la
+herramienta. Si cambia el método, las mediciones viejas siguen comparables.
 
 ---
 
-## 8. Fuera de alcance de este documento
+## 8. Régimen: se emite, no se exige
 
-- El **schema JSON materializado** y los validadores: trabajo derivado.
-- El **transporte** (HTTP/SSE, colas, ficheros): el sobre es agnóstico a propósito.
-- El **formato del payload** por tipo de tarea.
-- La **retención** de sobres y logs.
-- **Quién hospeda P1/P2/P3** (`CANON_GLOBAL.md` D1) y **cuál canon de ruteo manda**
-  (D2). Este contrato es compatible con cualquiera de las dos salidas.
+**v1.1 no es vinculante.** Hasta nuevo aviso:
+
+- Los procesos **emiten** el sobre.
+- La validación **registra** lo que no cumple; **no bloquea**.
+- Los `reason_code` que dispararía la validación se acumulan como dato de campo.
+
+El contrato se vuelve vinculante recién cuando ese dato confirme que los campos
+obligatorios son llenables en producción. Escribir v1.2 desde el campo, en vez de
+por deducción, es exactamente lo que le faltó a v1.0.
+
+---
+
+## 9. Fuera de alcance
+
+- Schema JSON materializado y validadores: trabajo derivado.
+- Transporte (HTTP/SSE, colas, ficheros): el sobre es agnóstico a propósito.
+- Formato del `payload` por tipo de tarea.
+- Retención de sobres y logs.
+- **D1** (quién hospeda P1/P2/P3) y **D2** (qué canon de ruteo manda). El
+  contrato es compatible con cualquiera de las dos salidas.
+
+---
+
+## 10. Changelog
+
+### v1.1 — 2026-07-27
+
+Trece correcciones sobre v1.0, de la auditoría de Codex (modelo `NO_CONSTA`).
+
+> Las citas por número de línea de ese informe estaban corridas entre 10 y 30
+> líneas. **El contenido se verificó por símbolo contra el código real: 7/7
+> correcto.** Quien implemente esto debe buscar por símbolo, nunca por número
+> de línea.
+
+| # | Cambio | Motivo |
+|---|---|---|
+| 1 | `unit_kind` como discriminador | v1.0 exigía identidad de modelo a gates deterministas, evidencia manual y resúmenes: todos salían `BLOCKED` |
+| 2 | `chain` sale del sobre | Un hijo paralelo no sabe qué sobre lo precede; encadena el ledger central |
+| 3 | `subject_ref.candidate_sha256` | Input y candidato auditado divergen tras una corrección. Ya es obligatorio en el schema de Camino B |
+| 4 | `job.attempt_id` + `attempt_index` | `state_db.py` ya modela `attempts(attempt_id PK, job_id FK)` |
+| 5 | `quality.adjudication` reemplaza a `obligations_met` | El productor no se autocertifica. Camino A registra `PENDIENTE` |
+| 6 | `cost_class` con una sola fuente | Estaba duplicado en `identity` y en `cost` |
+| 7 | `authorization_tier` separado de `cost_class` | `VIBE` es autorización humana, no clase de costo |
+| 8 | Enum de `cost_class` reescrito | Ninguno de los cuatro valores de v1.0 existía en `budget.policy.json` |
+| 9 | `tokens_basis` y `cost_basis` | `cost_ledger.py` ya distingue `tokens_estimated` y `cost_unknown` |
+| 10 | `declared_form` + `items[].detected_format` | v1.0 mezclaba canal con formato y no representaba lotes heterogéneos |
+| 11 | La no-inferencia se acota a modelos | Detectar por extensión es determinista y correcto; `manual_harvest.py` ya lo hace |
+| 12 | 13 `reason_code` nuevos, agrupados por familia | Modos de falla reales de Camino A/B con acciones distintas |
+| 13 | `mobile_app` sale de `producer.process` | §6 dice que el teléfono no tiene autoridad |
+
+### v1.0 — 2026-07-27
+
+Primera versión. Cerraba D6.
