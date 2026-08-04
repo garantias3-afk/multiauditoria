@@ -143,6 +143,12 @@ def _build_puestos(rows: list[RouteAssignment]) -> dict[str, Any]:
                 continue
             by_tipo.setdefault(a.tipo_ruta, []).append(_route_entry(a))
         puestos[puesto] = {
+            # C2-E8-2: the runner orders a slot's puestos by CAPACIDADES
+            # (PLAN→DETECT→AGGREGATE→WRITE→APPROVE). Projected per puesto
+            # from the first row of the group — the slot-level field alone
+            # loses which capability each puesto carries (slot 14 ran its
+            # aprobador BEFORE the final auditoria on alphabetical order).
+            "capacidades": by_puesto[puesto][0].capacidades,
             "routes_by_tipo": {t: by_tipo[t] for t in sorted(by_tipo)},
             "routes": sorted(
                 {e["route_id"] for entries in by_tipo.values() for e in entries}),
