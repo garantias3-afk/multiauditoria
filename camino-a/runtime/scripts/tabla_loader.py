@@ -154,21 +154,28 @@ def _s(value: Any, default: str = "") -> str:
 
 
 def _i(value: Any, default: int = 0) -> int:
+    if value is None or (isinstance(value, float) and value != value):
+        return default
+    if isinstance(value, str) and not value.strip():
+        return default
     try:
-        if value is None or (isinstance(value, float) and value != value):
-            return default
         return int(float(value))
     except (TypeError, ValueError):
-        return default
+        # E2-12 (MEGA-OT-8): una celda numerica con basura no se coacciona
+        # en silencio al default; es error de config. Vacio/None si usa el
+        # default.
+        raise TablaError(f"celda numerica ilegitima: {value!r}")
 
 
 def _f(value: Any, default: float = 0.0) -> float:
+    if value is None or (isinstance(value, float) and value != value):
+        return default
+    if isinstance(value, str) and not value.strip():
+        return default
     try:
-        if value is None or (isinstance(value, float) and value != value):
-            return default
         return float(value)
     except (TypeError, ValueError):
-        return default
+        raise TablaError(f"celda numerica ilegitima: {value!r}")
 
 
 def _bool(value: Any) -> bool:
@@ -252,7 +259,10 @@ def _parse_assignments(ws) -> list[RouteAssignment]:
             # Only THIS shape is skipped: any other unknown tipo_ruta still
             # raises below.
             continue
-        step_val = _i(step_raw)
+        try:
+            step_val = _i(step_raw)
+        except TablaError:
+            step_val = 0  # texto en la celda de step: prosa, no numero
         if step_val <= 0:
             # No positive step: either trailing prose (the hoja carries
             # Mariano's annotations below the data, LEEME-declared) or a
@@ -300,7 +310,11 @@ def _parse_loops(ws) -> dict[int, LoopSpec]:
     headers = _header_map(ws)
     out: dict[int, LoopSpec] = {}
     for row in _rows(ws, headers):
-        step = _i(_row_get(row, headers, "step"))
+        try:
+            step = _i(_row_get(row, headers, "step"))
+        except TablaError:
+            # Prosa al pie de la hoja LOOPS: sin step numerico no es dato.
+            continue
         if not step:
             continue
         loop_slot = _row_get(row, headers, "loop_slot")

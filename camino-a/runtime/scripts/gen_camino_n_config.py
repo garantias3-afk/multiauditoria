@@ -186,6 +186,10 @@ def _build_slots(cfg: TablaConfig) -> dict[str, Any]:
                     "pasos": loop.interno_pasos,
                     "modo": loop.interno_modo,
                 }
+            # E5-2 (MEGA-OT-8): las vueltas del bucle largo salen de la
+            # tabla (loop_slot), no de un literal del runner.
+            if isinstance(loop.loop_slot, int):
+                loops_field["vueltas_largo"] = loop.loop_slot
         else:
             loops_field = None
 
