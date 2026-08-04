@@ -17,14 +17,18 @@ says and lets the runner classify any disagreement.
 """
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Iterable, Optional
 
 
 # Canonical sheet names. The loader refuses to guess: a renamed sheet is a
-# configuration error, not something to paper over.
-SHEET_CAMINO = "CAMINO_N_v1_1"
+# configuration error, not something to paper over. The assignments sheet is
+# looked up in CANDIDATES order (v1.2 first): the v1.2 tabla replaced the
+# assignments sheet and kept the v1.1 context sheets (LEEME, declarado).
+SHEET_CAMINO = "CAMINO_N_v1_2"
+SHEET_CAMINO_CANDIDATES = ("CAMINO_N_v1_2", "CAMINO_N_v1_1")
 SHEET_MODELOS = "MODELOS"
 SHEET_LOOPS = "LOOPS"
 
@@ -40,6 +44,9 @@ TIPOS_VALIDOS = frozenset({
 })
 
 NO_CONSTA = "NO_CONSTA"
+
+# Placeholder rows of the CAMINO_N_v1_2 sheet ("Columna1".."ColumnaN").
+_PLACEHOLDER_STEP = re.compile(r"^columna\d+$", re.IGNORECASE)
 
 
 class TablaError(RuntimeError):
@@ -116,6 +123,9 @@ class TablaConfig:
     models: dict[str, ModelSpec] = field(default_factory=dict)        # by route_id
     assignments: tuple[RouteAssignment, ...] = ()
     loops: dict[int, LoopSpec] = field(default_factory=dict)         # by step
+    # Which assignments sheet was actually read (SHEET_CAMINO_CANDIDATES).
+    # Empty for synthetic configs (tests); the generator projects it as-is.
+    sheet_camino: str = ""
 
     def routes_for_step(self, step: int) -> list[RouteAssignment]:
         return [a for a in self.assignments if a.step == step]
@@ -235,6 +245,27 @@ def _parse_assignments(ws) -> list[RouteAssignment]:
     headers = _header_map(ws)
     out: list[RouteAssignment] = []
     for row in _rows(ws, headers):
+        step_raw = _s(_row_get(row, headers, "step"))
+        if _PLACEHOLDER_STEP.match(step_raw):
+            # The v1.2 sheet keeps a placeholder second-header row
+            # ("Columna1".."ColumnaN"); it is sheet scaffolding, not data.
+            # Only THIS shape is skipped: any other unknown tipo_ruta still
+            # raises below.
+            continue
+        step_val = _i(step_raw)
+        if step_val <= 0:
+            # No positive step: either trailing prose (the hoja carries
+            # Mariano's annotations below the data, LEEME-declared) or a
+            # malformed row. Prose carries NO config content; if any config
+            # cell is populated this is a real error — refuse to guess.
+            tipo_chk = _s(_row_get(row, headers, "tipo_ruta"))
+            route_chk = _s(_row_get(row, headers, "route_id"))
+            ciclo_chk = _s(_row_get(row, headers, "ciclo"))
+            if tipo_chk or route_chk or ciclo_chk:
+                raise TablaError(
+                    "fila sin step valido pero con datos de config en la "
+                    f"hoja de asignaciones: {list(row[:8])!r}")
+            continue
         tipo = _s(_row_get(row, headers, "tipo_ruta")).lower()
         if tipo and tipo not in TIPOS_VALIDOS:
             # An unknown tipo_ruta is a real config error: refuse to guess.
@@ -299,12 +330,18 @@ def load_tabla(path: Path | str) -> TablaConfig:
     if not p.is_file():
         raise TablaError(f"tabla no encontrada: {p} (-> INPUT_NOT_FOUND_TABLA)")
     wb = _open_workbook(p)
-    missing = [s for s in (SHEET_CAMINO, SHEET_MODELOS, SHEET_LOOPS) if s not in wb.sheetnames]
+    sheet_camino = next(
+        (s for s in SHEET_CAMINO_CANDIDATES if s in wb.sheetnames), None)
+    if sheet_camino is None:
+        raise TablaError(
+            f"tabla {p.name} sin hoja de asignaciones: probadas "
+            f"{list(SHEET_CAMINO_CANDIDATES)}, presentes {wb.sheetnames}")
+    missing = [s for s in (SHEET_MODELOS, SHEET_LOOPS) if s not in wb.sheetnames]
     if missing:
         raise TablaError(f"tabla {p.name} sin hojas requeridas: {missing}")
 
     models = _parse_models(wb[SHEET_MODELOS])
-    assignments = tuple(_parse_assignments(wb[SHEET_CAMINO]))
+    assignments = tuple(_parse_assignments(wb[sheet_camino]))
     loops = _parse_loops(wb[SHEET_LOOPS])
 
     # Light validation: every active assignment must reference a known model,
@@ -322,6 +359,7 @@ def load_tabla(path: Path | str) -> TablaConfig:
         models=models,
         assignments=assignments,
         loops=loops,
+        sheet_camino=sheet_camino,
     )
 
 
@@ -332,6 +370,9 @@ def find_tabla(intercambio_root: Path, repo_fallback: Path = Path("/tmp/camino-n
     Never raises INPUT_NOT_FOUND_TABLA without trying BOTH locations.
     """
     candidates = [
+        intercambio_root / "TABLA_CAMINO_N_v1.2_COMPLETA.xlsx",
+        intercambio_root / "intercambio" / "TABLA_CAMINO_N_v1.2_COMPLETA.xlsx",
+        repo_fallback / "intercambio" / "TABLA_CAMINO_N_v1.2_COMPLETA.xlsx",
         intercambio_root / "TABLA_CAMINO_N_v1.1.xlsx",
         intercambio_root / "intercambio" / "TABLA_CAMINO_N_v1.1.xlsx",
         repo_fallback / "intercambio" / "TABLA_CAMINO_N_v1.1.xlsx",

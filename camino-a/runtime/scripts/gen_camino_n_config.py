@@ -34,7 +34,11 @@ from scripts.tabla_loader import (  # noqa: E402
 # not timestamps: changing them is a deliberate version bump, so the output
 # stays deterministic across regenerations within a version.
 SCHEMA_VERSION = "camino_n_assignments.v1"
-CANON_VERSION = "camino_n.projection.v1.1"
+# v1.2: the projection now reads the CAMINO_N_v1_2 assignments sheet (the
+# v1.2 tabla replaced it; LEEME declares the context sheets stay v1.1) and
+# projects puestos. Deliberate version bump, per the determinism contract:
+# output stays byte-identical across regenerations within a version.
+CANON_VERSION = "camino_n.projection.v1.2"
 
 DEFAULT_OUTPUT = ROOT / "config" / "camino_n.assignments.json"
 
@@ -76,13 +80,85 @@ def _build_models(cfg: TablaConfig) -> dict[str, Any]:
     return out
 
 
-def _build_slots(cfg: TablaConfig) -> dict[str, Any]:
-    """Project CAMINO_N_v1_1 -> slots dict mirroring CANON_WORKFLOW_SLOTS.
+# v1.2b prose decision, declared in the CAMINO_N_v1_2 sheet itself (slot 6
+# row note and the "STOP Y BLOCK REVISADOS" section): "v1.2b: ESCALATE_HUMAN
+# -> BLOCK". The LOOPS sheet is v1.1 context and still says escalate_human
+# for step 6; per MEGA-OT-8 rule 3.2 the DECLARED TEXT WINS. The divergent
+# cell (LOOPS, step 6, al_agotarse=escalate_human) is recorded in
+# camino-n/DECISIONES_PENDIENTES.md. Keyed by step.
+POLICY_OVERRIDES_V1_2B: dict[int, str] = {6: "block"}
 
-    Each slot: cycle, role (puesto), loops (from LOOPS sheet, nullable),
-    correction_policy (derived from the loop's al_agotarse), and routes grouped
-    by tipo_ruta. Human checkpoints (empty route_id) are recorded as
-    `human_checkpoint: true` so the runner sees them without inventing a route.
+
+def _slot_correction_policy(step: int, loop: Any) -> str:
+    if step in POLICY_OVERRIDES_V1_2B:
+        return POLICY_OVERRIDES_V1_2B[step]
+    if loop:
+        al = (loop.al_agotarse or "").strip().lower()
+        return al if al else "advance_with_debt"
+    return "NO_BLOQUEA"
+
+
+def _is_human_checkpoint(rows: list[RouteAssignment]) -> bool:
+    """Human points per the v1.2 prose (CAMINO_N_v1_2 sheet, literal:
+    "UNICA INTERVENCION HUMANA: EL SLOT 14 ... Quedan dos: la cosecha manual
+    del slot 2, que es humana por definicion, y el aprobador del slot 14").
+
+    Derived rule: a slot is a human checkpoint when it has NO active routes
+    (manual harvest) or when any of its rows declares ESCALATE_HUMAN (the
+    approver). Empty route_id ALONE is not a checkpoint: the previous
+    heuristic wrongly flagged slot 12's mechanical-axis floor row and
+    missed slot 14, whose rows all carry routes.
+    """
+    if not any(a.is_active for a in rows):
+        return True
+    return any(
+        a.on_unavailable.strip().upper() == "ESCALATE_HUMAN" for a in rows)
+
+
+def _route_entry(a: RouteAssignment) -> dict[str, Any]:
+    entry = {
+        "route_id": a.route_id,
+        "orden": a.orden,
+        "on_unavailable": a.on_unavailable,
+        "fallback_real": a.fallback_real or None,
+    }
+    # Keep the note only where it carries a condition (condicional).
+    if a.tipo_ruta == "condicional" and a.notas:
+        entry["condicion"] = a.notas
+    return entry
+
+
+def _build_puestos(rows: list[RouteAssignment]) -> dict[str, Any]:
+    """Group a slot's rows by puesto (v1.2 slots can have several: e.g.
+    slot 12 planificador/agentes/escritor, slot 14 auditoria/aprobador).
+    Inactive rows (empty route_id) are excluded from the route lists."""
+    by_puesto: dict[str, list[RouteAssignment]] = {}
+    for a in rows:
+        by_puesto.setdefault(a.puesto, []).append(a)
+    puestos: dict[str, Any] = {}
+    for puesto in sorted(by_puesto):
+        by_tipo: dict[str, list[dict[str, Any]]] = {}
+        for a in sorted(by_puesto[puesto], key=_slot_key):
+            if not a.is_active:
+                continue
+            by_tipo.setdefault(a.tipo_ruta, []).append(_route_entry(a))
+        puestos[puesto] = {
+            "routes_by_tipo": {t: by_tipo[t] for t in sorted(by_tipo)},
+            "routes": sorted(
+                {e["route_id"] for entries in by_tipo.values() for e in entries}),
+        }
+    return puestos
+
+
+def _build_slots(cfg: TablaConfig) -> dict[str, Any]:
+    """Project the assignments sheet -> slots dict mirroring
+    CANON_WORKFLOW_SLOTS, plus the per-puesto structure.
+
+    Each slot: cycle, role (first puesto, compat shape), loops (from LOOPS
+    sheet, nullable), correction_policy (loop's al_agotarse, with the v1.2b
+    overrides), human_checkpoint (derived per v1.2 prose), routes grouped
+    by tipo_ruta (flattened across puestos, compat shape) and `puestos`
+    with the per-puesto grouping.
     """
     # Group assignments by step.
     by_step: dict[int, list[RouteAssignment]] = {}
@@ -92,14 +168,12 @@ def _build_slots(cfg: TablaConfig) -> dict[str, Any]:
     slots: dict[str, Any] = {}
     for step in sorted(by_step):
         rows = sorted(by_step[step], key=_slot_key)
-        # Slot-level fields come from the first row (they share step/ciclo/puesto
-        # in a well-formed tabla; we take the majority/first rather than guessing).
+        # Slot-level fields come from the first row (they share step/ciclo
+        # in a well-formed tabla; we take the first rather than guessing).
         first = rows[0]
         loop = cfg.loop_for(step)
-        # correction_policy mirrors the canon's vocabulary.
+        correction_policy = _slot_correction_policy(step, loop)
         if loop:
-            al = (loop.al_agotarse or "").strip().lower()
-            correction_policy = al if al else "advance_with_debt"
             loops_field: Any = {
                 "nivel": "slot",
                 "tope_ejec": loop.tope_ejec,
@@ -113,26 +187,15 @@ def _build_slots(cfg: TablaConfig) -> dict[str, Any]:
                     "modo": loop.interno_modo,
                 }
         else:
-            correction_policy = "NO_BLOQUEA"
             loops_field = None
 
-        # Routes grouped by tipo_ruta, deterministically ordered.
+        # Slot-level routes grouped by tipo_ruta, deterministically ordered
+        # (flattened across puestos; `puestos` carries the structure).
         by_tipo: dict[str, list[dict[str, Any]]] = {}
-        human_checkpoint = False
         for a in rows:
             if not a.is_active:
-                human_checkpoint = True
                 continue
-            entry = {
-                "route_id": a.route_id,
-                "orden": a.orden,
-                "on_unavailable": a.on_unavailable,
-                "fallback_real": a.fallback_real or None,
-            }
-            # Keep the note only where it carries a condition (condicional).
-            if a.tipo_ruta == "condicional" and a.notas:
-                entry["condicion"] = a.notas
-            by_tipo.setdefault(a.tipo_ruta, []).append(entry)
+            by_tipo.setdefault(a.tipo_ruta, []).append(_route_entry(a))
 
         slot_obj: dict[str, Any] = {
             "cycle": first.ciclo,
@@ -140,7 +203,8 @@ def _build_slots(cfg: TablaConfig) -> dict[str, Any]:
             "capacidades": first.capacidades,
             "loops": loops_field,
             "correction_policy": correction_policy,
-            "human_checkpoint": human_checkpoint,
+            "human_checkpoint": _is_human_checkpoint(rows),
+            "puestos": _build_puestos(rows),
             "routes_by_tipo": {
                 t: by_tipo[t] for t in sorted(by_tipo)
             },
@@ -177,7 +241,9 @@ def build_projection(cfg: TablaConfig) -> dict[str, Any]:
         "schema_version": SCHEMA_VERSION,
         "canon_version": CANON_VERSION,
         # NO updated_utc on purpose: a timestamp would break G5 round-trip.
-        "source_tabla_sheet": "CAMINO_N_v1_1",
+        # The sheet actually read (v1.2 preferred; synthetic configs fall
+        # back to the historical name).
+        "source_tabla_sheet": cfg.sheet_camino or "CAMINO_N_v1_1",
         "cycles": _build_cycles(cfg),
         "slots": _build_slots(cfg),
         "models": _build_models(cfg),
