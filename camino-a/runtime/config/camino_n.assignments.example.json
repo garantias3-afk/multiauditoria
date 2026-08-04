@@ -1,0 +1,1150 @@
+{
+  "canon_version": "camino_n.projection.v1.1",
+  "cycles": {
+    "A": [
+      1,
+      2,
+      3
+    ],
+    "B": [
+      4,
+      5,
+      6
+    ],
+    "C": [
+      7,
+      8,
+      9,
+      10
+    ],
+    "FINAL": [
+      11,
+      12,
+      14
+    ]
+  },
+  "models": {
+    "alibaba_qwen_3_8_plan": {
+      "cost_class": "subscription",
+      "familia": "qwen",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "externo_por_eje",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Alibaba",
+      "timeout_s": 900.0
+    },
+    "anthropic_api_direct": {
+      "cost_class": "paid",
+      "familia": "claude",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Anthropic API",
+      "timeout_s": 0.0
+    },
+    "blackbox_grok_4_5": {
+      "cost_class": "paid",
+      "familia": "grok",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Blackbox",
+      "timeout_s": 600.0
+    },
+    "blackbox_minimax_m3": {
+      "cost_class": "paid",
+      "familia": "minimax",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Blackbox",
+      "timeout_s": 600.0
+    },
+    "blackbox_nemotron_3_ultra_paid": {
+      "cost_class": "paid",
+      "familia": "nemotron",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Blackbox",
+      "timeout_s": 600.0
+    },
+    "claude_code_opus5_cli": {
+      "cost_class": "subscription",
+      "familia": "claude",
+      "manos": "ejecuta",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "externo_por_eje",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Claude Code CLI",
+      "timeout_s": 900.0
+    },
+    "claude_code_sonnet5_cli": {
+      "cost_class": "subscription",
+      "familia": "claude",
+      "manos": "ejecuta",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Claude Code CLI",
+      "timeout_s": 600.0
+    },
+    "codex_sol_5_6_ultra_cli": {
+      "cost_class": "subscription",
+      "familia": "gpt",
+      "manos": "ejecuta",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "externo_por_eje",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Codex CLI",
+      "timeout_s": 900.0
+    },
+    "deepinfra_comparacion": {
+      "cost_class": "paid",
+      "familia": "varias",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "DeepInfra",
+      "timeout_s": 600.0
+    },
+    "deepseek_v4_pro_api": {
+      "cost_class": "paid",
+      "familia": "deepseek",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "DeepSeek API",
+      "timeout_s": 600.0
+    },
+    "gpt_luna_high_cli": {
+      "cost_class": "subscription",
+      "familia": "gpt",
+      "manos": "ejecuta",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "ChatGPT CLI",
+      "timeout_s": 600.0
+    },
+    "gpt_sol_5_6_high_cli": {
+      "cost_class": "subscription",
+      "familia": "gpt",
+      "manos": "ejecuta",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Codex CLI",
+      "timeout_s": 900.0
+    },
+    "grok_4_5_free": {
+      "cost_class": "free",
+      "familia": "grok",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NO_CONSTA",
+      "timeout_s": 600.0
+    },
+    "groq_todos": {
+      "cost_class": "free",
+      "familia": "varias",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Groq",
+      "timeout_s": 0.0
+    },
+    "moonshot_kimi_2_7_code_plan": {
+      "cost_class": "subscription",
+      "familia": "kimi",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Moonshot",
+      "timeout_s": 600.0
+    },
+    "moonshot_kimi_k3_plan": {
+      "cost_class": "subscription",
+      "familia": "kimi",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "externo_por_eje",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Moonshot",
+      "timeout_s": 900.0
+    },
+    "nvidia_deepseek_v4_flash": {
+      "cost_class": "free",
+      "familia": "deepseek",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 0.0
+    },
+    "nvidia_deepseek_v4_pro_free": {
+      "cost_class": "free",
+      "familia": "deepseek",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 180.0
+    },
+    "nvidia_glm_5_2_free": {
+      "cost_class": "free",
+      "familia": "glm",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 30.0
+    },
+    "nvidia_gpt_oss_120b": {
+      "cost_class": "free",
+      "familia": "gpt_oss",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 900.0
+    },
+    "nvidia_inkling": {
+      "cost_class": "free",
+      "familia": "thinkingmachines",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 0.0
+    },
+    "nvidia_kimi_k2_6": {
+      "cost_class": "free",
+      "familia": "kimi",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 0.0
+    },
+    "nvidia_laguna_xs_2_1": {
+      "cost_class": "free",
+      "familia": "poolside",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 300.0
+    },
+    "nvidia_nemotron_3_super_120b": {
+      "cost_class": "free",
+      "familia": "nemotron",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 30.0
+    },
+    "nvidia_nemotron_3_ultra_550b": {
+      "cost_class": "free",
+      "familia": "nemotron",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "NVIDIA NIM",
+      "timeout_s": 40.0
+    },
+    "openai_api_direct": {
+      "cost_class": "paid",
+      "familia": "gpt",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenAI API",
+      "timeout_s": 0.0
+    },
+    "openclaw_local_swarm": {
+      "cost_class": "local_free",
+      "familia": "subsistema",
+      "manos": "ejecuta",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "externo_por_eje",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenClaw M5",
+      "timeout_s": 0.0
+    },
+    "or_gemma_4_26b": {
+      "cost_class": "free",
+      "familia": "gemma",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 360.0
+    },
+    "or_gemma_4_31b": {
+      "cost_class": "free",
+      "familia": "gemma",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 360.0
+    },
+    "or_gpt_oss_20b": {
+      "cost_class": "free",
+      "familia": "gpt_oss",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 200.0
+    },
+    "or_laguna_s_2_1": {
+      "cost_class": "free",
+      "familia": "poolside",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 0.0
+    },
+    "or_ling_3_flash": {
+      "cost_class": "free",
+      "familia": "ling",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 0.0
+    },
+    "or_meta_free": {
+      "cost_class": "free",
+      "familia": "NO_CONSTA_router",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 25.0
+    },
+    "or_nemotron_3_nano_30b": {
+      "cost_class": "free",
+      "familia": "nemotron",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 20.0
+    },
+    "or_nemotron_3_nano_omni_30b": {
+      "cost_class": "free",
+      "familia": "nemotron",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 20.0
+    },
+    "or_nemotron_3_super_120b": {
+      "cost_class": "free",
+      "familia": "nemotron",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 25.0
+    },
+    "or_nemotron_3_ultra_550b": {
+      "cost_class": "free",
+      "familia": "nemotron",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 35.0
+    },
+    "or_north_mini_code": {
+      "cost_class": "free",
+      "familia": "cohere",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "OpenRouter",
+      "timeout_s": 35.0
+    },
+    "vertex_gemini_3_1_pro": {
+      "cost_class": "paid",
+      "familia": "gemini",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Vertex",
+      "timeout_s": 600.0
+    },
+    "xiaomi_mimo_v2_5_pro_plan": {
+      "cost_class": "subscription",
+      "familia": "mimo",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Xiaomi",
+      "timeout_s": 600.0
+    },
+    "zai_glm_5_0_plan": {
+      "cost_class": "subscription",
+      "familia": "glm",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Z.ai Coding Pro",
+      "timeout_s": 900.0
+    },
+    "zai_glm_5_2_plan": {
+      "cost_class": "subscription",
+      "familia": "glm",
+      "manos": "relee",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "externo_por_eje",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Z.ai Coding Pro",
+      "timeout_s": 900.0
+    },
+    "zai_glm_turbo_plan": {
+      "cost_class": "subscription",
+      "familia": "glm",
+      "manos": "ejecuta",
+      "modelo_exacto": "<MODELO_EXACTO>",
+      "modo_agente": "simple",
+      "provider_id": "<PROVIDER_ID>",
+      "provider_name": "Z.ai Coding Pro",
+      "timeout_s": 120.0
+    }
+  },
+  "schema_version": "camino_n_assignments.v1",
+  "slots": {
+    "1": {
+      "capacidades": "DETECT",
+      "correction_policy": "advance_with_debt",
+      "cycle": "A",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 3,
+        "vuelve_a": null
+      },
+      "role": "auditores paralelos",
+      "routes": [
+        "nvidia_deepseek_v4_pro_free",
+        "nvidia_glm_5_2_free",
+        "nvidia_laguna_xs_2_1",
+        "nvidia_nemotron_3_ultra_550b",
+        "or_meta_free",
+        "or_nemotron_3_ultra_550b",
+        "xiaomi_mimo_v2_5_pro_plan"
+      ],
+      "routes_by_tipo": {
+        "carrera": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 1,
+            "route_id": "nvidia_nemotron_3_ultra_550b"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 1,
+            "route_id": "or_nemotron_3_ultra_550b"
+          }
+        ],
+        "paralela": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_deepseek_v4_pro_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_glm_5_2_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_laguna_xs_2_1"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "or_meta_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "xiaomi_mimo_v2_5_pro_plan"
+          }
+        ]
+      }
+    },
+    "10": {
+      "capacidades": "DETECT+WRITE",
+      "correction_policy": "advance_with_debt",
+      "cycle": "C",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": "cualquier gate rojo del ciclo C",
+        "contador_persiste": true,
+        "interno": {
+          "modo": "invocaciones separadas",
+          "pasos": 6
+        },
+        "nivel": "slot",
+        "tope_ejec": 18,
+        "vuelve_a": 7
+      },
+      "role": "audit-writer",
+      "routes": [
+        "claude_code_sonnet5_cli",
+        "gpt_luna_high_cli"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "STOP_NO_FALLBACK",
+            "orden": 1,
+            "route_id": "claude_code_sonnet5_cli"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "STOP_NO_FALLBACK",
+            "orden": 0,
+            "route_id": "gpt_luna_high_cli"
+          }
+        ]
+      }
+    },
+    "11": {
+      "capacidades": "DETECT",
+      "correction_policy": "advance_with_debt",
+      "cycle": "FINAL",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 12,
+        "vuelve_a": 11
+      },
+      "role": "auditor",
+      "routes": [
+        "blackbox_minimax_m3",
+        "nvidia_deepseek_v4_pro_free"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "SKIP_STEP",
+            "orden": 1,
+            "route_id": "nvidia_deepseek_v4_pro_free"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "blackbox_minimax_m3"
+          }
+        ]
+      }
+    },
+    "12": {
+      "capacidades": "DETECT",
+      "correction_policy": "advance_with_debt",
+      "cycle": "FINAL",
+      "human_checkpoint": true,
+      "loops": {
+        "clase_que_dispara": "MEDIANO-A: consolidacion o trazabilidad",
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 9,
+        "vuelve_a": 12
+      },
+      "role": "enjambre: agentes",
+      "routes": [
+        "alibaba_qwen_3_8_plan",
+        "moonshot_kimi_k3_plan",
+        "nvidia_laguna_xs_2_1",
+        "or_nemotron_3_ultra_550b",
+        "vertex_gemini_3_1_pro",
+        "xiaomi_mimo_v2_5_pro_plan",
+        "zai_glm_5_2_plan"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "SKIP_STEP",
+            "orden": 1,
+            "route_id": "vertex_gemini_3_1_pro"
+          },
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "STOP_NO_FALLBACK",
+            "orden": 1,
+            "route_id": "xiaomi_mimo_v2_5_pro_plan"
+          }
+        ],
+        "paralela": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "alibaba_qwen_3_8_plan"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "or_nemotron_3_ultra_550b"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "zai_glm_5_2_plan"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "STOP_NO_FALLBACK",
+            "orden": 0,
+            "route_id": "moonshot_kimi_k3_plan"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_laguna_xs_2_1"
+          }
+        ]
+      }
+    },
+    "14": {
+      "capacidades": "DETECT+APPROVE",
+      "correction_policy": "restart_big_loop",
+      "cycle": "FINAL",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": "LARGO: sobrevivio a todo el camino",
+        "contador_persiste": true,
+        "interno": {
+          "modo": "invocaciones separadas",
+          "pasos": 6
+        },
+        "nivel": "slot",
+        "tope_ejec": 18,
+        "vuelve_a": 1
+      },
+      "role": "aprobador",
+      "routes": [
+        "claude_code_opus5_cli",
+        "codex_sol_5_6_ultra_cli",
+        "gpt_sol_5_6_high_cli",
+        "nvidia_glm_5_2_free",
+        "zai_glm_5_2_plan"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "COSMETICO",
+            "on_unavailable": "ESCALATE_HUMAN",
+            "orden": 1,
+            "route_id": "codex_sol_5_6_ultra_cli"
+          },
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "BLOCK",
+            "orden": 1,
+            "route_id": "nvidia_glm_5_2_free"
+          },
+          {
+            "fallback_real": "COSMETICO",
+            "on_unavailable": "ESCALATE_HUMAN",
+            "orden": 2,
+            "route_id": "gpt_sol_5_6_high_cli"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "ESCALATE_HUMAN",
+            "orden": 0,
+            "route_id": "claude_code_opus5_cli"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "BLOCK",
+            "orden": 0,
+            "route_id": "zai_glm_5_2_plan"
+          }
+        ]
+      }
+    },
+    "2": {
+      "capacidades": "-",
+      "correction_policy": "advance_with_debt",
+      "cycle": "A",
+      "human_checkpoint": true,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 3,
+        "vuelve_a": null
+      },
+      "role": "cosecha manual",
+      "routes": [],
+      "routes_by_tipo": {}
+    },
+    "3": {
+      "capacidades": "DETECT+WRITE",
+      "correction_policy": "advance_with_debt",
+      "cycle": "A",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": "cualquier gate rojo del ciclo A",
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 15,
+        "vuelve_a": 1
+      },
+      "role": "audit-writer",
+      "routes": [
+        "alibaba_qwen_3_8_plan",
+        "moonshot_kimi_k3_plan",
+        "nvidia_deepseek_v4_pro_free",
+        "xiaomi_mimo_v2_5_pro_plan"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "STOP_NO_FALLBACK",
+            "orden": 1,
+            "route_id": "moonshot_kimi_k3_plan"
+          },
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "BLOCK",
+            "orden": 1,
+            "route_id": "nvidia_deepseek_v4_pro_free"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "STOP_NO_FALLBACK",
+            "orden": 0,
+            "route_id": "alibaba_qwen_3_8_plan"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "BLOCK",
+            "orden": 0,
+            "route_id": "xiaomi_mimo_v2_5_pro_plan"
+          }
+        ]
+      }
+    },
+    "4": {
+      "capacidades": "DETECT",
+      "correction_policy": "advance_with_debt",
+      "cycle": "B",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 3,
+        "vuelve_a": null
+      },
+      "role": "auditores paralelos",
+      "routes": [
+        "blackbox_nemotron_3_ultra_paid",
+        "moonshot_kimi_2_7_code_plan",
+        "nvidia_deepseek_v4_pro_free",
+        "nvidia_glm_5_2_free",
+        "or_nemotron_3_super_120b",
+        "vertex_gemini_3_1_pro"
+      ],
+      "routes_by_tipo": {
+        "condicional": [
+          {
+            "condicion": "PAGO. Entra RECIEN ACA para dar tiempo a que las dos ultras free ganen la carrera del slot 1.",
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 9,
+            "route_id": "blackbox_nemotron_3_ultra_paid"
+          },
+          {
+            "condicion": "SUPER solo si fallan las TRES ultras (OR, NVIDIA y Blackbox). Muy improbable.",
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 9,
+            "route_id": "or_nemotron_3_super_120b"
+          }
+        ],
+        "paralela": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "moonshot_kimi_2_7_code_plan"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_deepseek_v4_pro_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_glm_5_2_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "vertex_gemini_3_1_pro"
+          }
+        ]
+      }
+    },
+    "5": {
+      "capacidades": "AGGREGATE+DECIDE",
+      "correction_policy": "advance_with_debt",
+      "cycle": "B",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 3,
+        "vuelve_a": null
+      },
+      "role": "consolidator-propuestas",
+      "routes": [
+        "nvidia_deepseek_v4_pro_free",
+        "or_nemotron_3_ultra_550b",
+        "xiaomi_mimo_v2_5_pro_plan"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "BLOCK",
+            "orden": 1,
+            "route_id": "nvidia_deepseek_v4_pro_free"
+          },
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "BLOCK",
+            "orden": 2,
+            "route_id": "or_nemotron_3_ultra_550b"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "BLOCK",
+            "orden": 0,
+            "route_id": "xiaomi_mimo_v2_5_pro_plan"
+          }
+        ]
+      }
+    },
+    "6": {
+      "capacidades": "DETECT+WRITE",
+      "correction_policy": "escalate_human",
+      "cycle": "B",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": "cualquier gate rojo del ciclo B",
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 9,
+        "vuelve_a": 4
+      },
+      "role": "audit-writer",
+      "routes": [
+        "alibaba_qwen_3_8_plan",
+        "moonshot_kimi_k3_plan"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "STOP_NO_FALLBACK",
+            "orden": 1,
+            "route_id": "alibaba_qwen_3_8_plan"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "ESCALATE_HUMAN",
+            "orden": 0,
+            "route_id": "moonshot_kimi_k3_plan"
+          }
+        ]
+      }
+    },
+    "7": {
+      "capacidades": "DETECT",
+      "correction_policy": "advance_with_debt",
+      "cycle": "C",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 3,
+        "vuelve_a": null
+      },
+      "role": "auditores",
+      "routes": [
+        "blackbox_grok_4_5",
+        "nvidia_deepseek_v4_pro_free",
+        "nvidia_glm_5_2_free",
+        "or_nemotron_3_ultra_550b"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "SKIP_STEP",
+            "orden": 1,
+            "route_id": "blackbox_grok_4_5"
+          }
+        ],
+        "paralela": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_deepseek_v4_pro_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_glm_5_2_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "or_nemotron_3_ultra_550b"
+          }
+        ]
+      }
+    },
+    "8": {
+      "capacidades": "DETECT",
+      "correction_policy": "advance_with_debt",
+      "cycle": "C",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 3,
+        "vuelve_a": null
+      },
+      "role": "auditores",
+      "routes": [
+        "nvidia_deepseek_v4_pro_free",
+        "nvidia_glm_5_2_free",
+        "nvidia_laguna_xs_2_1",
+        "nvidia_nemotron_3_ultra_550b",
+        "xiaomi_mimo_v2_5_pro_plan"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "BLOCK",
+            "orden": 1,
+            "route_id": "nvidia_deepseek_v4_pro_free"
+          }
+        ],
+        "paralela": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_glm_5_2_free"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_laguna_xs_2_1"
+          },
+          {
+            "fallback_real": null,
+            "on_unavailable": "SKIP_STEP",
+            "orden": 0,
+            "route_id": "nvidia_nemotron_3_ultra_550b"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "BLOCK",
+            "orden": 0,
+            "route_id": "xiaomi_mimo_v2_5_pro_plan"
+          }
+        ]
+      }
+    },
+    "9": {
+      "capacidades": "DETECT+AGGREGATE",
+      "correction_policy": "advance_with_debt",
+      "cycle": "C",
+      "human_checkpoint": false,
+      "loops": {
+        "clase_que_dispara": null,
+        "contador_persiste": true,
+        "interno": {
+          "modo": "una invocacion",
+          "pasos": 3
+        },
+        "nivel": "slot",
+        "tope_ejec": 3,
+        "vuelve_a": null
+      },
+      "role": "revisa-audita-propone",
+      "routes": [
+        "nvidia_glm_5_2_free",
+        "or_nemotron_3_ultra_550b",
+        "zai_glm_5_2_plan"
+      ],
+      "routes_by_tipo": {
+        "fallback": [
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "BLOCK",
+            "orden": 1,
+            "route_id": "nvidia_glm_5_2_free"
+          },
+          {
+            "fallback_real": "REAL",
+            "on_unavailable": "BLOCK",
+            "orden": 2,
+            "route_id": "or_nemotron_3_ultra_550b"
+          }
+        ],
+        "primaria": [
+          {
+            "fallback_real": null,
+            "on_unavailable": "BLOCK",
+            "orden": 0,
+            "route_id": "zai_glm_5_2_plan"
+          }
+        ]
+      }
+    }
+  },
+  "source_tabla_sheet": "CAMINO_N_v1_1"
+}

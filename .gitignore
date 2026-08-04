@@ -30,3 +30,10 @@ graphify-out/
 *.bak[0-9]*
 *.backup
 *.backup-*
+
+# OT-R (2026-08-03, decision de Mariano): la config de asignaciones lleva la
+# topologia de proveedores (provider_id x43 modelos, ruteo de 9 slots). El
+# archivo REAL vive versionado en el repo PRIVADO camino-n
+# (intercambio/camino_n.assignments.json, junto a la tabla que lo genera);
+# en este repo publico solo entra el ejemplo con placeholders.
+camino-a/runtime/config/camino_n.assignments.json
