@@ -90,11 +90,13 @@ POLICY_OVERRIDES_V1_2B: dict[int, str] = {6: "block"}
 
 
 def _slot_correction_policy(step: int, loop: Any) -> str:
-    if step in POLICY_OVERRIDES_V1_2B:
-        return POLICY_OVERRIDES_V1_2B[step]
     if loop:
         al = (loop.al_agotarse or "").strip().lower()
-        return al if al else "advance_with_debt"
+        base = al if al else "advance_with_debt"
+        # C5-E8-1 (ciclo 5): el override v1.2b aplica SOLO con loop
+        # habilitado: con habilitado=NO el slot queda sin politica de
+        # loop, como cualquier otro slot sin LOOPS (regla de C4-E8-1).
+        return POLICY_OVERRIDES_V1_2B.get(step, base)
     # C4-E8-1 (MEGA-OT-8 ciclo 4): sin fila LOOPS (o deshabilitada) la
     # politica es el neutro advance_with_debt. "NO_BLOQUEA" quedaba fuera
     # del vocabulario cerrado del runner y la config resultaba
