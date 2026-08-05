@@ -178,6 +178,11 @@ def _build_slots(cfg: TablaConfig) -> dict[str, Any]:
         # in a well-formed tabla; we take the first rather than guessing).
         first = rows[0]
         loop = cfg.loop_for(step)
+        # C3-E8-7 (MEGA-OT-8 ciclo 3): la columna habilitado de la hoja
+        # LOOPS ya no se ignora: habilitado=NO proyecta el slot SIN bloque
+        # loops (y sin politica derivada del loop).
+        if loop is not None and not getattr(loop, "habilitado", True):
+            loop = None
         correction_policy = _slot_correction_policy(step, loop)
         if loop:
             loops_field: Any = {
