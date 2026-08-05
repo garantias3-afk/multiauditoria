@@ -95,7 +95,11 @@ def _slot_correction_policy(step: int, loop: Any) -> str:
     if loop:
         al = (loop.al_agotarse or "").strip().lower()
         return al if al else "advance_with_debt"
-    return "NO_BLOQUEA"
+    # C4-E8-1 (MEGA-OT-8 ciclo 4): sin fila LOOPS (o deshabilitada) la
+    # politica es el neutro advance_with_debt. "NO_BLOQUEA" quedaba fuera
+    # del vocabulario cerrado del runner y la config resultaba
+    # inarrancable.
+    return "advance_with_debt"
 
 
 def _is_human_checkpoint(rows: list[RouteAssignment]) -> bool:
@@ -104,15 +108,17 @@ def _is_human_checkpoint(rows: list[RouteAssignment]) -> bool:
     del slot 2, que es humana por definicion, y el aprobador del slot 14").
 
     Derived rule: a slot is a human checkpoint when it has NO active routes
-    (manual harvest) or when any of its rows declares ESCALATE_HUMAN (the
-    approver). Empty route_id ALONE is not a checkpoint: the previous
-    heuristic wrongly flagged slot 12's mechanical-axis floor row and
-    missed slot 14, whose rows all carry routes.
+    (manual harvest) or when any ACTIVE row declares ESCALATE_HUMAN (the
+    approver). C4-E8-5 (ciclo 4): inactive rows are excluded, matching the
+    runner-side derived rule (_config_human_checkpoint); a divergent scan
+    made validate_pair reject legitimate regenerated pairs.
     """
-    if not any(a.is_active for a in rows):
+    active = [a for a in rows if a.is_active]
+    if not active:
         return True
     return any(
-        a.on_unavailable.strip().upper() == "ESCALATE_HUMAN" for a in rows)
+        a.on_unavailable.strip().upper() == "ESCALATE_HUMAN"
+        for a in active)
 
 
 def _route_entry(a: RouteAssignment) -> dict[str, Any]:
